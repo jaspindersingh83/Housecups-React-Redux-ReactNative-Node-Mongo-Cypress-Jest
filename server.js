@@ -10,7 +10,7 @@ const server = express();
 
 server.use(bodyParser.json());
 
-const port = 5050;
+const port = process.env.PORT || 5050;
 
 const dbuser = process.env.DB_USER;
 const dbpassword = process.env.DB_PASSWORD;

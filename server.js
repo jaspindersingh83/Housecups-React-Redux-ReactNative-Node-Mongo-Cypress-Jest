@@ -1,6 +1,8 @@
+require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+
 //require('./db/connection.js');
 const Sample = require('./Samplemodels/samplemodels.js');
 
@@ -29,13 +31,18 @@ server.post('/api/person', (req, res) => {
 
 const port = 5050;
 
+const dbuser = process.env.DB_USER;
+const dbpassword = process.env.DB_PASSWORD;
 
-const dbPath = 'mongodb://localhost/teams';
+
+//const dbPath = 'mongodb://localhost/teams';
+const dbPath = `mongodb://${dbuser}:${dbpassword}@ds111050.mlab.com:11050/house_cup_db`;
+
 
 mongoose.Promise = global.Promise;
 
 mongoose
-.connect(dbPath, {useMongoClient: true})
+.connect(dbPath)
 .then(()=> {
     server.listen(port, () => {
         console.log(`server is running on ${port}`);

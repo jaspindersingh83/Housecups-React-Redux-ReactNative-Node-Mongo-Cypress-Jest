@@ -1,4 +1,8 @@
 const mongoose = require('mongoose');
+const express = require('express');
+const bodyParser = require('body-parser');
+const House = require('./appModels/houses')
+
 // database related plumbing
 const dbuser = process.env.DB_USER;
 const dbpassword = process.env.DB_PASSWORD;

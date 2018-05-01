@@ -1,0 +1,30 @@
+.Auth__Body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.Auth__Body__Container {
+  display: flex;
+  flex-direction: column;
+  width: 25%;
+}
+.Auth__Body__Imageholder{
+  display: flex;
+  width: 25%;
+}
+label {
+  font-weight: 5;
+  margin-top: 15px;
+}
+input {
+  width: 100%;
+  color: #333;
+  padding: 6px 10px;
+  font-size: 0.8em;
+}
+.btn-primary {
+  border: 1px solid #11111166;
+  align-items: center;
+  font-family: Roboto, Arial, sans-serif;
+  font-size: 18px;
+}

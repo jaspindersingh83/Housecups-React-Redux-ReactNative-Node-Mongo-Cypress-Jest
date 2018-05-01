@@ -2,39 +2,38 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import './Auth.css';
-import { createUser } from '../../actions';
 import backgroundimage from './trophy.png';
+import { resetPassword } from '../../actions';
 
-class Signup extends Component {
+class Resetpassword extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: '',
       password: '',
       confirmPassword: '',
-      email: '',
-      error: undefined,
+      error: null,
     };
+  }
+  componentDidMount() {
+    const token = this.props.location.search.substr(1);
+    localStorage.setItem('token', token);
   }
   componentWillReceiveProps(props) {
     this.setState({
       error: props.error,
     });
   }
-  // Rather than having individual input functions.
-  handleInput = async (e, type) => {
+  handleInput = (e, type) => {
     e.preventDefault();
-    await this.setState({
+    this.setState({
       [type]: e.target.value,
     });
   };
-  signup = (e) => {
+  resetPassword = (e) => {
     e.preventDefault();
-    this.props.createUser(this.state, this.props.history);
+    this.props.resetPassword(this.state, this.props.history);
     this.setState({
-      password: '',
-      confirmPassword: '',
+      email: '',
       error: this.props.error,
     });
   };
@@ -47,17 +46,14 @@ class Signup extends Component {
       <div>
         <div className="Auth__Body">
           <div className="Auth__Body__Imageholder" />
-          <div className="Auth__Body__Container" style={{ marginTop: '80px' }}>
-            <h1 style={{ marginBottom: '20px' }}>Sign up</h1>
+          <div
+            className="Auth__Body__Container"
+            style={{ width: '33%', marginTop: '40px' }}
+          >
+            <h1 style={{ marginBottom: '20px' }}>Reset Password</h1>
             {this.renderAlert()}
-            <form onSubmit={this.signup}>
-              <label>Username</label>
-              <input
-                onChange={e => this.handleInput(e, 'username')}
-                value={this.state.username}
-                type="text"
-              />
-              <label>Password</label>
+            <form onSubmit={this.resetPassword}>
+              <label>New Password</label>
               <input
                 onChange={e => this.handleInput(e, 'password')}
                 value={this.state.password}
@@ -69,24 +65,19 @@ class Signup extends Component {
                 value={this.state.confirmPassword}
                 type="password"
               />
-              <label>Email</label>
-              <input
-                onChange={e => this.handleInput(e, 'email')}
-                value={this.state.email}
-                type="text"
-              />
               <Button
                 style={{ width: '100%', margin: '20px 0px' }}
                 bsStyle="primary"
                 type="submit"
               >
-                Sign Up
+                Submit
               </Button>
             </form>
             <p>
-              Already have an account?
-              <Link to={"/signin"} className="Link">
-                {' '}SignIn now
+              New to Litchi?
+              <Link to={"/signup"} className="Link">
+                {' '}
+                Sign Up now
               </Link>
             </p>
           </div>
@@ -109,4 +100,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { createUser })(Signup);
+export default connect(mapStateToProps, { resetPassword })(Resetpassword);

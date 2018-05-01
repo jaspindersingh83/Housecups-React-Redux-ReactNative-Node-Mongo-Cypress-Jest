@@ -5,13 +5,13 @@ import {
   ADMIN_AUTHORIZED,
   SIGNOUT,
   FORGOTPASSWORD,
-  RESETPASSWORD
-} from "../actions/index";
+  RESETPASSWORD,
+} from '../actions/index';
 
 const authReducer = (auth = {}, action) => {
   switch (action.type) {
-    //When user is created send signedUpusername in props so that username field
-    //can be auto populate at first instance of login
+    // When user is created send signedUpusername in props so that username field
+    // can be auto populate at first instance of signin
     case CREATE_USER:
       return { ...auth, signedUpusername: action.payload.data.username };
 
@@ -29,7 +29,7 @@ const authReducer = (auth = {}, action) => {
 
     case SIGNOUT:
       return { ...auth };
-    //If authorized send auth property of admin as true
+    // If authorized send auth property of admin as true
     case ADMIN_AUTHORIZED:
       return { ...auth, admin: true };
     default:

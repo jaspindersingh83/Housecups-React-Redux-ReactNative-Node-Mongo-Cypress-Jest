@@ -3,38 +3,35 @@ import { connect } from 'react-redux';
 import { Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import './Auth.css';
-import { createUser } from '../../actions';
+import { forgotPassword } from '../../actions';
 import backgroundimage from './trophy.png';
 
-class Signup extends Component {
+class Fogotpassword extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: '',
-      password: '',
-      confirmPassword: '',
       email: '',
-      error: undefined,
+      error: null,
+      emailSent: null,
     };
   }
   componentWillReceiveProps(props) {
     this.setState({
       error: props.error,
+      emailSent: props.emailSent,
     });
   }
-  // Rather than having individual input functions.
-  handleInput = async (e, type) => {
+  handleInput = (e) => {
     e.preventDefault();
-    await this.setState({
-      [type]: e.target.value,
+    this.setState({
+      email: e.target.value,
     });
   };
-  signup = (e) => {
+  forgotPassword = (e) => {
     e.preventDefault();
-    this.props.createUser(this.state, this.props.history);
+    this.props.forgotPassword(this.state.email);
     this.setState({
-      password: '',
-      confirmPassword: '',
+      email: '',
       error: this.props.error,
     });
   };
@@ -42,36 +39,31 @@ class Signup extends Component {
     if (!this.state.error) return null;
     return <p style={{ color: '#337ab7' }}>{this.state.error}</p>;
   }
+  renderEmailSuccess() {
+    if (!this.state.emailSent) return null;
+    return (
+      <p style={{ color: '#337ab7' }}>
+        Reset Password link has been sent to email associated with this account
+      </p>
+    );
+  }
+
   render() {
     return (
       <div>
         <div className="Auth__Body">
           <div className="Auth__Body__Imageholder" />
-          <div className="Auth__Body__Container" style={{ marginTop: '80px' }}>
-            <h1 style={{ marginBottom: '20px' }}>Sign up</h1>
+          <div
+            className="Auth__Body__Container"
+            style={{ width: '33%', marginTop: '20px' }}
+          >
+            <h1 style={{ marginBottom: '20px' }}>Forgot Password</h1>
             {this.renderAlert()}
-            <form onSubmit={this.signup}>
-              <label>Username</label>
-              <input
-                onChange={e => this.handleInput(e, 'username')}
-                value={this.state.username}
-                type="text"
-              />
-              <label>Password</label>
-              <input
-                onChange={e => this.handleInput(e, 'password')}
-                value={this.state.password}
-                type="password"
-              />
-              <label>Confirm Password</label>
-              <input
-                onChange={e => this.handleInput(e, 'confirmPassword')}
-                value={this.state.confirmPassword}
-                type="password"
-              />
+            {this.renderEmailSuccess()}
+            <form onSubmit={this.forgotPassword}>
               <label>Email</label>
               <input
-                onChange={e => this.handleInput(e, 'email')}
+                onChange={this.handleInput}
                 value={this.state.email}
                 type="text"
               />
@@ -80,13 +72,14 @@ class Signup extends Component {
                 bsStyle="primary"
                 type="submit"
               >
-                Sign Up
+                Submit
               </Button>
             </form>
             <p>
-              Already have an account?
-              <Link to={"/signin"} className="Link">
-                {' '}SignIn now
+              New to Housecups?
+              <Link to={"/signup"} className="Link">
+                {' '}
+                Sign Up now
               </Link>
             </p>
           </div>
@@ -106,7 +99,8 @@ class Signup extends Component {
 const mapStateToProps = (state) => {
   return {
     error: state.auth.error,
+    emailSent: state.auth.emailSent,
   };
 };
 
-export default connect(mapStateToProps, { createUser })(Signup);
+export default connect(mapStateToProps, { forgotPassword })(Fogotpassword);

@@ -4,12 +4,8 @@
   "description": "Backend for House Cup app",
   "main": "server.js",
   "scripts": {
-<<<<<<< HEAD
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
-=======
-    "test": "echo \"Error: no test specified\" && exit 0"
->>>>>>> master
   },
   "author": "",
   "license": "ISC",
@@ -31,22 +27,9 @@
     "eslint": "^4.19.1",
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-plugin-import": "^2.11.0"
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
-    "express": "^4.16.3",
-    "nodemon": "^1.17.3"
->>>>>>> master
->>>>>>> 52dd9724a980d5594c929d91761734fe28ec49ed
-=======
   },
-  "engines" : {
-    "node" : "8.11.1",
-    "npm" : "5.8.0"
->>>>>>> 9c5c48046205b8043241b9e1f1876be7ee76ad65
->>>>>>> master
+  "engines": {
+    "node": "8.11.1",
+    "npm": "5.8.0"
   }
 }

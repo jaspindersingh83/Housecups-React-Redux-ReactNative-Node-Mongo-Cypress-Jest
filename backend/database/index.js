@@ -13,6 +13,7 @@ module.exports = {
     // Mongo DB connection URI using mLab
     const dbPath = `mongodb://${dbUser}:${dbPassword}@ds111050.mlab.com:11050/house_cup_db`;
 
+    console.log(dbPath);
     mongoose.connect(dbPath)
       .then(() => {
         console.log('Database is connected sucessfully');

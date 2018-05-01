@@ -11,6 +11,10 @@
   "dependencies": {
     "body-parser": "^1.18.2",
     "cors": "^2.8.4",
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 52dd9724a980d5594c929d91761734fe28ec49ed
     "dotenv": "^5.0.1",
     "express": "^4.16.3",
     "mongoose": "^5.0.17",
@@ -21,5 +25,12 @@
     "eslint": "^4.19.1",
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-plugin-import": "^2.11.0"
+<<<<<<< HEAD
+=======
+=======
+    "express": "^4.16.3",
+    "nodemon": "^1.17.3"
+>>>>>>> master
+>>>>>>> 52dd9724a980d5594c929d91761734fe28ec49ed
   }
 }

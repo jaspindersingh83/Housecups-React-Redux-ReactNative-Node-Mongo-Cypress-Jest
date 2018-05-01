@@ -114,7 +114,6 @@ const forgotPassword = async (req, res, next) => {
 // Change `http://localhost:3000/reset?${token}\n\n` url to production url in production
 const sendResetEmailAndRedirect = async (req, res) => {
   const { email, token, username } = req;
-  console.log(adminemail,adminusername)
   const mailOptions = {
     to: email,
     from: adminemail,

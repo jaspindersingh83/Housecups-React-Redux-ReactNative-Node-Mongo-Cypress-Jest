@@ -66,7 +66,7 @@ server.put('/api/teacher/:id', (req, res) => {
       res.status(200).json({ message: 'Teacher has been updated!', teacher });
     })
     .catch((error) => {
-      res.status(500).json({ message: 'The information cannot be deleted because it is invalid', error });
+      res.status(500).json({ message: 'The information cannot be updated because it is invalid', error });
     });
 });
 
@@ -108,7 +108,7 @@ server.put('/api/house/:id', (req, res) => {
       res.status(200).json({ message: 'House has been updated!', house });
     })
     .catch((error) => {
-      res.status(500).json({ message: 'The information cannot be deleted because it is invalid', error });
+      res.status(500).json({ message: 'The information cannot be updated because it is invalid', error });
     });
 });
 

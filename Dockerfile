@@ -10,7 +10,9 @@ RUN npm install -g eslint@^4.9.0 eslint-plugin-import@^2.7.0 babel-eslint
 
 COPY . /
 
-RUN eslint *.js
+RUN eslint **/*.js
+
+#RUN eslint *.js
 
 EXPOSE 5050
 

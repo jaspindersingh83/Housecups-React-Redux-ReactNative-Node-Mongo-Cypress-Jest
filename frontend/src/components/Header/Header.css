@@ -1,0 +1,25 @@
+.Header {
+  height: 75px;
+}
+.Header > .wrapper {
+  max-width: 1200px;
+  margin: 0px auto;
+}
+nav.Header__navigation {
+
+}
+nav.Header__navigation > ul {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  list-style-type: none;
+  height: 75px;
+  padding: 0px;
+  margin: 0px;
+}
+nav.Header__navigation > ul > a {
+  text-decoration: none;
+}
+nav.Header__navigation > ul > a > li {
+  padding: 7px 15px;
+}

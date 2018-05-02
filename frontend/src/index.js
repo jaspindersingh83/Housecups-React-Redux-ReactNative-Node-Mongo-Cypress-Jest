@@ -8,6 +8,7 @@ import Reducers from './reducers';
 
 import App from './App';
 import './index.css';
+import Header from './components/Header/Header';
 import Signin from './components/Auth/Signin';
 import Signup from './components/Auth/Signup';
 import forgotpassword from './components/Auth/forgotpassword';
@@ -17,12 +18,15 @@ const ReduxStore = createStore(Reducers, applyMiddleware(ReduxPromise));
 ReactDOM.render(
   <Provider store={ReduxStore}>
     <Router>
-      <Switch>
-        <Route exact path="/" component={App} />
-        <Route exact path="/signin" component={Signin} />
-        <Route exact path="/signup" component={Signup} />
-        <Route exact path="/forgotPassword" component={forgotpassword} />
-      </Switch>
+      <div>
+        <Header />
+        <Switch>
+          <Route exact path="/" component={App} />
+          <Route exact path="/signin" component={Signin} />
+          <Route exact path="/signup" component={Signup} />
+          <Route exact path="/forgotPassword" component={forgotpassword} />
+        </Switch>
+      </div>
     </Router>
   </Provider>,
   document.getElementById('root'),

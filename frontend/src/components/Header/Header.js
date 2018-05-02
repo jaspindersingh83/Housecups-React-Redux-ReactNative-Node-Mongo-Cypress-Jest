@@ -1,33 +1,45 @@
 import React, { Component } from 'react';
+import { NavLink } from 'react-router-dom';
 import './Header.css';
 
 class Header extends Component {
+
+  state = {}
 
   render() {
     return (
       <div className="Header">
         <div className="wrapper">
-      
-          <nav className="Header__navigation">
+
+          <div className="Header__logo">
+            <div className="Header__logo__image">
+              <div className="img" />
+            </div>
+            <div className="Header__logo__text">
+              House Cup
+            </div>
+          </div>
+          <nav className="Header__nav">
             <ul>
-              <a href="#">
-                <li>Home</li>
-              </a>
-              <a href="#">
-                <li>Features</li>
-              </a>
-              <a href="#">
-                <li>Pricing</li>
-              </a>
-              <a href="/signin">
-                <li>Log In</li>
-              </a>
-              <a href="/signup">
-                <li>Sign Up</li>
-              </a>
+              <div className="Header__nav__links">
+                <NavLink to="/">
+                  <li>Home</li>
+                </NavLink>
+                <NavLink to="/">
+                  <li>Pricing</li>
+                </NavLink>
+              </div>
+              <div className="Header__nav__buttons">
+                <NavLink to="/signin">
+                  <button>Log In</button>
+                </NavLink>
+                <NavLink to="/signup">
+                  <button>Sign Up</button>
+                </NavLink>
+              </div>
             </ul>
           </nav>
-          
+
         </div>
       </div>
     );

@@ -1,0 +1,53 @@
+.Landing {
+
+}
+.Intro {
+  
+}
+.Intro > .wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 100px);
+  min-height: 500px;
+}
+
+.Intro__content {
+  flex-basis: 50%;
+  color: #000000;
+  padding: 0px 50px;
+}
+.Intro__content__headline {
+  font-size: 40px;
+  font-family: 'PT Serif', serif;
+  font-weight: 700;
+}
+.Intro__content__summary {
+  font-size: 28px;
+  font-family: 'PT Sans', sans-serif;
+}
+.Intro__content__buttons {
+  margin-top: 35px;
+}
+.Intro__content__buttons > button {
+  color: #fff;
+  font-size: 20px;
+  font-family: 'PT Sans', sans-serif;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+  padding: 10px 20px;
+  border: 0px;
+  border-radius: 5px;
+  background-color: blue;
+}
+
+.Intro__image {
+  flex-basis: 50%;
+  min-width: 360px;
+  height: 360px;
+  background-color: #eee;
+  background-image: url('../../static/placeholder-image.png');
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}

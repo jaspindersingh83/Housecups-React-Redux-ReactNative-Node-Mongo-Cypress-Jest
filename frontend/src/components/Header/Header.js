@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, withRouter } from 'react-router-dom';
 import './Header.css';
 
 class Header extends Component {
-
+  
   render() {
+    const { pathname } = this.props.history.location;    
     return (
       <div className="Header">
         <div className="wrapper">
@@ -21,19 +22,27 @@ class Header extends Component {
             <ul>
               <div className="Header__nav__links">
                 <NavLink to="/">
-                  <li className="selected">Home</li>
+                  <li data-selected={ pathname === '/' }>Home</li>
                 </NavLink>
                 <NavLink to="/pricing">
-                  <li>Pricing</li>
+                  <li data-selected={ pathname === '/pricing' }>Pricing</li>
                 </NavLink>
               </div>
               <div className="Header__nav__buttons">
-                <NavLink to="/signin">
-                  <button>Log In</button>
-                </NavLink>
-                <NavLink to="/signup">
-                  <button>Sign Up</button>
-                </NavLink>
+                {
+                  (pathname !== '/signin') ? (
+                    <NavLink to="/signin">
+                      <button>Log In</button>
+                    </NavLink>
+                  ) : null
+                }
+                {
+                  (pathname !== '/signup') ? (
+                    <NavLink to="/signup">
+                      <button>Sign Up</button>
+                    </NavLink>
+                  ) : null
+                }
               </div>
             </ul>
           </nav>
@@ -45,4 +54,4 @@ class Header extends Component {
 
 }
 
-export default Header;
+export default withRouter(Header);

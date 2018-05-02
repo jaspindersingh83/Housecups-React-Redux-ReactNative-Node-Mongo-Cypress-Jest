@@ -81,8 +81,8 @@ nav.Header__nav > ul {
   border-right: 1px solid rgba(0, 0, 255, 0.1);
 }
 .Header__nav__links > a:hover > li,
-.Header__nav__links > a > li.selected {
-    border-radius: 3px;
+.Header__nav__links > a > li[data-selected="true"] {
+  border-radius: 3px;
   border-right: 1px solid transparent;
   background-color: rgba(0, 0, 255, 0.1);
 }

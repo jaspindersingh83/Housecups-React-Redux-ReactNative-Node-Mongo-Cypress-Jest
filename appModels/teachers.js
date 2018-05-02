@@ -16,7 +16,11 @@ const TeacherSchema = new mongoose.Schema({
         type: Date,
         required: true,
         default: Date.now
-    }
+    },
+    updatedAt: {
+        type: Date,
+        default: Date.now,
+      }
 });
 
 module.exports = mongoose.model('Teacher', TeacherSchema);

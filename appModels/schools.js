@@ -20,7 +20,11 @@ const SchoolSchema = mongoose.Schema({
         type: Date,
         required: true,
         default: Date.now
-    }
+    },
+    updatedAt: {
+        type: Date,
+        default: Date.now,
+      }
 });
 
 module.exports = mongoose.model('School', SchoolSchema);

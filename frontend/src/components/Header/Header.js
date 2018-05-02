@@ -5,7 +5,7 @@ import './Header.css';
 class Header extends Component {
   
   render() {
-    const { pathname } = this.props.history.location;    
+    const { pathname } = this.props.history.location;
     return (
       <div className="Header">
         <div className="wrapper">
@@ -40,6 +40,13 @@ class Header extends Component {
                   (pathname !== '/signup') ? (
                     <NavLink to="/signup">
                       <button>Sign Up</button>
+                    </NavLink>
+                  ) : null
+                }
+                {
+                  (localStorage.getItem('token') !== null) ? (
+                    <NavLink to="/signout">
+                      <button className="signout">Sign Out</button>
                     </NavLink>
                   ) : null
                 }

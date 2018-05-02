@@ -56,8 +56,8 @@ class Pricing extends Component {
             </div>
             <div className="Package__details">
               <ul>
-                <li>up to 10+ Teachers</li>
-                <li>up to 20+ Houses</li>
+                <li>more than 10 Teachers</li>
+                <li>more than 20 Houses</li>
               </ul>
             </div>
             <div className="Package__price">

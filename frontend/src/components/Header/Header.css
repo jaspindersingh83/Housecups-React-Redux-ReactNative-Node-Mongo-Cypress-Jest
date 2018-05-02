@@ -105,3 +105,10 @@ nav.Header__nav > ul {
   box-shadow: inset 0px 0px 0px 2px blue;
   background-color: transparent;
 }
+.Header__nav__buttons > a > button.signout {
+  background-color: red;
+}
+.Header__nav__buttons > a:hover > button.signout {
+  color: red;
+  box-shadow: inset 0px 0px 0px 2px red;
+}

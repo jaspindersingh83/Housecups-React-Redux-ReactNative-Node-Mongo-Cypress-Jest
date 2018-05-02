@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const House = require('./appModels/houses');
 const School = require('./appModels/schools');
 const Teacher = require('./appModels/teachers');
+require('dotenv').config();
 
 const server = express();
 server.use(bodyParser.json());
@@ -130,6 +131,7 @@ mongoose
     });
     console.log('database is connected sucessfully');
   })
-  .catch(() => {
+  .catch((error) => {
     console.log('Database connection failed');
+    console.log(error);
   });

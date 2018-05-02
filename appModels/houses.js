@@ -13,7 +13,10 @@ const HouseSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    students: [],
+    schoolID:{
+        type: Schema.Types.ObjectId,
+        ref: 'School',
+    }, // schoolId: foreign key from the schools table 
     score: {
         type: Number,
         required: true

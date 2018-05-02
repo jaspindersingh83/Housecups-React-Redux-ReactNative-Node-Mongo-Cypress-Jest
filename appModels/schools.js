@@ -5,16 +5,18 @@ const SchoolSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    principal: {
+    admin: {
         type: String,
         required: true
     },
-    principalEmail: {
-        type: String,
-        required: true,
-        unique: true
-    },
-    teachers: [],
+    teachers: [{
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+    }], // an array of object ids that will come from the user model.
+    houses: [{
+        type: Schema.Types.ObjectId,
+        ref: 'House',
+    }], // an array of ids that will come from house model.
     location: String,
     createdOn: {
         type: Date,

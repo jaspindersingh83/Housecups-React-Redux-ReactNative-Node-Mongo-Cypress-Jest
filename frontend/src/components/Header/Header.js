@@ -23,9 +23,9 @@ class Header extends Component {
             <ul>
               <div className="Header__nav__links">
                 <NavLink to="/">
-                  <li>Home</li>
+                  <li className="selected">Home</li>
                 </NavLink>
-                <NavLink to="/">
+                <NavLink to="/pricing">
                   <li>Pricing</li>
                 </NavLink>
               </div>

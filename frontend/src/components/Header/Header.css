@@ -77,11 +77,12 @@ nav.Header__nav > ul {
   background-color: transparent;
   transition: all 0.25s ease-in-out 0s;
 }
-.Header__nav__links > a:not(:last-child) > li {
+.Header__nav__links > a:not(:last-child) {
   border-right: 1px solid rgba(0, 0, 255, 0.1);
 }
-.Header__nav__links > a:hover > li {
-  border-radius: 3px;
+.Header__nav__links > a:hover > li,
+.Header__nav__links > a > li.selected {
+    border-radius: 3px;
   border-right: 1px solid transparent;
   background-color: rgba(0, 0, 255, 0.1);
 }

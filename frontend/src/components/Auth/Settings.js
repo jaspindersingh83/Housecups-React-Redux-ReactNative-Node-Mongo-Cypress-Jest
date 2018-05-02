@@ -1,25 +1,25 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Button } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
 import './Auth.css';
-import { createUser } from '../../actions';
+import { changeSettings } from '../../actions';
 import backgroundimage from '../../static/trophy.png';
 
-class Signup extends Component {
+class Settings extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: '',
+      email: '',
       password: '',
       confirmPassword: '',
-      email: '',
       error: undefined,
+      settingsChanged: false,
     };
   }
   componentWillReceiveProps(props) {
     this.setState({
       error: props.error,
+      settingsChanged: props.settingsChanged,
     });
   }
   // Rather than having individual input functions.
@@ -29,18 +29,28 @@ class Signup extends Component {
       [type]: e.target.value,
     });
   };
-  signup = (e) => {
+  changeSettings = async (e) => {
     e.preventDefault();
-    this.props.createUser(this.state, this.props.history);
+    await this.props.changeSettings(this.state, this.props.history);
     this.setState({
+      email: '',
       password: '',
       confirmPassword: '',
       error: this.props.error,
+      settingsChanged: this.props.changedSettings,
     });
   };
   renderAlert() {
     if (!this.state.error) return null;
     return <p style={{ color: '#337ab7' }}>{this.state.error}</p>;
+  }
+  renderSettingsChangeSuccess() {
+    if (!this.state.settingsChanged) return null;
+    return (
+      <p style={{ color: '#337ab7' }}>
+        Settings have been changed successfully.
+      </p>
+    );
   }
   render() {
     return (
@@ -48,54 +58,38 @@ class Signup extends Component {
         <div className="Auth__Body">
           <div className="Auth__Body__Imageholder" />
           <div className="Auth__Body__Container" style={{ marginTop: '80px' }}>
-            <h1 style={{ marginBottom: '20px' }}>Sign up</h1>
             {this.renderAlert()}
-            <form onSubmit={this.signup}>
-              <label>Username</label>
-              <input
-                onChange={e => this.handleInput(e, 'username')}
-                value={this.state.username}
-                type="text"
-              />
-              <label>Password</label>
-              <input
-                onChange={e => this.handleInput(e, 'password')}
-                value={this.state.password}
-                type="password"
-              />
-              <label>Confirm Password</label>
-              <input
-                onChange={e => this.handleInput(e, 'confirmPassword')}
-                value={this.state.confirmPassword}
-                type="password"
-              />
+            {this.renderSettingsChangeSuccess()}
+            <form onSubmit={this.changeSettings}>
               <label>Email</label>
               <input
                 onChange={e => this.handleInput(e, 'email')}
                 value={this.state.email}
                 type="text"
               />
+              <label>New Password</label>
+              <input
+                onChange={e => this.handleInput(e, 'password')}
+                value={this.state.password}
+                type="password"
+              />
+              <label>Confirm New Password</label>
+              <input
+                onChange={e => this.handleInput(e, 'confirmPassword')}
+                value={this.state.confirmPassword}
+                type="password"
+              />
               <Button
                 style={{ width: '100%', margin: '20px 0px' }}
                 bsStyle="primary"
                 type="submit"
               >
-                Sign Up
+                Submit
               </Button>
             </form>
-            <p>
-              Already have an account?
-              <Link to={"/signin"} className="Link">
-                {' '}SignIn now
-              </Link>
-            </p>
           </div>
           <div className="Auth__Body__Imageholder">
-            <img
-              src={backgroundimage}
-              alt="Album"
-              style={{ opacity: 0.1 }}
-            />
+            <img src={backgroundimage} alt="Album" style={{ opacity: 0.1 }} />
           </div>
         </div>
       </div>
@@ -106,7 +100,8 @@ class Signup extends Component {
 const mapStateToProps = (state) => {
   return {
     error: state.auth.error,
+    changedSettings: state.auth.changedSettings,
   };
 };
 
-export default connect(mapStateToProps, { createUser })(Signup);
+export default connect(mapStateToProps, { changeSettings })(Settings);

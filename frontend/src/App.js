@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { Component } from 'react';
 
 // Redux
@@ -12,13 +13,15 @@ import './App.css';
 import reducers from './reducers';
 // Components
 // import Home from './components/Home/Home';
-import Forgotpassword from './components/Auth/forgotpassword';
-import Resetpassword from './components/Auth/reset'
+import Forgotpassword from './components/Auth/Forgotpassword';
+import Resetpassword from './components/Auth/Reset';
 import Signin from './components/Auth/Signin';
 import Signup from './components/Auth/Signup';
+import Settings from './components/Auth/Settings';
 
-
-const createStoreWithMiddleware = applyMiddleware(ReduxPromise, ReduxThunk)(createStore );
+const createStoreWithMiddleware = applyMiddleware(ReduxPromise, ReduxThunk)(
+  createStore
+);
 
 class App extends Component {
   render() {
@@ -27,18 +30,19 @@ class App extends Component {
         store={createStoreWithMiddleware(
           reducers,
           window.__REDUX_DEVTOOLS_EXTENSION__ &&
-          window.__REDUX_DEVTOOLS_EXTENSION__()
+            window.__REDUX_DEVTOOLS_EXTENSION__()
         )}
       >
         <Router>
-          <div className='App'>
+          <div className="App">
             {/* Please import componenets in alphabetical order */}
             {/* <Route path='/' component={Home} exact /> */}
-          <Route path='/forgotpassword' component={Forgotpassword} />
-          <Route path='/reset' component={Resetpassword} />
-            <Route path='/signin' component={Signin} exact />
+            <Route path="/forgotpassword" component={Forgotpassword} />
+            <Route path="/reset" component={Resetpassword} />
+            <Route path="/settings" component={Settings} />
+            <Route path="/signin" component={Signin} exact />
             {/* <Route path='/signout' component={Signout} /> */}
-            <Route path='/signup' component={Signup} />
+            <Route path="/signup" component={Signup} />
           </div>
         </Router>
       </Provider>

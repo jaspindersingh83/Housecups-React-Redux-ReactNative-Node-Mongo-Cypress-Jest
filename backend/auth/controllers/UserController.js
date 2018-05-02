@@ -38,14 +38,17 @@ const createUser = async (req, res) => {
 };
 
 const updateUserPassword = async (req, res, next) => {
+  const { email } = req.body;
   const { hashedPassword } = req;
   const { username } = req.decoded;
   try {
     const user = await User.findOne({ username });
-    const { email } = user;
+    if (!email) {
+      email = user.email;
+    }
     await User.update(
       { username },
-      { passwordHash: hashedPassword, updatedAt: moment() },
+      { email, passwordHash: hashedPassword, updatedAt: moment() },
     );
     req.email = email;
     next();
@@ -61,8 +64,8 @@ const sendResetPasswordEmail = async (req, res) => {
     from: adminemail,
     subject: 'Housecups Password Has been Changed',
     text:
-      'Your Housecups password has been successfully changed .\n\n' +
-      'Thanks Team Housecups'
+      'Your Housecups email/password has been successfully changed .\n\n' +
+      'Thanks Team Housecups',
   };
   try {
     await smtpTransport.sendMail(mailOptions);
@@ -76,7 +79,6 @@ const sendResetPasswordEmail = async (req, res) => {
 const signin = async (req, res) => {
   const { username, isAdmin, isTeacher } = req;
   const payload = { username, isAdmin, isTeacher };
-  console.log(mysecret)
   const token = await jwt.sign(payload, mysecret);
   res.status(200).json({ token });
 };

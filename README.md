@@ -24,7 +24,7 @@ It has following features.
 
 # Auth Routes
 
-`\signup`
+POST`\signup`
 Errors: This route goes through following middleware validations from top to bottom
 
 1. Checks username length. Error `Your username must contain between 5 to 60 characters`
@@ -42,7 +42,7 @@ The above errors pop up on top form for 4 seconds only.
 
 Once the user signs in, he is taken directly to siginin page with autofilled username field.
 
-`\signin`
+POST`\signin`
 A user can sign in with either username or email.
 
 Additional Features
@@ -61,7 +61,7 @@ Errors: This route goes through following middleware validations from top to bot
 
 
 
-`\forgotpassword`
+POST`\forgotpassword`
 
 A user can request to reset his password via forgotpassword. He will receive a reset request with a token valid for two hours. Although user is asked to submit email id to reset password. This route will work if user puts in his username instead of email id.
 
@@ -75,7 +75,7 @@ Errors:
 Error `Email could note be sent`.
 
 
-`\reset`
+POST`\reset`
 
 A user can reset his password via this route. User fills in newpassword and confirmPassword for same
 
@@ -84,5 +84,25 @@ Success
 * The user is sent an email that password has been reset.
 
 Errors:
-
 1. Checks password and confirm password. Error `Password and confirm password don't match`.
+
+POST`\settings`
+
+A user can reset his password via this route. User fills in newpassword and confirmPassword for same
+
+Success
+* The user is shown settings change success. 
+* The user is sent an email that email and password has been reset.
+
+Errors:
+1. Authentication error. `You are not authorized. Please login`.
+2. Checks password and confirm password. Error `Password and confirm password don't match`.
+3. Checks if email is valid
+Error `Please enter a valid email id`
+
+GET`\signout`
+
+Success
+* The JWT in localstorage is deleted. 
+* The user is redirected to signin page.
+

@@ -4,6 +4,7 @@ import axios from 'axios';
 export const AUTHENTICATION_ERROR = 'AUTHENTICATION_ERROR';
 export const ADMIN_AUTHORIZED = 'ADMIN_AUTHORIZED';
 export const CREATE_USER = 'CREATE_USER';
+export const CHANGESETTINGS = 'CHANGESETTINGS';
 export const FORGOTPASSWORD = 'FORGOTPASSWORD';
 export const RESETPASSWORD = 'RESETPASSWORD';
 export const SIGNIN = 'SIGNIN';
@@ -21,6 +22,24 @@ export const authError = (error) => {
       dispatch({ type: AUTHENTICATION_ERROR });
     }, 4000);
   };
+};
+
+export const changeSettings = async (user) => {
+  const apiurl = `${ROOT_URL}/settings`;
+  try {
+    const token = localStorage.getItem('token');
+    const changeSettingsRequest = await axios.post(apiurl, user, {
+      headers: {
+        Authorization: token,
+      },
+    });
+    console.log(changeSettingsRequest)
+    return {
+      type: CHANGESETTINGS,
+    };
+  } catch (error) {
+    return authError(error.response.data.message);
+  }
 };
 
 export const createUser = async (user, history) => {

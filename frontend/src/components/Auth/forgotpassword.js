@@ -4,7 +4,7 @@ import { Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import './Auth.css';
 import { forgotPassword } from '../../actions';
-import backgroundimage from './trophy.png';
+import backgroundimage from '../../static/trophy.png';
 
 class Fogotpassword extends Component {
   constructor(props) {

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import backgroundimage from './trophy.png';
+import backgroundimage from '../../static/trophy.png';
 import { resetPassword } from '../../actions';
 
 class Resetpassword extends Component {

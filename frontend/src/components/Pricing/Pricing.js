@@ -4,7 +4,6 @@ import Section from '../Section/Section';
 
 class Pricing extends Component {
 
-  state = {}
   render() {
     return (
       <Section className="Pricing">

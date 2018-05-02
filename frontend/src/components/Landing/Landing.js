@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './Landing.css';
 import Section from '../Section/Section';
+import Pricing from '../Pricing/Pricing';
 
 class Landing extends Component {
 
@@ -26,6 +27,8 @@ class Landing extends Component {
           </div>
 
         </Section>
+
+        <Pricing />
 
       </div>
     );

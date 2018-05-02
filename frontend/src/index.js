@@ -15,6 +15,7 @@ import Signup from './components/Auth/Signup';
 import forgotpassword from './components/Auth/forgotpassword';
 // General View Pages
 import Landing from './components/Landing/Landing';
+import Pricing from './components/Pricing/Pricing';
 
 const ReduxStore = createStore(Reducers, applyMiddleware(ReduxPromise));
 
@@ -25,6 +26,7 @@ ReactDOM.render(
         <Header />
         <Switch>
           <Route exact path="/" component={Landing} />
+          <Route exact path="/pricing" component={Pricing} />
           <Route exact path="/signin" component={Signin} />
           <Route exact path="/signup" component={Signup} />
           <Route exact path="/forgotPassword" component={forgotpassword} />

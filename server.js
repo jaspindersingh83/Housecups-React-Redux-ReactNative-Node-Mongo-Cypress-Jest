@@ -4,7 +4,10 @@ const bodyParser = require('body-parser');
 const House = require('./appModels/houses');
 const School = require('./appModels/schools');
 const User = require('./appModels/users');
+const stripe = require('stripe');
 require('dotenv').config();
+
+stripe('sk_test_vsxsVedMiX98SQfxctlOpxn1');
 
 const server = express();
 server.use(bodyParser.json());

@@ -6,6 +6,11 @@ class Header extends Component {
   
   render() {
     const { pathname } = this.props.history.location;
+    const authRoutes = [
+      '/signin',
+      '/signup',
+      '/forgotpassword',
+    ];
     return (
       <div className="Header">
         <div className="wrapper">
@@ -30,21 +35,21 @@ class Header extends Component {
               </div>
               <div className="Header__nav__buttons">
                 {
-                  (pathname !== '/signin') ? (
+                  (!authRoutes.includes(pathname)) ? (
                     <NavLink to="/signin">
                       <button>Log In</button>
                     </NavLink>
                   ) : null
                 }
                 {
-                  (pathname !== '/signup') ? (
+                  (!authRoutes.includes(pathname)) ? (
                     <NavLink to="/signup">
                       <button>Sign Up</button>
                     </NavLink>
                   ) : null
                 }
                 {
-                  (localStorage.getItem('token') !== null) ? (
+                  (!authRoutes.includes(pathname) && localStorage.getItem('token') !== null) ? (
                     <NavLink to="/signout">
                       <button className="signout">Sign Out</button>
                     </NavLink>

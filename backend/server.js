@@ -30,6 +30,12 @@ const authRoutes = require('./auth/routes/routes');
 
 authRoutes(server);
 
+
+// Running the House routes
+const houseRoutes = require('./houses/routes/routes');
+
+houseRoutes(server);
+
 // Connect Database
 database.connect();
 

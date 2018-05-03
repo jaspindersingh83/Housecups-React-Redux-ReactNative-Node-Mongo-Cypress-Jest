@@ -1,16 +1,25 @@
 import React, { Component } from 'react';
 import { NavLink, withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { signout } from '../../actions';
 import './Header.css';
 
 class Header extends Component {
-  
+
+  signout = () => {
+    const { history } = this.props;
+    this.props.signout(history);
+  }
+
   render() {
+    const isAuthorized = localStorage.getItem('token') !== null;
     const { pathname } = this.props.history.location;
     const authRoutes = [
       '/signin',
       '/signup',
       '/forgotpassword',
     ];
+
     return (
       <div className="Header">
         <div className="wrapper">
@@ -27,32 +36,30 @@ class Header extends Component {
             <ul>
               <div className="Header__nav__links">
                 <NavLink to="/">
-                  <li data-selected={ pathname === '/' }>Home</li>
+                  <li data-selected={pathname === '/'}>Home</li>
                 </NavLink>
                 <NavLink to="/pricing">
-                  <li data-selected={ pathname === '/pricing' }>Pricing</li>
+                  <li data-selected={pathname === '/pricing'}>Pricing</li>
                 </NavLink>
               </div>
               <div className="Header__nav__buttons">
                 {
-                  (!authRoutes.includes(pathname)) ? (
+                  (!authRoutes.includes(pathname) && !isAuthorized) ? (
                     <NavLink to="/signin">
                       <button>Log In</button>
                     </NavLink>
                   ) : null
                 }
                 {
-                  (!authRoutes.includes(pathname)) ? (
+                  (!authRoutes.includes(pathname) && !isAuthorized) ? (
                     <NavLink to="/signup">
                       <button>Sign Up</button>
                     </NavLink>
                   ) : null
                 }
                 {
-                  (!authRoutes.includes(pathname) && localStorage.getItem('token') !== null) ? (
-                    <NavLink to="/signout">
-                      <button className="signout">Sign Out</button>
-                    </NavLink>
+                  (!authRoutes.includes(pathname) && isAuthorized) ? (
+                    <button className="signout" onClick={this.signout}>Sign Out</button>
                   ) : null
                 }
               </div>
@@ -66,4 +73,8 @@ class Header extends Component {
 
 }
 
-export default withRouter(Header);
+const mapStateToProps = (state) => {
+  return state;
+};
+
+export default connect(mapStateToProps, { signout })(withRouter(Header));

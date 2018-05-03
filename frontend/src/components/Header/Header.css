@@ -90,7 +90,7 @@ nav.Header__nav > ul {
 .Header__nav__buttons > a:not(:last-child) {
   margin-right: 10px;
 }
-.Header__nav__buttons > a > button {
+.Header__nav__buttons button {
   color: #fff;
   font-family: 'PT Sans', sans-serif;
   font-weight: 500;
@@ -100,15 +100,16 @@ nav.Header__nav > ul {
   background-color: blue;
   transition: all 0.25s ease-in-out 0s;
 }
-.Header__nav__buttons > a:hover > button {
+.Header__nav__buttons button:hover {
   color: blue;
   box-shadow: inset 0px 0px 0px 2px blue;
   background-color: transparent;
 }
-.Header__nav__buttons > a > button.signout {
+.Header__nav__buttons button.signout {
   background-color: red;
 }
-.Header__nav__buttons > a:hover > button.signout {
+.Header__nav__buttons button.signout:hover {
   color: red;
   box-shadow: inset 0px 0px 0px 2px red;
+  background-color: transparent;
 }

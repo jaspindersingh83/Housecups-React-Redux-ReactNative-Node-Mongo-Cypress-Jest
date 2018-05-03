@@ -7,9 +7,9 @@ class Landing extends Component {
   render() {
     return (
       <div className="Landing">
-      
+
         <Section className="Intro">
-          
+
           <div className="Intro__content">
             <div className="Intro__content__headline">
               Welcome to House Cup

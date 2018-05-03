@@ -18,6 +18,7 @@ import reset from './components/Auth/reset';
 // General View Pages
 import Landing from './components/Landing/Landing';
 import Pricing from './components/Pricing/Pricing';
+import Dashboard from './components/Dashboard/Dashboard';
 
 const ReduxStore = createStore(Reducers, applyMiddleware(ReduxPromise));
 
@@ -37,6 +38,8 @@ class App extends Component {
               <Route exact path="/settings" component={Settings} />
               <Route exact path="/forgotPassword" component={forgotpassword} />
               <Route exact path="/reset" component={reset} />
+
+              <Route exact path="/dashboard/" component={Dashboard} />
             </Switch>
           </div>
         </Router>

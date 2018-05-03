@@ -1,48 +1,43 @@
 /* eslint-disable */
 import React, { Component } from 'react';
-
-// Redux
-import { Provider } from 'react-redux';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { createStore, applyMiddleware } from 'redux';
+import { Provider } from 'react-redux';
 import ReduxPromise from 'redux-promise';
-import ReduxThunk from 'redux-thunk';
-// Routers
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import Reducers from './reducers';
 
 import './App.css';
-import reducers from './reducers';
-// Components
-// import Home from './components/Home/Home';
-import Forgotpassword from './components/Auth/Forgotpassword';
-import Resetpassword from './components/Auth/Reset';
+// Common Components
+import Header from './components/Header/Header';
+// Views for Authentication
 import Signin from './components/Auth/Signin';
 import Signup from './components/Auth/Signup';
 import Settings from './components/Auth/Settings';
+import forgotpassword from './components/Auth/forgotpassword';
+import reset from './components/Auth/reset';
+// General View Pages
+import Landing from './components/Landing/Landing';
+import Pricing from './components/Pricing/Pricing';
 
-const createStoreWithMiddleware = applyMiddleware(ReduxPromise, ReduxThunk)(
-  createStore
-);
+const ReduxStore = createStore(Reducers, applyMiddleware(ReduxPromise));
 
 class App extends Component {
+  state = {}
   render() {
     return (
-      <Provider
-        store={createStoreWithMiddleware(
-          reducers,
-          window.__REDUX_DEVTOOLS_EXTENSION__ &&
-            window.__REDUX_DEVTOOLS_EXTENSION__()
-        )}
-      >
+      <Provider store={ReduxStore}>
         <Router>
           <div className="App">
-            {/* Please import componenets in alphabetical order */}
-            {/* <Route path='/' component={Home} exact /> */}
-            <Route path="/forgotpassword" component={Forgotpassword} />
-            <Route path="/reset" component={Resetpassword} />
-            <Route path="/settings" component={Settings} />
-            <Route path="/signin" component={Signin} exact />
-            {/* <Route path='/signout' component={Signout} /> */}
-            <Route path="/signup" component={Signup} />
+            <Header />
+            <Switch>
+              <Route exact path="/" component={Landing} />
+              <Route exact path="/pricing" component={Pricing} />
+              <Route exact path="/signin" component={Signin} />
+              <Route exact path="/signup" component={Signup} />
+              <Route exact path="/settings" component={Settings} />
+              <Route exact path="/forgotPassword" component={forgotpassword} />
+              <Route exact path="/reset" component={reset} />
+            </Switch>
           </div>
         </Router>
       </Provider>

@@ -1,0 +1,94 @@
+.Pricing {
+  text-align: center;
+  margin: 50px 0px;
+}
+.Pricing__packages {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 75px 0px;
+}
+.Package {
+  flex-basis: 25%;
+  min-width: 300px;
+  margin: 5px;
+  box-shadow: 0px 0px 0px 1px blue;
+  /* background-color: #eee; */
+}
+.Package--best-value {
+  box-shadow: 0px 0px 0px 5px blue;
+  border: 1px solid #fff;
+  background-color: #fff;
+  transform: scale(1.15);
+}
+.Package--best-value > .Package__name {
+  padding: 25px;
+}
+.Package__name {
+  color: #000;
+  font-size: 24px;
+  font-family: 'PT Serif', serif;
+  font-weight: 700;
+  padding: 10px 25px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+.Package__name__bestValue {
+  color: rgb(252, 71, 0);
+  font-size: 16px;
+  font-family: 'PT Serif', serif;
+}
+.Package__details {
+  display: flex;
+  justify-content: center;
+  text-align: left;
+  padding: 25px;
+  background-color: rgba(255, 255, 255, 0.75);
+}
+.Package__details > ul {
+  list-style-type: none;
+  margin: 0px;
+  padding: 0px
+}
+.Package__details > ul > li {
+  font-size: 18px;
+  font-family: 'PT Sans', sans-serif;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+  padding: 7px 0px;
+}
+.Package__details > ul > li::before {
+  content: "- ";
+}
+.Package__price {
+  font-size: 28px;
+  font-family: 'PT Serif', serif;
+  font-weight: 700;
+  padding: 20px;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+.Package__price__dollar-sign {
+  margin-right: 7px;
+}
+.Package__price__amount {
+}
+.Package__price__term {
+  min-width: 100%;
+  font-size: 16px;
+  font-family: 'PT Sans', sans-serif;
+  font-weight: 400;
+  margin-left: 10px;
+}
+.Package__button {
+  padding: 20px 25px;
+}
+.Package__button > button {
+  width: 100%;
+  color: #fff;
+  font-family: 'PT Sans', sans-serif;
+  font-weight: 500;
+  border-radius: 3px;
+  padding: 7px 25px;
+  border: 0px;
+  background-color: blue;
+  transition: all 0.25s ease-in-out 0s;
+}

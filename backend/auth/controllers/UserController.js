@@ -38,27 +38,17 @@ const createUser = async (req, res) => {
 };
 
 const updateUserPassword = async (req, res, next) => {
-<<<<<<< HEAD
-=======
   const { email } = req.body;
->>>>>>> e6cd7da16e5ae6336067a9f99bf0c2e7a83ccd9e
   const { hashedPassword } = req;
   const { username } = req.decoded;
   try {
     const user = await User.findOne({ username });
-<<<<<<< HEAD
-    const { email } = user;
-    await User.update(
-      { username },
-      { passwordHash: hashedPassword, updatedAt: moment() },
-=======
     if (!email) {
       email = user.email;
     }
     await User.update(
       { username },
       { email, passwordHash: hashedPassword, updatedAt: moment() },
->>>>>>> e6cd7da16e5ae6336067a9f99bf0c2e7a83ccd9e
     );
     req.email = email;
     next();
@@ -74,13 +64,8 @@ const sendResetPasswordEmail = async (req, res) => {
     from: adminemail,
     subject: 'Housecups Password Has been Changed',
     text:
-<<<<<<< HEAD
-      'Your Housecups password has been successfully changed .\n\n' +
-      'Thanks Team Housecups'
-=======
       'Your Housecups email/password has been successfully changed .\n\n' +
       'Thanks Team Housecups',
->>>>>>> e6cd7da16e5ae6336067a9f99bf0c2e7a83ccd9e
   };
   try {
     await smtpTransport.sendMail(mailOptions);
@@ -94,10 +79,6 @@ const sendResetPasswordEmail = async (req, res) => {
 const signin = async (req, res) => {
   const { username, isAdmin, isTeacher } = req;
   const payload = { username, isAdmin, isTeacher };
-<<<<<<< HEAD
-  console.log(mysecret)
-=======
->>>>>>> e6cd7da16e5ae6336067a9f99bf0c2e7a83ccd9e
   const token = await jwt.sign(payload, mysecret);
   res.status(200).json({ token });
 };
@@ -135,10 +116,6 @@ const forgotPassword = async (req, res, next) => {
 // Change `http://localhost:3000/reset?${token}\n\n` url to production url in production
 const sendResetEmailAndRedirect = async (req, res) => {
   const { email, token, username } = req;
-<<<<<<< HEAD
-  console.log(adminemail,adminusername)
-=======
->>>>>>> e6cd7da16e5ae6336067a9f99bf0c2e7a83ccd9e
   const mailOptions = {
     to: email,
     from: adminemail,

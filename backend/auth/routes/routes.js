@@ -43,4 +43,17 @@ module.exports = (server) => {
       updateUserPassword,
       sendResetPasswordEmail,
     );
+<<<<<<< HEAD
+=======
+  server
+    .route('/settings')
+    .post(
+      authenticate,
+      validatePasswords,
+      validateEmail,
+      hashPassword,
+      updateUserPassword,
+      sendResetPasswordEmail,
+    );
+>>>>>>> e6cd7da16e5ae6336067a9f99bf0c2e7a83ccd9e
 };

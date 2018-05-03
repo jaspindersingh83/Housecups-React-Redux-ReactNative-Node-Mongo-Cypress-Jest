@@ -4,7 +4,7 @@ import { Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import './Auth.css';
 import { forgotPassword } from '../../actions';
-import backgroundimage from './trophy.png';
+import backgroundimage from '../../static/trophy.png';
 
 class Fogotpassword extends Component {
   constructor(props) {
@@ -55,7 +55,7 @@ class Fogotpassword extends Component {
           <div className="Auth__Body__Imageholder" />
           <div
             className="Auth__Body__Container"
-            style={{ width: '33%', marginTop: '20px' }}
+            style={{ marginTop: '20px' }}
           >
             <h1 style={{ marginBottom: '20px' }}>Forgot Password</h1>
             {this.renderAlert()}

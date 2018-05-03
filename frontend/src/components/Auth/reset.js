@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import backgroundimage from './trophy.png';
+import backgroundimage from '../../static/trophy.png';
 import { resetPassword } from '../../actions';
 
 class Resetpassword extends Component {
@@ -48,7 +48,7 @@ class Resetpassword extends Component {
           <div className="Auth__Body__Imageholder" />
           <div
             className="Auth__Body__Container"
-            style={{ width: '33%', marginTop: '40px' }}
+            style={{ marginTop: '40px' }}
           >
             <h1 style={{ marginBottom: '20px' }}>Reset Password</h1>
             {this.renderAlert()}

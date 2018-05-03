@@ -41,7 +41,6 @@ class App extends Component {
             <Route path="/reset" component={Resetpassword} />
             <Route path="/settings" component={Settings} />
             <Route path="/signin" component={Signin} exact />
-            {/* <Route path='/signout' component={Signout} /> */}
             <Route path="/signup" component={Signup} />
           </div>
         </Router>

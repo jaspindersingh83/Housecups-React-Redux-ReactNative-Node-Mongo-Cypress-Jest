@@ -217,7 +217,7 @@ export const getHouses = async (house, history) => {
       },
     });
     return {
-      type: UPDATEHOUSE,
+      type: GETHOUSES,
       payload: getAllHousesRequest,
     };
   } catch (error) {

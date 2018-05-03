@@ -112,6 +112,8 @@ server.put('/api/house/:id', (req, res) => {
     });
 });
 
+// stripe server-side
+
 const port = process.env.PORT || 5050;
 
 

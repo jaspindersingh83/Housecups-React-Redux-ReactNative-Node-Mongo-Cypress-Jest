@@ -5,10 +5,17 @@ body {
   font-family: 'Roboto', sans-serif;
   background-color: #fff;
 }
-a {
+a,
+a:hover,
+a:focus,
+a:active {
   color: blue;
   text-decoration: none;
 }
+a:hover {
+  color: #000;
+}
+
 h1 {
   font-size: 36px;
   font-family: 'PT Serif', serif;

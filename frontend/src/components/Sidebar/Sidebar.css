@@ -11,7 +11,7 @@
   max-width: 360px;
   min-width: 250px;
   height: calc(100% - 100px);
-  background-color: #eee;
+  background-color: rgba(0, 0, 0, 0.065);
   overflow: hidden;
   z-index: 99999;
 }
@@ -22,7 +22,7 @@
 }
 
 .Sidebar__navigation {
-  margin-top: 25px;
+  
 }
 .Sidebar__navigation > ul {
   list-style-type: none;
@@ -51,7 +51,7 @@
   background-position: 150% center;
   z-index: 3;
 }
-.Sidebar__navigation > ul > a:hover > li {
+.Sidebar__navigation > ul > a:hover > li:not([data-selected="true"]) {
   box-shadow: 0px 0px 100px rgba(0, 0, 0, 0.1);
   background-color: #fff;
   background-position: 92% center;

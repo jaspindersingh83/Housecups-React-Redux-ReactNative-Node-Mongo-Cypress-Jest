@@ -1,27 +1,31 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import './Sidebar.css';
 
 class Sidebar extends Component {
 
   render() {
+    const { pathname } = this.props.history.location;    
     return (
       <div className="Sidebar">
         <div className="Sidebar__sidebar">
 
           <nav className="Sidebar__navigation">
             <ul>
-              <Link to="/dashboard/houses">
-                <li data-selected="true">Overview</li>
+              <Link to="/dashboard">
+                <li data-selected={ pathname === '/dashboard' }>Overview</li>
               </Link>
-              <Link to="/dashboard/houses">
-                <li>Houses</li>
+              <Link to="/schools">
+                <li data-selected={ pathname === '/schools' }>Schools</li>
               </Link>
-              <Link to="/dashboard/scores">
-                <li>Scoreboard</li>
+              <Link to="/houses">
+                <li data-selected={ pathname === '/houses' }>Houses</li>
               </Link>
-              <Link to="/dashboard/settings">
-                <li>Settings</li>
+              <Link to="/scoreboard">
+                <li data-selected={ pathname === '/scoreboard' }>Scoreboard</li>
+              </Link>
+              <Link to="/settings">
+                <li data-selected={ pathname === '/settings' }>Settings</li>
               </Link>
             </ul>
           </nav>
@@ -36,4 +40,4 @@ class Sidebar extends Component {
 
 }
 
-export default Sidebar;
+export default withRouter(Sidebar);

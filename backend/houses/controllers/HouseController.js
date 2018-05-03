@@ -1,4 +1,5 @@
 const House = require('../models/HouseModel.js');
+const moment = require('moment');
 
 // add houses
 const addHouse = (req, res) => {
@@ -14,7 +15,7 @@ const addHouse = (req, res) => {
 };
 // delete houses
 const deleteHouse = (req, res) => {
-  const { id } = req.params.id;
+  const { id } = req.params;
   House.findByIdAndRemove(id)
     .then((house) => {
       res.status(200).json({ success: true, house });
@@ -25,7 +26,6 @@ const deleteHouse = (req, res) => {
 };
 // get Houses
 const getHouses = (req, res) => {
-  console.log('in get houses')
   House.find({})
     .then((houses) => {
       res.status(200).json(houses);
@@ -36,17 +36,16 @@ const getHouses = (req, res) => {
 };
 
 // update/edit house
-const updateHouse = (req, res) => {
-  const { id } = req.params.id;
+const updateHouse = async (req, res) => {
+  const { id } = req.params;
   const houseInfo = req.body;
-
-  House.findByIdAndUpdate(id, houseInfo)
-    .then((house) => {
-      res.status(200).json({ message: 'House has been updated!', house });
-    })
-    .catch((error) => {
-      res.status(500).json({ message: 'The information cannot be updated because it is invalid', error });
-    });
+  houseInfo.updatedAt = moment();
+  try {
+    const house = await House.findByIdAndUpdate(id, houseInfo);
+    res.status(200).json({ message: 'House has been updated!', house });
+  } catch (error) {
+    res.status(500).json({ message: error });
+  }
 };
 
 

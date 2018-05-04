@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Glyphicon, Button } from 'react-bootstrap';
+import { SketchPicker } from 'react-color';
 import { deleteHouse, updateHouse } from '../../actions';
 import './House.css';
 
@@ -13,6 +14,7 @@ class House extends Component {
       color: props.color,
       mascot: props.mascot,
       gettingUpdated: false,
+      displayColorPicker: false,
     };
   }
   gettingUpdated = async (e) => {
@@ -27,6 +29,16 @@ class House extends Component {
       [type]: e.target.value,
     });
   };
+  handleClick = async () => {
+    await this.setState({ displayColorPicker: !this.state.displayColorPicker });
+  };
+
+  handleClose = async () => {
+    await this.setState({ displayColorPicker: false });
+  };
+  handleChange = async (color) => {
+    await this.setState({ color: color.hex });
+  };
   deleteHouse = async (id) => {
     await this.props.deleteHouse(id, this.props.history);
   }
@@ -35,41 +47,45 @@ class House extends Component {
   }
   render() {
     const updating = this.state.gettingUpdated;
+    const styles = {
+      popover: {
+        position: 'absolute',
+        zIndex: '2',
+      },
+    };
     return (
       <div>
         {updating ? (
           <form className="tableitem" onSubmit={() => this.updateHouse(this.state.id)}>
             <input
-              style={{ width: '40%', fontSize: '14px', height: '60%' }}
+              style={{ width: '40%', fontSize: '14px', height: '60%', marginRight: '20px' }}
               onChange={e => this.handleInput(e, 'name')}
               value={this.state.name}
               type="text"
             />
+            <div className="swatch" onClick={this.handleClick} style={{ height: '25px' }}>
+              <div className="color" style={{ background: this.state.color, height: '13px' }} />
+            </div>
+            {this.state.displayColorPicker ? (
+              <div style={styles.popover}>
+                <div className="cover" onClick={this.handleClose} />
+                <SketchPicker
+                  color={this.state.color}
+                  onChange={this.handleChange}
+                />
+              </div>
+            ) : null}
             <input
-              style={{ width: '30%', fontSize: '14px', height: '60%' }}
-              onChange={e => this.handleInput(e, 'color')}
-              value={this.state.color}
-              type="text"
-            />
-            <input
-              style={{ width: '30%', fontSize: '14px', height: '60%' }}
+              style={{ width: '30%', fontSize: '14px', height: '60%', marginRight: '20px' }}
               onChange={e => this.handleInput(e, 'mascot')}
               value={this.state.mascot}
               type="text"
             />
-            <Button
-              style={{
-              width: '80px',
-              fontSize: '12px',
-              height: '60%',
-              marginLeft: '20px',
-              textAlign: 'center',
-             }}
-              bsStyle="primary"
-              type="submit"
-            >
+            <div className="Header__nav__buttons">
+              <button style={{ width: '80px', height: '100%', fontSize: '13px' }}>
               Update
-            </Button>
+              </button>
+            </div>
           </form>
         )
         : (
@@ -77,8 +93,8 @@ class House extends Component {
             <div className="tableitem__name">
               {this.state.name}
             </div>
-            <div className="tableitem__color">
-              {this.state.color}
+            <div className="swatch" style={{ height: '25px' }}>
+              <div className="color" style={{ background: this.state.color, height: '13px' }} />
             </div>
             <div className="tableitem__mascot">
               {this.state.mascot}

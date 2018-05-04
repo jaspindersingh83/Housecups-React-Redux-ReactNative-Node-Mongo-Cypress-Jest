@@ -3,9 +3,7 @@ const moment = require('moment');
 
 // add houses
 const addHouse = async (req, res) => {
-  const { name, mascot } = req.body;
-  let { color } = req.body;
-  color = '#' + color.r.toString(16) + color.g.toString(16) + color.b.toString(16) + (color.a * 255).toString(16).substring(0,2)
+  const { name, mascot, color } = req.body;
   try {
     const result = await House.create({
       name,
@@ -29,14 +27,13 @@ const deleteHouse = (req, res) => {
     });
 };
 // get Houses
-const getHouses = (req, res) => {
-  House.find({})
-    .then((houses) => {
-      res.status(200).json(houses);
-    })
-    .catch((error) => {
-      res.status(500).json({ message: 'No such house in database', error });
-    });
+const getHouses = async (req, res) => {
+  try {
+    const houses = await House.find({});
+    res.status(200).json(houses);
+  } catch (error) {
+    res.status(500).json({ message: 'No such house in database', error });
+  }
 };
 
 // update/edit house

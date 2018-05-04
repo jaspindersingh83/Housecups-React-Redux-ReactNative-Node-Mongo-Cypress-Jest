@@ -11,12 +11,7 @@ class Houses extends Component {
     this.state = {
       houses: [],
       displayColorPicker: false,
-      color: {
-        r: '241',
-        g: '112',
-        b: '19',
-        a: '1',
-      },
+      color: '#F17013',
       newHouseName: '',
       newHouseMascot: '',
     };
@@ -45,7 +40,7 @@ class Houses extends Component {
   };
 
   handleChange = async (color) => {
-    await this.setState({ color: color.rgb });
+    await this.setState({ color: color.hex });
   };
   addHouse = async () => {
     const house = {
@@ -57,35 +52,9 @@ class Houses extends Component {
   }
   render() {
     const styles = {
-      color: {
-        width: '36px',
-        height: '28px',
-        borderRadius: '2px',
-        background: `rgba(${this.state.color.r}, ${this.state.color.g}, ${
-          this.state.color.b
-        }, ${this.state.color.a})`,
-      },
-      swatch: {
-        padding: '5px',
-        background: '#fff',
-        borderRadius: '1px',
-        boxShadow: '0 0 0 1px rgba(0,0,0,.1)',
-        display: 'inline-block',
-        cursor: 'pointer',
-        height: '40px',
-        border: 'solid 1px #333',
-        marginRight: '20px',
-      },
       popover: {
         position: 'absolute',
         zIndex: '2',
-      },
-      cover: {
-        position: 'fixed',
-        top: '0px',
-        right: '0px',
-        bottom: '0px',
-        left: '0px',
       },
     };
     return (
@@ -104,12 +73,12 @@ class Houses extends Component {
             placeholder="Name"
           />
           <div>
-            <div style={styles.swatch} onClick={this.handleClick}>
-              <div style={styles.color} />
+            <div className="swatch" onClick={this.handleClick}>
+              <div className="color" style={{ background: this.state.color }} />
             </div>
             {this.state.displayColorPicker ? (
               <div style={styles.popover}>
-                <div style={styles.cover} onClick={this.handleClose} />
+                <div className="cover" onClick={this.handleClose} />
                 <SketchPicker
                   color={this.state.color}
                   onChange={this.handleChange}

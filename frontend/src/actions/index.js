@@ -132,24 +132,25 @@ export const signout = async (history) => {
   }
 };
 
-// export const adminAuth = async (history) => {
-//     try{
-//         const token = localStorage.getItem('token')
-//         await axios.get(
-//             `${ROOT_URL}/admin`,
-//             {
-//             headers: {
-//               Authorization: token
-//             }
-//         });
-//         return {
-//             type:ADMIN_AUTHORIZED
-//         }
-//     } catch (error){
-//         history.push('/signin');
-//         return authError('You are not authorized as admin');
-//     }
-// }
+export const adminAuth = async (history) => {
+  try {
+    const token = localStorage.getItem('token');
+    await axios.get(
+      `${ROOT_URL}/admin`,
+      {
+        headers: {
+          Authorization: token,
+        },
+      },
+    );
+    return {
+      type: ADMIN_AUTHORIZED,
+    };
+  } catch (error) {
+    history.push('/signin');
+    return authError('You are not authorized as school admin');
+  }
+};
 
 // Houses Action Functions
 export const addHouse = async (house, history) => {
@@ -170,18 +171,18 @@ export const addHouse = async (house, history) => {
   }
 };
 
-
 export const deleteHouse = async (houseid, history) => {
   const apiurl = `${ROOT_URL}/api/house/${houseid}`;
   try {
     const token = localStorage.getItem('token');
-    await axios.delete(apiurl, {
+    const deleteRequest = await axios.delete(apiurl, {
       headers: {
         Authorization: token,
       },
     });
     return {
       type: DELETEHOUSE,
+      payload: deleteRequest,
     };
   } catch (error) {
     history.push('/signin');
@@ -207,11 +208,11 @@ export const updateHouse = async (house, history) => {
   }
 };
 
-export const getHouses = async (house, history) => {
+export const getHouses = async (history) => {
   const apiurl = `${ROOT_URL}/api/house`;
   try {
     const token = localStorage.getItem('token');
-    const getAllHousesRequest = await axios.get(apiurl, house, {
+    const getAllHousesRequest = await axios.get(apiurl, {
       headers: {
         Authorization: token,
       },
@@ -225,4 +226,3 @@ export const getHouses = async (house, history) => {
     return authError('You are not authorized, Please signin');
   }
 };
-

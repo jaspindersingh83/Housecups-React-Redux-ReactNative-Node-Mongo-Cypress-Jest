@@ -1,0 +1,30 @@
+.table{
+  display: flex;
+  flex-direction: column;
+  margin-left: 30px;
+}
+.tableitem{
+  display: flex;
+  flex-direction: row;
+  font-size: 14px;
+  width: 300px;
+  height: 50px;
+}
+.tableitem__name{
+  width: 40%;
+}
+.tableitem__color{
+  width: 30%
+}
+.tableitem__mascot{
+  width: 30%
+}
+.addentry{
+  display: flex;
+  width: 50%;
+  height:40px;
+  flex-direction: row;
+  margin-left: 30px;
+  margin-bottom: 40px;
+}
+

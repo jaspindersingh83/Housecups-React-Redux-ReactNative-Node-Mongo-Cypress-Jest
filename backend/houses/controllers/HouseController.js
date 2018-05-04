@@ -2,16 +2,20 @@ const House = require('../models/HouseModel.js');
 const moment = require('moment');
 
 // add houses
-const addHouse = (req, res) => {
-  const houseInfo = req.body;
-  const house = new House(houseInfo);
-  house.save()
-    .then((newhouse) => {
-      res.status(201).json(newhouse);
-    })
-    .catch((error) => {
-      res.status(500).json({ message: 'Error whilst saving the house to the database', error });
+const addHouse = async (req, res) => {
+  const { name, mascot } = req.body;
+  let { color } = req.body;
+  color = '#' + color.r.toString(16) + color.g.toString(16) + color.b.toString(16) + (color.a * 255).toString(16).substring(0,2)
+  try {
+    const result = await House.create({
+      name,
+      color,
+      mascot,
     });
+    res.status(201).json(result);
+  } catch (error) {
+    res.status(500).json({ message: error });
+  }
 };
 // delete houses
 const deleteHouse = (req, res) => {

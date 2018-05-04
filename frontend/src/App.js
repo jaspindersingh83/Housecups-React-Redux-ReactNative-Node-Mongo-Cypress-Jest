@@ -11,13 +11,19 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import './App.css';
 import reducers from './reducers';
-// Components
-// import Home from './components/Home/Home';
+// Common Components
+import Header from './components/Header/Header';
+// School Admin view
+import Schooladmin from './components/Schooladmin/Schooladmin'
+// Views for Authentication
 import Forgotpassword from './components/Auth/Forgotpassword';
 import Resetpassword from './components/Auth/Reset';
 import Signin from './components/Auth/Signin';
 import Signup from './components/Auth/Signup';
 import Settings from './components/Auth/Settings';
+// General View Pages
+import Landing from './components/Landing/Landing';
+import Pricing from './components/Pricing/Pricing';
 
 const createStoreWithMiddleware = applyMiddleware(ReduxPromise, ReduxThunk)(
   createStore
@@ -35,13 +41,16 @@ class App extends Component {
       >
         <Router>
           <div className="App">
+            <Header />
             {/* Please import componenets in alphabetical order */}
-            {/* <Route path='/' component={Home} exact /> */}
+            <Route exact path="/" component={Landing} />
             <Route path="/forgotpassword" component={Forgotpassword} />
+            <Route exact path="/pricing" component={Pricing} />
             <Route path="/reset" component={Resetpassword} />
-            <Route path="/settings" component={Settings} />
-            <Route path="/signin" component={Signin} exact />
-            <Route path="/signup" component={Signup} />
+            <Route exact path="/settings" component={Settings} />
+            <Route exact path="/signin" component={Signin} />
+            <Route exact path="/signup" component={Signup} />
+            <Route exact path="/schooladmin" component={Schooladmin} />
           </div>
         </Router>
       </Provider>

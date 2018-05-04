@@ -1,43 +1,156 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { Button } from "react-bootstrap";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { SketchPicker } from 'react-color';
+import { getHouses, addHouse } from '../../actions';
 import House from './House';
-import './Houses.css';
+import './House.css';
 
 class Houses extends Component {
   constructor(props) {
     super(props);
     this.state = {
       houses: [],
+      displayColorPicker: false,
+      color: {
+        r: '241',
+        g: '112',
+        b: '19',
+        a: '1',
+      },
       newHouseName: '',
-      newHouseColor: undefined,
+      newHouseMascot: '',
     };
   }
-  // handlenameInput = async (e) => {
-  //   e.preventdefault();
-  //   await this.setState({
-  //     newHouseName: e.target.value,
-  //   });
-  // }
-  // handlecolorInput = async (e) => {
-  //   e.preventdefault();
-    
-  // }
+  async componentWillMount() {
+    await this.props.getHouses(this.props.history);
+  }
+
+  async componentWillReceiveProps(props) {
+    await this.setState({
+      houses: props.houses,
+    });
+  }
+  handleInput = async (e, type) => {
+    e.preventDefault();
+    await this.setState({
+      [type]: e.target.value,
+    });
+  };
+  handleClick = async () => {
+    await this.setState({ displayColorPicker: !this.state.displayColorPicker });
+  };
+
+  handleClose = async () => {
+    await this.setState({ displayColorPicker: false });
+  };
+
+  handleChange = async (color) => {
+    await this.setState({ color: color.rgb });
+  };
+  addHouse = async () => {
+    const house = {
+      name: this.state.newHouseName,
+      color: this.state.color,
+      mascot: this.state.newHouseMascot,
+    };
+    await this.props.addHouse(house, this.props.history);
+  }
   render() {
+    const styles = {
+      color: {
+        width: '36px',
+        height: '28px',
+        borderRadius: '2px',
+        background: `rgba(${this.state.color.r}, ${this.state.color.g}, ${
+          this.state.color.b
+        }, ${this.state.color.a})`,
+      },
+      swatch: {
+        padding: '5px',
+        background: '#fff',
+        borderRadius: '1px',
+        boxShadow: '0 0 0 1px rgba(0,0,0,.1)',
+        display: 'inline-block',
+        cursor: 'pointer',
+        height: '40px',
+        border: 'solid 1px #333',
+        marginRight: '20px',
+      },
+      popover: {
+        position: 'absolute',
+        zIndex: '2',
+      },
+      cover: {
+        position: 'fixed',
+        top: '0px',
+        right: '0px',
+        bottom: '0px',
+        left: '0px',
+      },
+    };
     return (
       <div>
-        {this.state.houses.map((house) => {
-          <House id={house.id} name={house.name} color = {house.color} />
-        })}
+        <h4 style={{ marginBottom: '40px', marginLeft: '30px' }}>
+          Add Houses
+        </h4>
+        <form className="addentry" onSubmit={() => this.addHouse(this.state.id)}>
+          <input
+            onChange={e => this.handleInput(e, 'newHouseName')}
+            style={{
+              fontSize: '13px',
+              marginRight: '20px',
+              border: 'solid 1px #333',
+            }}
+            placeholder="Name"
+          />
+          <div>
+            <div style={styles.swatch} onClick={this.handleClick}>
+              <div style={styles.color} />
+            </div>
+            {this.state.displayColorPicker ? (
+              <div style={styles.popover}>
+                <div style={styles.cover} onClick={this.handleClose} />
+                <SketchPicker
+                  color={this.state.color}
+                  onChange={this.handleChange}
+                />
+              </div>
+            ) : null}
+          </div>
+          <input
+            onChange={e => this.handleInput(e, 'newHouseMascot')}
+            style={{ fontSize: '13px', border: 'solid 1px #333' }}
+            placeholder="Mascot"
+          />
+          <div className="Header__nav__buttons">
+            <button style={{ width: '80px', height: '100%', fontSize: '13px' }}>
+              Add House
+            </button>
+          </div>
+        </form>
+        <div className="table">
+          <h4 style={{ marginBottom: '40px' }}> Houses </h4>
+          {this.state.houses.map((house) => {
+            return (
+              <House
+                key={house._id}
+                id={house._id}
+                name={house.name}
+                color={house.color}
+                mascot={house.mascot}
+              />
+            );
+          })}
+        </div>
       </div>
     );
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    houses: state.houses
+    houses: state.houses,
   };
 };
 
-export default connect(mapStateToProps, { getAllHouses })(Houses);
+export default connect(mapStateToProps, { getHouses, addHouse })(Houses);

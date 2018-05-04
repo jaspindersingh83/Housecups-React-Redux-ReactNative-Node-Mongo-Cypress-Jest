@@ -11,14 +11,28 @@ class Header extends Component {
     this.props.signout(history);
   }
 
-  render() {
-    const isAuthorized = localStorage.getItem('token') !== null;
-    const { pathname } = this.props.history.location;
+  render() {    
     const authRoutes = [
       '/signin',
       '/signup',
       '/forgotpassword',
     ];
+    const dashboardRoutes = [
+      '/dashboard',
+      '/schools',
+      '/houses',
+      '/scoreboard',
+      '/settings',
+    ];
+
+    const isAuthorized = localStorage.getItem('token') !== null;
+
+    const { pathname } = this.props.history.location;
+
+    let pageName = pathname.split('/').reverse()[0];
+    if (pageName.length > 0) {
+      pageName = pageName[0].toUpperCase() + pageName.substring(1);
+    }
 
     return (
       <div className="Header">
@@ -34,14 +48,33 @@ class Header extends Component {
           </div>
           <nav className="Header__nav">
             <ul>
-              <div className="Header__nav__links">
-                <NavLink to="/">
-                  <li data-selected={pathname === '/'}>Home</li>
-                </NavLink>
-                <NavLink to="/pricing">
-                  <li data-selected={pathname === '/pricing'}>Pricing</li>
-                </NavLink>
-              </div>
+              {
+                (!dashboardRoutes.includes(pathname)) ? (
+                  // Main Navigation
+                  <div className="Header__nav__links">
+                    <NavLink to="/">
+                      <li data-selected={pathname === '/'}>Home</li>
+                    </NavLink>
+                    <NavLink to="/pricing">
+                      <li data-selected={pathname === '/pricing'}>Pricing</li>
+                    </NavLink>
+                  </div>
+                ) : (
+                  // Breadcrumbs for Dashboard
+                  <div className="Header__nav__links">
+                    <NavLink to="/dashboard">
+                      <li>Dashboard</li>
+                    </NavLink>
+                    {
+                      (pathname !== '/dashboard') ? (
+                        <NavLink to={pathname}>
+                          <li>{ pageName }</li>
+                        </NavLink>
+                      ) : null
+                    }
+                  </div>
+                )
+              }
               <div className="Header__nav__buttons">
                 {
                   (!authRoutes.includes(pathname) && !isAuthorized) ? (

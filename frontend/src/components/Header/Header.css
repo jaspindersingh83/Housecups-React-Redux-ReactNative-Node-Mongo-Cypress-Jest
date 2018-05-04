@@ -1,13 +1,12 @@
 .Header {
   height: 100px;
+  background-color: #fff;
 }
 .Header > .wrapper {
   display: flex;
   justify-content: space-between;
   align-items: center;
   height: 100px;
-
-  max-width: 1200px;
   margin: 0px auto;
 }
 
@@ -16,6 +15,7 @@
   justify-content: flex-start;
   align-items: center;
   flex-basis: 30%;
+  max-width: 360px;
 }
 .Header__logo__image {
   position: relative;
@@ -42,7 +42,7 @@
 }
 
 nav.Header__nav {
-  flex-basis: 70%;
+  width: calc(100% - 360px);
 }
 nav.Header__nav > ul {
   display: flex;
@@ -50,7 +50,7 @@ nav.Header__nav > ul {
   align-items: center;
   list-style-type: none;
   height: 75px;
-  padding: 0px;
+  padding: 0px 25px;
   margin: 0px;
 }
 

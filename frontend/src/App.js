@@ -9,7 +9,6 @@ import Reducers from './reducers';
 import './App.css';
 // Common Components
 import Header from './components/Header/Header';
-import DashboardHeader from './components/DashboardHeader/DashboardHeader';
 // Views for Authentication
 import Signin from './components/Auth/Signin';
 import Signup from './components/Auth/Signup';
@@ -28,10 +27,7 @@ class App extends Component {
       <Provider store={ReduxStore}>
         <Router>
           <div className="App">
-            <Switch>
-              <Route exact path="/(dashboard|schools|houses|scoreboard|settings)" component={DashboardHeader} />
-              <Route component={Header} />
-            </Switch>
+            <Header />
             <Switch>
               <Route exact path="/" component={Landing} />
               <Route exact path="/pricing" component={Pricing} />

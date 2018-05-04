@@ -17,9 +17,13 @@ class Schooladmin extends Component {
     );
   }
 }
-const mapStateToProps = () => {
-  return {
-  };
+// const mapStateToProps = () => {
+//   return {};
+// };
+
+
+const mapStateToProps = (state) => {
+  return state;
 };
 
 export default connect(mapStateToProps, { adminAuth })(Schooladmin);

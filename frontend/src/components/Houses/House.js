@@ -29,6 +29,8 @@ class House extends Component {
       [type]: e.target.value,
     });
   };
+
+  // color picker functions
   handleClick = async () => {
     await this.setState({ displayColorPicker: !this.state.displayColorPicker });
   };
@@ -39,6 +41,7 @@ class House extends Component {
   handleChange = async (color) => {
     await this.setState({ color: color.hex });
   };
+  //
   deleteHouse = async (id) => {
     await this.props.deleteHouse(id, this.props.history);
   }

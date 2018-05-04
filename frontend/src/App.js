@@ -1,43 +1,56 @@
 /* eslint-disable */
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import { createStore, applyMiddleware } from 'redux';
+
+// Redux
 import { Provider } from 'react-redux';
+import { createStore, applyMiddleware } from 'redux';
 import ReduxPromise from 'redux-promise';
-import Reducers from './reducers';
+import ReduxThunk from 'redux-thunk';
+// Routers
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import './App.css';
+import reducers from './reducers';
 // Common Components
 import Header from './components/Header/Header';
+// School Admin view
+import Schooladmin from './components/Schooladmin/Schooladmin'
 // Views for Authentication
+import Forgotpassword from './components/Auth/Forgotpassword';
+import Resetpassword from './components/Auth/Reset';
 import Signin from './components/Auth/Signin';
 import Signup from './components/Auth/Signup';
 import Settings from './components/Auth/Settings';
-import forgotpassword from './components/Auth/forgotpassword';
-import reset from './components/Auth/reset';
 // General View Pages
 import Landing from './components/Landing/Landing';
 import Pricing from './components/Pricing/Pricing';
 
-const ReduxStore = createStore(Reducers, applyMiddleware(ReduxPromise));
+const createStoreWithMiddleware = applyMiddleware(ReduxPromise, ReduxThunk)(
+  createStore
+);
 
 class App extends Component {
-  state = {}
   render() {
     return (
-      <Provider store={ReduxStore}>
+      <Provider
+        store={createStoreWithMiddleware(
+          reducers,
+          window.__REDUX_DEVTOOLS_EXTENSION__ &&
+            window.__REDUX_DEVTOOLS_EXTENSION__()
+        )}
+      >
         <Router>
           <div className="App">
             <Header />
-            <Switch>
-              <Route exact path="/" component={Landing} />
-              <Route exact path="/pricing" component={Pricing} />
-              <Route exact path="/signin" component={Signin} />
-              <Route exact path="/signup" component={Signup} />
-              <Route exact path="/settings" component={Settings} />
-              <Route exact path="/forgotPassword" component={forgotpassword} />
-              <Route exact path="/reset" component={reset} />
-            </Switch>
+            {/* Please import componenets in alphabetical order */}
+            <Route exact path="/" component={Landing} />
+            <Route path="/forgotpassword" component={Forgotpassword} />
+            <Route exact path="/pricing" component={Pricing} />
+            <Route path="/reset" component={Resetpassword} />
+            <Route exact path="/settings" component={Settings} />
+            <Route exact path="/signin" component={Signin} />
+            <Route exact path="/signup" component={Signup} />
+            <Route exact path="/schooladmin" component={Schooladmin} />
           </div>
         </Router>
       </Provider>

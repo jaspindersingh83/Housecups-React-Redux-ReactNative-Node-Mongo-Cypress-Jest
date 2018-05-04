@@ -5,24 +5,15 @@ import './Sidebar.css';
 class Sidebar extends Component {
 
   render() {
-    const { pathname } = this.props.history.location;    
+    const { pathname } = this.props.history.location;
     return (
       <div className="Sidebar">
         <div className="Sidebar__sidebar">
 
           <nav className="Sidebar__navigation">
             <ul>
-              <Link to="/dashboard">
-                <li data-selected={ pathname === '/dashboard' }>Overview</li>
-              </Link>
               <Link to="/schools">
                 <li data-selected={ pathname === '/schools' }>Schools</li>
-              </Link>
-              <Link to="/houses">
-                <li data-selected={ pathname === '/houses' }>Houses</li>
-              </Link>
-              <Link to="/scoreboard">
-                <li data-selected={ pathname === '/scoreboard' }>Scoreboard</li>
               </Link>
               <Link to="/settings">
                 <li data-selected={ pathname === '/settings' }>Settings</li>

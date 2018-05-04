@@ -10,11 +10,18 @@ export const RESETPASSWORD = 'RESETPASSWORD';
 export const SIGNIN = 'SIGNIN';
 export const SIGNOUT = 'SIGNOUT';
 
+// House Actions
+export const ADDHOUSE = 'ADDHOUSE';
+export const DELETEHOUSE = 'DELETEHOUSE';
+export const GETHOUSES = 'GETHOUSES';
+export const UPDATEHOUSE = 'UPDATEHOUSE';
+
 // Api url To be changed for Production
 // const ROOT_URL = 'Insert Production URL here'
 
 const ROOT_URL = 'http://127.0.0.1:5000';
 
+// Auth Actions functions
 export const authError = (error) => {
   return (dispatch) => {
     dispatch({ type: AUTHENTICATION_ERROR, payload: error });
@@ -28,12 +35,11 @@ export const changeSettings = async (user) => {
   const apiurl = `${ROOT_URL}/settings`;
   try {
     const token = localStorage.getItem('token');
-    const changeSettingsRequest = await axios.post(apiurl, user, {
+    await axios.post(apiurl, user, {
       headers: {
         Authorization: token,
       },
     });
-    console.log(changeSettingsRequest)
     return {
       type: CHANGESETTINGS,
     };
@@ -126,21 +132,97 @@ export const signout = async (history) => {
   }
 };
 
-// export const adminAuth = async (history) => {
-//     try{
-//         const token = localStorage.getItem('token')
-//         await axios.get(
-//             `${ROOT_URL}/admin`,
-//             {
-//             headers: {
-//               Authorization: token
-//             }
-//         });
-//         return {
-//             type:ADMIN_AUTHORIZED
-//         }
-//     } catch (error){
-//         history.push('/signin');
-//         return authError('You are not authorized as admin');
-//     }
-// }
+export const adminAuth = async (history) => {
+  try {
+    const token = localStorage.getItem('token');
+    await axios.get(
+      `${ROOT_URL}/admin`,
+      {
+        headers: {
+          Authorization: token,
+        },
+      },
+    );
+    return {
+      type: ADMIN_AUTHORIZED,
+    };
+  } catch (error) {
+    history.push('/signin');
+    return authError('You are not authorized as school admin');
+  }
+};
+
+// Houses Action Functions
+export const addHouse = async (house, history) => {
+  const apiurl = `${ROOT_URL}/api/house`;
+  try {
+    const token = localStorage.getItem('token');
+    await axios.post(apiurl, house, {
+      headers: {
+        Authorization: token,
+      },
+    });
+    return {
+      type: ADDHOUSE,
+    };
+  } catch (error) {
+    history.push('/signin');
+    return authError('You are not authorized, Please signin');
+  }
+};
+
+export const deleteHouse = async (houseid, history) => {
+  const apiurl = `${ROOT_URL}/api/house/${houseid}`;
+  try {
+    const token = localStorage.getItem('token');
+    const deleteRequest = await axios.delete(apiurl, {
+      headers: {
+        Authorization: token,
+      },
+    });
+    return {
+      type: DELETEHOUSE,
+      payload: deleteRequest,
+    };
+  } catch (error) {
+    history.push('/signin');
+    return authError('You are not authorized, Please signin');
+  }
+};
+
+export const updateHouse = async (house, history) => {
+  const apiurl = `${ROOT_URL}/api/house/${house.id}`;
+  try {
+    const token = localStorage.getItem('token');
+    await axios.put(apiurl, house, {
+      headers: {
+        Authorization: token,
+      },
+    });
+    return {
+      type: UPDATEHOUSE,
+    };
+  } catch (error) {
+    history.push('/signin');
+    return authError('You are not authorized, Please signin');
+  }
+};
+
+export const getHouses = async (history) => {
+  const apiurl = `${ROOT_URL}/api/house`;
+  try {
+    const token = localStorage.getItem('token');
+    const getAllHousesRequest = await axios.get(apiurl, {
+      headers: {
+        Authorization: token,
+      },
+    });
+    return {
+      type: GETHOUSES,
+      payload: getAllHousesRequest,
+    };
+  } catch (error) {
+    history.push('/signin');
+    return authError('You are not authorized, Please signin');
+  }
+};

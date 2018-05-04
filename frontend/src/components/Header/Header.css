@@ -1,14 +1,19 @@
 .Header {
   height: 100px;
+  background-color: #fff;
 }
 .Header > .wrapper {
   display: flex;
   justify-content: space-between;
   align-items: center;
   height: 100px;
-
-  max-width: 1200px;
   margin: 0px auto;
+}
+.Header[data-protected-route="false"] > .wrapper {
+  max-width: 1200px;
+}
+.Header[data-public-auth-route="true"] > .wrapper {
+  justify-content: center;
 }
 
 .Header__logo {
@@ -16,12 +21,19 @@
   justify-content: flex-start;
   align-items: center;
   flex-basis: 30%;
+  max-width: 360px;
+}
+.Header[data-public-auth-route="true"] .Header__logo {
+  justify-content: center;
 }
 .Header__logo__image {
   position: relative;
   width: 100px;
   height: 100px;
   overflow: hidden;
+}
+.Header[data-public-auth-route="true"] .Header__logo__image {
+  margin-left: -25px;
 }
 .Header__logo__image > .img {
   position: absolute;
@@ -42,7 +54,10 @@
 }
 
 nav.Header__nav {
-  flex-basis: 70%;
+  width: calc(100% - 360px);
+}
+.Header[data-public-auth-route="true"] nav.Header__nav {
+  display: none;
 }
 nav.Header__nav > ul {
   display: flex;
@@ -50,7 +65,7 @@ nav.Header__nav > ul {
   align-items: center;
   list-style-type: none;
   height: 75px;
-  padding: 0px;
+  padding: 0px 25px;
   margin: 0px;
 }
 
@@ -90,7 +105,7 @@ nav.Header__nav > ul {
 .Header__nav__buttons > a:not(:last-child) {
   margin-right: 10px;
 }
-.Header__nav__buttons > a > button {
+.Header__nav__buttons button {
   color: #fff;
   font-family: 'PT Sans', sans-serif;
   font-weight: 500;
@@ -100,15 +115,16 @@ nav.Header__nav > ul {
   background-color: blue;
   transition: all 0.25s ease-in-out 0s;
 }
-.Header__nav__buttons > a:hover > button {
+.Header__nav__buttons button:hover {
   color: blue;
   box-shadow: inset 0px 0px 0px 2px blue;
   background-color: transparent;
 }
-.Header__nav__buttons > a > button.signout {
+.Header__nav__buttons button.signout {
   background-color: red;
 }
-.Header__nav__buttons > a:hover > button.signout {
+.Header__nav__buttons button.signout:hover {
   color: red;
   box-shadow: inset 0px 0px 0px 2px red;
+  background-color: transparent;
 }

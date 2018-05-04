@@ -12,12 +12,12 @@ class Header extends Component {
   }
 
   render() {
-    const authRoutes = [
+    const publicAuthRoute = [
       '/signin',
       '/signup',
       '/forgotpassword',
     ];
-    const dashboardRoutes = [
+    const protectedRoutes = [
       '/dashboard',
       '/schools',
       '/houses',
@@ -25,9 +25,12 @@ class Header extends Component {
       '/settings',
     ];
 
-    const isAuthorized = localStorage.getItem('token') !== null;
-
     const { pathname } = this.props.history.location;
+    const token = localStorage.getItem('token');
+
+    const isAuthorized = !!token;
+    const isProtectedRoute = protectedRoutes.includes(pathname);
+    const isPublicAuthRoute = publicAuthRoute.includes(pathname);
 
     let pageName = pathname.split('/').reverse()[0];
     if (pageName.length > 0) {
@@ -35,21 +38,26 @@ class Header extends Component {
     }
 
     return (
-      <div className="Header">
+      <div
+        className="Header"
+        data-protected-route={isProtectedRoute}
+        data-public-auth-route={isPublicAuthRoute}
+      >
         <div className="wrapper">
-
-          <div className="Header__logo">
-            <div className="Header__logo__image">
-              <div className="img" />
+          <NavLink to="/">
+            <div className="Header__logo">
+              <div className="Header__logo__image">
+                <div className="img" />
+              </div>
+              <div className="Header__logo__text">
+                House Cup
+              </div>
             </div>
-            <div className="Header__logo__text">
-              House Cup
-            </div>
-          </div>
+          </NavLink>
           <nav className="Header__nav">
             <ul>
               {
-                (!dashboardRoutes.includes(pathname)) ? (
+                (!isProtectedRoute) ? (
                   // Main Navigation
                   <div className="Header__nav__links">
                     <NavLink to="/">
@@ -77,21 +85,21 @@ class Header extends Component {
               }
               <div className="Header__nav__buttons">
                 {
-                  (!authRoutes.includes(pathname) && !isAuthorized) ? (
+                  (!isPublicAuthRoute && !isAuthorized) ? (
                     <NavLink to="/signin">
                       <button>Log In</button>
                     </NavLink>
                   ) : null
                 }
                 {
-                  (!authRoutes.includes(pathname) && !isAuthorized) ? (
+                  (!isPublicAuthRoute && !isAuthorized) ? (
                     <NavLink to="/signup">
                       <button>Sign Up</button>
                     </NavLink>
                   ) : null
                 }
                 {
-                  (!authRoutes.includes(pathname) && isAuthorized) ? (
+                  (!isPublicAuthRoute && isAuthorized) ? (
                     <button className="signout" onClick={this.signout}>Sign Out</button>
                   ) : null
                 }

@@ -11,7 +11,7 @@ class Header extends Component {
     this.props.signout(history);
   }
 
-  render() {    
+  render() {
     const authRoutes = [
       '/signin',
       '/signup',
@@ -110,4 +110,4 @@ const mapStateToProps = (state) => {
   return state;
 };
 
-export default connect(mapStateToProps, { signout })(withRouter(Header));
+export default withRouter(connect(mapStateToProps, { signout })(Header));

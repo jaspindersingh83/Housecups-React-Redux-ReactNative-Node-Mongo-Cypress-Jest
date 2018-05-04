@@ -11,6 +11,7 @@ stripe('sk_test_vsxsVedMiX98SQfxctlOpxn1');
 
 const server = express();
 server.use(bodyParser.json());
+server.use(bodyParser.urlencoded({ extended: false }));
 
 server.get('/', (req, res) => {
   res.status(200).json({ message: 'API running' });
@@ -116,6 +117,22 @@ server.put('/api/house/:id', (req, res) => {
 });
 
 // stripe server-side
+
+server.use('paymentFiles', 'hbs');
+server.set('paymentFiles', _dirname + '/paymentFiles'); // gets the paymentFiles and renders them to the html
+
+
+server.get('/api/payment', (req, res) => {
+  res.render('index', {
+  });
+})
+server.get('/api/paysucess', (req, res) => {
+  res.render('api/paysucess', {
+  });
+})
+server.post('/charge', (req, res) => {
+  
+})
 
 const port = process.env.PORT || 5050;
 

@@ -1,0 +1,14 @@
+#Box {
+    border: 1px solid green;
+    width:400px;
+}
+
+p {
+    width:200px;
+    margin-left: 40%;
+    display: block;
+}
+
+dl dt {
+    margin-left: 0;
+}

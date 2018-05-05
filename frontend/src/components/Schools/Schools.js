@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Houses from '../Houses/Houses';
 import { adminAuth } from '../../actions';
+import SchoolInfo from '../SchoolInfo/SchoolInfo';
+import StripePaymentButton from '../StripePaymentButton/StripePaymentButton';
 
 class Schools extends Component {
   // async componentWillMount() {
@@ -11,7 +13,9 @@ class Schools extends Component {
   render() {
     return (
       <div className="Schools">
+        <SchoolInfo />
         <Houses />
+        <StripePaymentButton />
       </div>
     );
   }

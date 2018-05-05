@@ -6,6 +6,6 @@ const {
 const { authenticate } = require('../../common/common');
 
 module.exports = (server) => {
-  server.route('/schools').post(addSchool);
-  server.route('/schools').get(getAllSchools);
+  server.route('/api/schools').post(addSchool);
+  server.route('/api/schools').get(getAllSchools);
 };

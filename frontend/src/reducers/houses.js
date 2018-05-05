@@ -14,7 +14,7 @@ const housesReducer = (houses = [], action) => {
     case UPDATEHOUSE:
       return [...houses, action.payload.data];
     case GETHOUSES:
-      return [...houses, ...action.payload.data];
+      return [...action.payload.data];
     case DELETEHOUSE:
       return houses.filter(house => house._id !== action.payload.data.house._id);
     default:

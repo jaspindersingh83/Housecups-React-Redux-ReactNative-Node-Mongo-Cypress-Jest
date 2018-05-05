@@ -165,16 +165,20 @@ GET`\api\schools\:id` Type: `public`
 Rendered when user/non-user/teachers/schooladmin/superadmin clicks on a particular school in list of schools.
 
 Success
-1. List of school houses color and their corresponding scores.
+1. List of school houses color and their corresponding scores (in sorted manner).
 
 # Scoreboard increment/decrement Routes
 
-POST`\api\scoreboard` Type: `protected`
+GET`\api\scoreboard` Type: `protected`
 Rendered when teacher/schooladmin clicks on a `Scoreboard`(visible to only teachers/schooladmin) in side bar. 
 
 Success
-1. Increment and decrement in house scores.
+1. List of houses with color and increment and decrement abilities.
 
+POST`\api\scoreboard` Type: `protected`
+
+Success
+1. Ability of increment and decrement the house scores.
 
 
 

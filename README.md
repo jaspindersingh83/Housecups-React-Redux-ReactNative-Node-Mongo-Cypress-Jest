@@ -133,7 +133,7 @@ Success
 A route which gives admin dashboard for company/housecups admin. Following Features
 1. List of current added Teachers, their emailid and whether teacher has completed signup process or not.
 2. Ability to delte and update teachers.
-3. Ability to add teachers and handle their sigup process by sending temporary JWT (similar to JWT) to their emailid. 
+3. Ability to add teachers and handle their sigup process by sending temporary JWT (similar to `reset`) to their emailid. 
 3. List of current added houses, house colors, house mascots.
 4. Ability to add teachers.
 5. Ability to delete/update teachers.
@@ -148,7 +148,6 @@ Rendered when user/non-user/teachers/schooladmin/superadmin clicks on `schools` 
 
 Success
 1. List of all the schools which can be clicked to see house scorecard of each school.
-
 
 POST `\api\schools` Type: `Protected`
 Rendered when `signed up user` clicks on `Add School` in side bar.
@@ -179,6 +178,10 @@ POST`\api\scoreboard` Type: `protected`
 
 Success
 1. Ability of increment and decrement the house scores.
+
+# Teachers/ House Routes
+These are simple CRUD routes. If there are any points of cofusion please refer to 
+corresponding teachers/houses folder on backend.
 
 
 

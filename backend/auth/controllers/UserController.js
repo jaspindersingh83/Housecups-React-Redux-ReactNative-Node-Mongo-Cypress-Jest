@@ -38,7 +38,7 @@ const createUser = async (req, res) => {
 };
 
 const updateUserPassword = async (req, res, next) => {
-  const { email } = req.body;
+  let { email } = req.body;
   const { hashedPassword } = req;
   const { username } = req.decoded;
   try {

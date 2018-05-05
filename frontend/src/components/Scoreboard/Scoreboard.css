@@ -1,3 +1,78 @@
 .Scoreboard {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 50px 0px;
+}
+.ScoreCard {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-width: 300px;
+  min-height: 250px;
+  border-radius: 5px;
+  box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.05),
+    0px 0px 5px 0px rgba(0, 0, 0, 0.1),
+    0px 10px 5px -3px rgba(0, 0, 0, 0.05);
+  margin: 10px;
+  background-color: #fff;
+  overflow: hidden;
+}
+.ScoreCard__house {
+  text-align: left;
+  letter-spacing: 0.5px;
+  border-bottom: 1px solid  rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 20px 50px 0px rgba(0, 0, 0, 0.1);
+  padding: 25px;
+}
+.ScoreCard__house-name {
+  font-size: 24px;
+  font-family: 'PT Sans', sans-serif;
+  font-weight: 700;
+}
+.ScoreCard__house-mascot {
+  font-size: 16px;
+  font-family: 'Roboto', sans-serif;
+}
 
+.ScoreCard__score {
+  font-size: 60px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 700;
+  text-align: right;
+  padding: 25px;
+}
+.ScoreCard__actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: -17px;
+  margin-right: 25px;
+}
+
+.ScoreCard__button {
+  position: relative;
+  width: 35px;
+  height: 35px;
+  padding: 0px;
+  border-radius: 50%;
+  box-shadow: 0px 0px 0px 5px rgba(0, 0, 0, 0.075);
+  outline: none;
+  background-color: #fff;
+  background-image: url('../../static/arrow-left.png');
+  background-position: center center;
+  background-size: 50% auto;
+  background-repeat: no-repeat;
+  transition: all 0.25s ease-in-out 0s;
+}
+.ScoreCard__button:not(:first-child) {
+  margin-left: 15px;
+}
+.ScoreCard__button--increment {
+  background-color: rgba(78, 166, 92, 1.0);
+  transform: rotate(90deg);
+}
+.ScoreCard__button--decrement {
+  background-color: rgba(248, 83, 95, 1.0);
+  transform: rotate(-90deg);
 }

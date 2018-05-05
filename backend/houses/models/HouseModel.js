@@ -15,10 +15,10 @@ const HouseSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  // schoolID: {
-  //   type: Schema.Types.ObjectId,
-  //   ref: 'School',
-  // }, // schoolId: foreign key from the schools table
+  schoolID: {
+     type: Schema.Types.ObjectId,
+     ref: 'School',
+  }, // schoolId: foreign key from the schools table
   score: {
     type: Number,
     default: 0,

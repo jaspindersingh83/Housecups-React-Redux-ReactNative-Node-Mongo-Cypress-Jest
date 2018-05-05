@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Glyphicon, Button } from 'react-bootstrap';
+import { Glyphicon } from 'react-bootstrap';
 import { SketchPicker } from 'react-color';
 import { deleteHouse, updateHouse } from '../../actions';
 import './House.css';

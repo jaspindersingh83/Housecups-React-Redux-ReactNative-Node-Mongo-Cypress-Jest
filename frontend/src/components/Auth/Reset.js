@@ -33,7 +33,8 @@ class Resetpassword extends Component {
     e.preventDefault();
     this.props.resetPassword(this.state, this.props.history);
     this.setState({
-      email: '',
+      password: '',
+      confirmPassword: '',
       error: this.props.error,
     });
   };

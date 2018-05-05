@@ -104,6 +104,7 @@ export const resetPassword = async (passwords, history) => {
         Authorization: token,
       },
     });
+    console.log('Reset Successfull');
     history.push('/signin');
     return {
       type: RESETPASSWORD,

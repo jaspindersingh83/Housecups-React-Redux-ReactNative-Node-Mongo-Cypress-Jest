@@ -4,7 +4,7 @@ const { Schema } = mongoose;
 
 const PlanSchema = Schema({
   name: String,
-  allowedTeahcers: {
+  allowedTeachers: {
     type: Number,
     required: true,
   },

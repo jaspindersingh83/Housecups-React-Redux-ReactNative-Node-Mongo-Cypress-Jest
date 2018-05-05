@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 
+const { Schema } = mongoose;
 const UserSchema = new mongoose.Schema({
   username: {
     type: String,
@@ -19,6 +20,10 @@ const UserSchema = new mongoose.Schema({
   isTeacher: {
     type: Boolean,
     default: false,
+  },
+  schoolId: {
+    type: Schema.Types.ObjectId,
+    ref: 'School',
   },
   createdAt: {
     type: Date,

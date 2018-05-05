@@ -30,6 +30,10 @@ const authRoutes = require('./auth/routes/routes');
 
 authRoutes(server);
 
+// Running the School routes
+const schoolRoutes = require('./schools/routes/routes');
+
+schoolRoutes(server);
 
 // Running the House routes
 const houseRoutes = require('./houses/routes/routes');

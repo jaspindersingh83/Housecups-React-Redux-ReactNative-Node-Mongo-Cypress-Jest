@@ -43,12 +43,12 @@ class App extends Component {
             <Switch>
               <Route exact path="/" component={Landing} />
               <Route exact path="/pricing" component={Pricing} />
-
-              <PublicAuthRoute exact path="/signin" component={Signin} />
+              {/* Reset uses a validation JWT and after processing the user needs to signin  */}
+              {/* again to reset the JWT. So please keep don't make signin as PublicAuth Route */}
+              <Route exact path="/signin" component={Signin} />
               <PublicAuthRoute exact path="/signup" component={Signup} />
               <PublicAuthRoute exact path="/forgotPassword" component={Forgotpassword} />
-
-              <PrivateRoute exact path="/reset" component={Resetpassword} />
+              <PublicAuthRoute path="/reset" component={Resetpassword} />
               <PrivateRoute
                 exact
                 path="/(dashboard|schools|scoreboard|settings)"

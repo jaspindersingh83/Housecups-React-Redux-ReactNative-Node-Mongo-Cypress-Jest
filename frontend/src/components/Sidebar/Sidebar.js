@@ -20,7 +20,6 @@ class Sidebar extends Component {
               </Link>
             </ul>
           </nav>
-
         </div>
         <div className="Sidebar__content">
           {this.props.children}

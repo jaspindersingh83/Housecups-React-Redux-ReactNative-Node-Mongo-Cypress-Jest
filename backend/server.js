@@ -36,6 +36,11 @@ const houseRoutes = require('./houses/routes/routes');
 
 houseRoutes(server);
 
+// Running the Score routes
+const ScoreRoutes = require('./scores/routes/routes');
+
+ScoreRoutes(server);
+
 // Connect Database
 database.connect();
 

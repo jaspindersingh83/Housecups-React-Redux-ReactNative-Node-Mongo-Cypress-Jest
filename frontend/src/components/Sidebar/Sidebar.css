@@ -5,11 +5,10 @@
 }
 .Sidebar__sidebar {
   position: fixed;
+  top: 100px;
   left: 0;
-  flex-basis: 25%;
-  width: 25%;
+  width: 100%;
   max-width: 360px;
-  min-width: 250px;
   height: calc(100% - 100px);
   background-color: rgba(0, 0, 0, 0.065);
   overflow: hidden;
@@ -17,8 +16,8 @@
 }
 .Sidebar__content {
   position: relative;
-  flex-basis: 75%;
-  width: 75%;
+  width: calc(100% - 360px);
+  margin-left: 360px;
 }
 
 .Sidebar__navigation {

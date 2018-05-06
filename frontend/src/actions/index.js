@@ -16,6 +16,9 @@ export const DELETEHOUSE = 'DELETEHOUSE';
 export const GETHOUSES = 'GETHOUSES';
 export const UPDATEHOUSE = 'UPDATEHOUSE';
 
+// Score Actions
+export const UPDATESCORE = 'UPDATESCORE';
+
 // Api url To be changed for Production
 // const ROOT_URL = 'Insert Production URL here'
 
@@ -220,6 +223,25 @@ export const getHouses = async (history) => {
     return {
       type: GETHOUSES,
       payload: getAllHousesRequest,
+    };
+  } catch (error) {
+    history.push('/signin');
+    return authError('You are not authorized, Please signin');
+  }
+};
+
+export const updateScore = async (house, history) => {
+  const apiurl = `${ROOT_URL}/api/scoreboard`;
+  try {
+    const token = localStorage.getItem('token');
+    const updateScoreResponse = await axios.put(apiurl, house, {
+      headers: {
+        Authorization: token,
+      },
+    });
+    return {
+      type: UPDATESCORE,
+      payload: updateScoreResponse,
     };
   } catch (error) {
     history.push('/signin');

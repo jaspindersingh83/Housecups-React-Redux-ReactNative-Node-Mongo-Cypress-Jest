@@ -3,6 +3,7 @@ import {
   UPDATEHOUSE,
   GETHOUSES,
   DELETEHOUSE,
+  UPDATESCORE,
 } from '../actions/index';
 
 const housesReducer = (houses = [], action) => {
@@ -14,9 +15,17 @@ const housesReducer = (houses = [], action) => {
     case UPDATEHOUSE:
       return [...houses, action.payload.data];
     case GETHOUSES:
-      return [...houses, ...action.payload.data];
+      return [...action.payload.data];
     case DELETEHOUSE:
       return houses.filter(house => house._id !== action.payload.data.house._id);
+    // Reduce Houses after changes in scores
+    case UPDATESCORE:
+      return houses.map((house) => {
+        if (house._id === action.payload.data.house._id) {
+          return Object.assign({}, house, action.payload.data.house);
+        }
+        return house;
+      });
     default:
       return houses;
   }

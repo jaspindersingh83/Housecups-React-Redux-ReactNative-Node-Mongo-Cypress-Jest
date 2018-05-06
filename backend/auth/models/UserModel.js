@@ -6,6 +6,8 @@ const UserSchema = new mongoose.Schema({
     type: String,
     unique: true,
   },
+  firstName: String,
+  LastName: String,
   email: {
     type: String,
     unique: true,
@@ -17,11 +19,15 @@ const UserSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
+  isSuperAdmin: {
+    type: Boolean,
+    default: false,
+  },
   isTeacher: {
     type: Boolean,
     default: false,
   },
-  schoolId: {
+  schoolID: {
     type: Schema.Types.ObjectId,
     ref: 'School',
   },

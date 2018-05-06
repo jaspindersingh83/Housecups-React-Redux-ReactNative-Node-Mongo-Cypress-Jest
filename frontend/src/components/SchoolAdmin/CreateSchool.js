@@ -2,9 +2,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Houses from '../Houses/Houses';
-import { adminAuth } from '../../actions';
+import { createSchool } from '../../actions';
 
-class Schools extends Component {
+class Createschool extends Component {
   // async componentWillMount() {
   //   await this.props.adminAuth(this.props.history);
   // }
@@ -21,4 +21,4 @@ const mapStateToProps = (state) => {
   return state;
 };
 
-export default connect(mapStateToProps, { adminAuth })(Schools);
+export default connect(mapStateToProps, { createSchool })(Createschool);

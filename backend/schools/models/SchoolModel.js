@@ -15,6 +15,13 @@ const SchoolSchema = Schema({
     type: Schema.Types.ObjectId,
     ref: 'Plan',
   },
+  nonSignedUpTeachers: [
+    {
+      firstName: String,
+      lastName: String,
+      email: String,
+    },
+  ],
   teachers: [{
     type: Schema.Types.ObjectId,
     ref: 'User',
@@ -24,7 +31,7 @@ const SchoolSchema = Schema({
     ref: 'House',
   }], // an array of ids that will come from house model.
   location: String,
-  paymentDue: {
+  nextPaymentDue: {
     type: Date,
   },
   createdOn: {

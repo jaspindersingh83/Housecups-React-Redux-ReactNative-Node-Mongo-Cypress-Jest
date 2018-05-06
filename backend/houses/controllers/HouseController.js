@@ -1,58 +1,87 @@
 const House = require('../models/HouseModel.js');
+const School = require('../../schools/models/SchoolModel');
 const moment = require('moment');
 
 // add houses
 const addHouse = async (req, res) => {
-  const { name, mascot, color } = req.body;
+  const houseInfo = req.body;
+  const { schoolID } = req;
   try {
-    const result = await House.create({
-      name,
-      color,
-      mascot,
-    });
-    res.status(201).json(result);
+    const house = await House.create(houseInfo);
+    await School.findOneAndUpdate(
+      { _id: schoolID },
+      { $push: { houses: house } },
+    );
+    res.status(201).json(house);
   } catch (error) {
     res.status(500).json({ message: error });
   }
 };
 // delete houses
-const deleteHouse = (req, res) => {
-  const { id } = req.params;
-  House.findByIdAndRemove(id)
-    .then((house) => {
-      res.status(200).json({ success: true, house });
-    })
-    .catch((error) => {
-      res.status(500).json({ message: 'No such house in database', error });
-    });
-};
-// get Houses
-const getHouses = async (req, res) => {
+const deleteHouse = async (req, res) => {
+  const houseID = req.params.id;
   try {
-    const houses = await House.find({});
+    const house = await House.findById(houseID);
+    const { schoolID } = house;
+    await School.findOneAndUpdate(
+      { _id: schoolID },
+      { $pull: { houses: { _id: houseID } } },
+    );
+    const removedHouse = await House.findByIdAndRemove(houseID);
+    res.status(200).json({ success: true, removedHouse });
+  } catch (error) {
+    res.status(500).json({ message: 'No such house in database', error });
+  }
+};
+// get all Houses
+const getHouseBySchool = async (req, res) => {
+  const { schoolID } = req.decoded;
+  try {
+    const school = await School.find(schoolID);
+    const { houses } = school;
     res.status(200).json(houses);
   } catch (error) {
     res.status(500).json({ message: 'No such house in database', error });
   }
 };
 
-// update/edit house
-const updateHouse = async (req, res) => {
+// get House by Id
+const getHouseById = async (req, res) => {
   const { id } = req.params;
+  try {
+    const house = await House.findById(id);
+    res.status(200).json(house);
+  } catch (error) {
+    res.status(500).json({ message: 'No such house in database', error });
+  }
+};
+
+// update/edit house //used for changing score as well
+const updateHouse = async (req, res) => {
+  const { schoolID } = req;
+  const houseID = req.params.id;
   const houseInfo = req.body;
   houseInfo.updatedAt = moment();
   try {
-    const house = await House.findByIdAndUpdate(id, houseInfo);
+    const house = await House.findByIdAndUpdate(houseID, houseInfo);
+    await School.findOneAndUpdate(
+      { _id: schoolID },
+      { $pull: { houses: { _id: houseID } } },
+    );
+    await School.findOneAndUpdate(
+      { _id: schoolID },
+      { $push: { houses: { $each: [house], $sort: { score: 1 } } } },
+    );
     res.status(200).json({ message: 'House has been updated!', house });
   } catch (error) {
     res.status(500).json({ message: error });
   }
 };
 
-
 module.exports = {
   addHouse,
   deleteHouse,
   updateHouse,
-  getHouses,
+  getHouseBySchool,
+  getHouseById,
 };

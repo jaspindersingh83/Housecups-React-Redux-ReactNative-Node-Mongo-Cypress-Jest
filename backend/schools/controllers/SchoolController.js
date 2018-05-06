@@ -1,14 +1,19 @@
 const School = require('../models/SchoolModel.js');
+const User = require('../../auth/models/UserModel');
 const moment = require('moment');
 
-// add houses
+// add school
 const addSchool = async (req, res) => {
   const schoolInfo = req.body;
-  console.log(schoolInfo)
+  const { username } = req.decoded;
   try {
-    const result = await School.create({
-      schoolInfo,
-    });
+    const foundUser = await User.findOne({ username });
+    schoolInfo.admin = foundUser._id;
+    const result = await School.create(schoolInfo);
+    await User.update(
+      { username },
+      { isAdmin: true, schoolID: result._id, updatedAt: moment() },
+    );
     res.status(201).json(result);
   } catch (error) {
     res.status(500).json({ message: error });

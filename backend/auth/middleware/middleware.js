@@ -70,13 +70,14 @@ const matchPassword = async (req, res, next) => {
       req.username = user[0].username;
       req.isAdmin = user[0].isAdmin;
       req.isTeacher = user[0].isTeacher;
+      req.isSuperAdmin = user[0].isSuperAdmin;
+      req.schoolID = user[0].schoolID;
       next();
     });
   } catch (error) {
     return sendUserError(new Error('Internal Error', res));
   }
 };
-
 module.exports = {
   validateEmail,
   sendUserError,

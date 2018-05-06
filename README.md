@@ -166,19 +166,6 @@ Rendered when user/non-user/teachers/schooladmin/superadmin clicks on a particul
 Success
 1. List of school houses color and their corresponding scores (in sorted manner).
 
-# Scoreboard increment/decrement Routes
-
-GET`\api\scoreboard` Type: `protected`
-Rendered when teacher/schooladmin clicks on a `Scoreboard`(visible to only teachers/schooladmin) in side bar. 
-
-Success
-1. List of houses with color and increment and decrement abilities.
-
-POST`\api\scoreboard` Type: `protected`
-
-Success
-1. Ability of increment and decrement the house scores.
-
 # Teachers/ House Routes
 These are simple CRUD routes. If there are any points of cofusion please refer to 
 corresponding teachers/houses folder on backend.

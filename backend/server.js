@@ -44,7 +44,23 @@ ScoreRoutes(server);
 // Connect Database
 database.connect();
 
-
-server.listen(PORT, () => {
+const httpListener = server.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
+});
+
+
+// WebSocket Integration
+
+const io = require('socket.io').listen(httpListener);
+
+const webSocketEvents = {};
+webSocketEvents.scores = require('./scores/routes/ScoreRoutes.ws');
+// Add more socket events here.
+
+io.on('connection', (socket) => {
+  console.log('Websocket is connected');
+
+  /* Routes */
+  webSocketEvents.scores(io, socket);
+
 });

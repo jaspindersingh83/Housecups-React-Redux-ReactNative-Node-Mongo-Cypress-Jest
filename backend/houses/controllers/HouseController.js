@@ -5,7 +5,8 @@ const moment = require('moment');
 // add houses
 const addHouse = async (req, res) => {
   const houseInfo = req.body;
-  const { schoolID } = req;
+  const { schoolID } = req.decoded;
+  houseInfo.schoolID = schoolID;
   try {
     const house = await House.create(houseInfo);
     await School.findOneAndUpdate(
@@ -25,7 +26,7 @@ const deleteHouse = async (req, res) => {
     const { schoolID } = house;
     await School.findOneAndUpdate(
       { _id: schoolID },
-      { $pull: { houses: { _id: houseID } } },
+      { $pull: { houses: houseID } },
     );
     const removedHouse = await House.findByIdAndRemove(houseID);
     res.status(200).json({ success: true, removedHouse });
@@ -37,7 +38,7 @@ const deleteHouse = async (req, res) => {
 const getHouseBySchool = async (req, res) => {
   const { schoolID } = req.decoded;
   try {
-    const school = await School.find(schoolID);
+    const school = await School.findById(schoolID);
     const { houses } = school;
     res.status(200).json(houses);
   } catch (error) {

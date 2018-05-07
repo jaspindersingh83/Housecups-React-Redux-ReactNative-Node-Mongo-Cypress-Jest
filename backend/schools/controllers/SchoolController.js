@@ -1,6 +1,11 @@
 const School = require('../models/SchoolModel.js');
 const User = require('../../auth/models/UserModel');
 const moment = require('moment');
+const jwt = require('jsonwebtoken');
+
+const {
+  mysecret,
+} = process.env;
 
 // add school
 const addSchool = async (req, res) => {
@@ -9,12 +14,16 @@ const addSchool = async (req, res) => {
   try {
     const foundUser = await User.findOne({ username });
     schoolInfo.admin = foundUser._id;
-    const result = await School.create(schoolInfo);
+    const result = await School.create(schoolInfo); 
     await User.update(
       { username },
       { isAdmin: true, schoolID: result._id, updatedAt: moment() },
     );
-    res.status(201).json(result);
+    const updatedUser = await User.findOne({ username });
+    const { isAdmin, isTeacher, isSuperAdmin, schoolID } = updatedUser;
+    const payload = { username, isAdmin, isTeacher, isSuperAdmin, schoolID };
+    const token = await jwt.sign(payload, mysecret);
+    res.status(201).json({ result, token });
   } catch (error) {
     res.status(500).json({ message: error });
   }

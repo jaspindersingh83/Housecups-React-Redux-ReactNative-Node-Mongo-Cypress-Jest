@@ -74,6 +74,7 @@ export const createUser = async (user, history) => {
 export const signin = async (user, history) => {
   const apiurl = `${ROOT_URL}/signin`;
   try {
+    console.log(apiurl, user)
     const signinrequest = await axios.post(apiurl, user);
     localStorage.setItem('token', signinrequest.data.token);
     // After signin the user needs to be redirected to

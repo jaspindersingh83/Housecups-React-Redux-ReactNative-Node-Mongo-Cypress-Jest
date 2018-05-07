@@ -36,6 +36,11 @@ const houseRoutes = require('./houses/routes/routes');
 
 houseRoutes(server);
 
+// Running the Payment routes
+const paymentRoutes = require('./payment/routes/routes');
+
+paymentRoutes(server);
+
 // Connect Database
 database.connect();
 

@@ -1,4 +1,4 @@
-const stripe = require('stripe');
+const stripe = require('../stripe');
 
 const createPayment = (req, res) => {
   const {
@@ -13,6 +13,7 @@ const createPayment = (req, res) => {
     currency,
     amount, 
   };
+  console.log(stripe.charges);
   stripe.charges.create(paymentRequest, (stripeErr, stripeRes) => {
     if (stripeErr) {
       res.status(500).send({ error: stripeErr });

@@ -8,8 +8,8 @@ class StripePaymentButton extends Component {
       <div className="App">
         <div className="App-intro">
           <Checkout
-            name={'The Road to learn React'}
-            description={'Only the Book'}
+            name={'Activate'}
+            description={'Enter your payment details'}
             amount={20}
           />
         </div>

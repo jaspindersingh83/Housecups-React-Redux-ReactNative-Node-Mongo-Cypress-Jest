@@ -1,24 +1,41 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { updateScore } from '../../actions';
+import { updateScore } from '../../actions/index.ws';
+
+import Socket from '../../websocket';
 
 class ScoreCard extends Component {
 
+  componentDidMount() {
+    // Initialize
+    this.changeScore(0);
+  }
+
   increaseScore = () => {
-    const house = {
-      _id: this.props.house._id,
-      score: this.props.house.score + 1 || 0,
-    };
-    this.props.updateScore(house, this.props.history);
+    this.changeScore(1);
   }
 
   decreaseScore = () => {
-    const house = {
+    this.changeScore(-1);
+  }
+
+  changeScore = (change) => {
+    // Sends Request to update score
+    Socket.emit('updateScoreRequest', {
       _id: this.props.house._id,
-      score: this.props.house.score - 1 || 0,
-    };
-    this.props.updateScore(house, this.props.history);
+      scoreChange: change,
+      Authorization: localStorage.getItem('token'),
+    });
+    // Receives Response after the update
+    Socket.on('updateScoreResponse', (response) => {
+      this.props.updateScore(response);
+    });
+    // Error Handling
+    Socket.on('error', (data) => {
+      console.log(data);
+      this.props.history.push('/signin');
+    });
   }
 
   render() {

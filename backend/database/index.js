@@ -10,11 +10,10 @@ module.exports = {
     // Mongo Auth Information
     const dbUser = process.env.DB_USER;
     const dbPassword = process.env.DB_PASSWORD;
-    console.log(process.env);
+
     // Mongo DB connection URI using mLab
     const dbPath = `mongodb://${dbUser}:${dbPassword}@ds111050.mlab.com:11050/house_cup_db`;
 
-    console.log(dbPath);
     mongoose.connect(dbPath)
       .then(() => {
         console.log('Database is connected sucessfully');

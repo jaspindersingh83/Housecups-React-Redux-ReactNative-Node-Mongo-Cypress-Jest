@@ -15,6 +15,9 @@ class Sidebar extends Component {
               <Link to="/schools">
                 <li data-selected={ pathname === '/schools' }>Schools</li>
               </Link>
+              <Link to="/scoreboard">
+                <li data-selected={ pathname === '/scoreboard' }>Score Board</li>
+              </Link>
               <Link to="/settings">
                 <li data-selected={ pathname === '/settings' }>Settings</li>
               </Link>

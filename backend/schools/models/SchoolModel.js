@@ -2,29 +2,27 @@ const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
 
-const HouseSchema = new Schema({
+const SchoolSchema = new Schema({
   name: {
     type: String,
     required: true,
   },
-  mascot: {
+  admin: {
     type: String,
     required: true,
   },
-  color: {
-    type: String,
-    required: true,
-  },
-  school: {
+  teachers: [{
     type: Schema.Types.ObjectId,
-    ref: 'School',
-  },
-  score: {
-    type: Number,
-    default: 0,
-  },
+    ref: 'User',
+  }],
+  houses: [{
+    type: Schema.Types.ObjectId,
+    ref: 'House',
+  }],
+  location: String,
   createdOn: {
     type: Date,
+    required: true,
     default: Date.now,
   },
   updatedAt: {
@@ -33,4 +31,4 @@ const HouseSchema = new Schema({
   },
 });
 
-module.exports = mongoose.model('House', HouseSchema);
+module.exports = mongoose.model('School', SchoolSchema);

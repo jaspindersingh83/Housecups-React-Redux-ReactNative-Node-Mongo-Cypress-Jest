@@ -8,7 +8,8 @@ class SchoolInfo extends Component {
       <div>
         <Section className="create_Schools">
           <div className="school_info">
-           <input type="text" /> 
+          <div><input type="text" /></div>
+          <div><input type="text" /><button>Add Teacher</button>></div>
           </div>
         </Section>
       </div>

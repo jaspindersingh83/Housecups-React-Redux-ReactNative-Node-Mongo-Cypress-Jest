@@ -32,7 +32,10 @@ class ScoreCard extends Component {
     // based on the luminance of Background-color
     if (new RegExp(/[^a-f0-9#]/gi).test(backgroundColor)) {
       // invalid Hex
-      return 'rgb(0, 0, 0)';
+      return {
+        color: 'rgb(0, 0, 0)',
+        textShadow: '1px 1px 2px rgba(255, 255, 255, 0.35)',
+      };
     }
     const hexColor = backgroundColor.replace(/#/gi, '');
     // values constant that determines the luminance
@@ -53,14 +56,19 @@ class ScoreCard extends Component {
 
     const luminance = (rgb[0] * factor.R) + (rgb[1] * factor.G) + (rgb[2] * factor.B);
 
-    return (luminance >= midPoint) ? 'rgb(0, 0, 0)' : 'rgb(255, 255, 255)';
+    return {
+      color: (luminance >= midPoint) ? 'rgb(0, 0, 0)' : 'rgb(255, 255, 255)',
+      textShadow: (luminance >= midPoint) ? '1px 1px 2px rgba(255, 255, 255, 0.35)' : '1px 1px 5px rgba(0, 0, 0, 0.25)',
+    };
   }
 
   render() {
     const { house } = this.props;
+    const fontStyleGenerated = this.getFontColor(house.color);
     const styles = {
       ScoreCard: {
-        color: this.getFontColor(house.color),
+        color: fontStyleGenerated.color,
+        textShadow: fontStyleGenerated.textShadow,
         backgroundColor: house.color,
       },
     };

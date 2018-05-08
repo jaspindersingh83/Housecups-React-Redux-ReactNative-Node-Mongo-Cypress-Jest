@@ -16,38 +16,39 @@
     0px 10px 5px -3px rgba(0, 0, 0, 0.05);
   margin: 10px;
   background-color: #fff;
+  filter: contrast(0.65) brightness(1.25);
   overflow: hidden;
 }
 .ScoreCard__house {
-  text-align: left;
+  text-align: center;
   letter-spacing: 0.5px;
   border-bottom: 1px solid  rgba(0, 0, 0, 0.1);
   box-shadow: 0px 20px 50px 0px rgba(0, 0, 0, 0.1);
   padding: 25px;
 }
 .ScoreCard__house-name {
-  font-size: 24px;
+  font-size: 28px;
   font-family: 'PT Sans', sans-serif;
   font-weight: 700;
 }
 .ScoreCard__house-mascot {
-  font-size: 16px;
+  font-size: 18px;
   font-family: 'Roboto', sans-serif;
 }
 
 .ScoreCard__score {
+  width: calc(100% - 120px);
   font-size: 60px;
   font-family: 'Roboto', sans-serif;
   font-weight: 700;
-  text-align: right;
-  padding: 25px;
+  text-align: center;
+  padding: 15px;
 }
 .ScoreCard__actions {
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   align-items: center;
-  margin-top: -17px;
-  margin-right: 25px;
+  min-height: 150px;
 }
 
 .ScoreCard__button {
@@ -63,10 +64,8 @@
   background-position: center center;
   background-size: 50% auto;
   background-repeat: no-repeat;
+  filter: contrast(1.25) saturate(1.25);
   transition: all 0.25s ease-in-out 0s;
-}
-.ScoreCard__button:not(:first-child) {
-  margin-left: 15px;
 }
 .ScoreCard__button--increment {
   background-color: rgba(78, 166, 92, 1.0);

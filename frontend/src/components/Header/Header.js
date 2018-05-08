@@ -46,6 +46,7 @@ class Header extends Component {
           className="Header"
           data-protected-route={isProtectedRoute}
           data-public-auth-route={isPublicAuthRoute}
+          data-user-authorized={isAuthorized}
         >
           <div className="wrapper">
             <NavLink to="/">
@@ -73,9 +74,13 @@ class Header extends Component {
                         </NavLink>
                       </div>
                       <div className="Header__nav__links">
-                        <NavLink to="/dashboard">
-                          <li>Go to Dashboard</li>
-                        </NavLink>
+                        {
+                          (isAuthorized) ? (
+                            <NavLink to="/dashboard">
+                              <li>Go to Dashboard</li>
+                            </NavLink>
+                          ) : null
+                        }
                       </div>
                     </div>
                   ) : (

@@ -93,6 +93,9 @@ nav.Header__nav > ul {
   justify-content: flex-end;
   align-items: center;
 }
+.Header[data-user-authorized="false"] .Header__nav__buttons {
+  min-width: 250px;
+}
 
 .Header__nav__links > a {
   text-decoration: none;
@@ -135,7 +138,7 @@ nav.Header__nav > ul {
   background-color: transparent;
 }
 .Header__nav__buttons button.signout {
-  min-width: 125px;
+  width: 125px;
   background-color: red;
 }
 .Header__nav__buttons button.signout:hover {

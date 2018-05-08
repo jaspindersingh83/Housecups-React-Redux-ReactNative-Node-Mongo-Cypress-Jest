@@ -10,7 +10,6 @@ import Sidebar from '../Sidebar/Sidebar';
 class Dashboard extends Component {
 
   render() {
-    console.log(this.props.match.params);
     return (
       <div className="Dashboard">
      

@@ -12,19 +12,16 @@ class Scoreboard extends Component {
   }
 
   async componentWillMount() {
-    console.log(this.props.history);
     await this.props.getHouses(this.props.history);
   }
 
   async componentWillReceiveProps(props) {
-    console.log('Tri', props.houses[0].score);
     await this.setState({
       houses: [...props.houses],
     });
   }
 
   render() {
-    console.log('Rendering');
     return (
       <div className="Scoreboard">
         {

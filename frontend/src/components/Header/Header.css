@@ -78,7 +78,11 @@ nav.Header__nav > ul {
   padding: 0px 25px;
   margin: 0px;
 }
-
+.Header__nav__links--non-dashboard {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
 .Header__nav__links {
   display: flex;
   justify-content: flex-end;
@@ -131,6 +135,7 @@ nav.Header__nav > ul {
   background-color: transparent;
 }
 .Header__nav__buttons button.signout {
+  min-width: 125px;
   background-color: red;
 }
 .Header__nav__buttons button.signout:hover {

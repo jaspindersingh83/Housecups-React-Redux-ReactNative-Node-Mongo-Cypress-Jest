@@ -63,13 +63,20 @@ class Header extends Component {
                 {
                   (!isProtectedRoute) ? (
                     // Main Navigation
-                    <div className="Header__nav__links">
-                      <NavLink to="/">
-                        <li data-selected={pathname === '/'}>Home</li>
-                      </NavLink>
-                      <NavLink to="/pricing">
-                        <li data-selected={pathname === '/pricing'}>Pricing</li>
-                      </NavLink>
+                    <div className="Header__nav__links--non-dashboard">
+                      <div className="Header__nav__links">
+                        <NavLink to="/">
+                          <li data-selected={pathname === '/'}>Home</li>
+                        </NavLink>
+                        <NavLink to="/pricing">
+                          <li data-selected={pathname === '/pricing'}>Pricing</li>
+                        </NavLink>
+                      </div>
+                      <div className="Header__nav__links">
+                        <NavLink to="/dashboard">
+                          <li>Go to Dashboard</li>
+                        </NavLink>
+                      </div>
                     </div>
                   ) : (
                     // Breadcrumbs for Dashboard

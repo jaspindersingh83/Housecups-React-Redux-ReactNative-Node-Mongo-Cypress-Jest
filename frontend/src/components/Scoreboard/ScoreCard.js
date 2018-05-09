@@ -63,6 +63,10 @@ class ScoreCard extends Component {
   }
 
   render() {
+    const token = localStorage.getItem('token');
+    const isAuthorized = !!token;
+    const isPublicScoreBoard = this.props.public;
+
     const { house } = this.props;
     const fontStyleGenerated = this.getFontColor(house.color);
     const styles = {
@@ -80,15 +84,23 @@ class ScoreCard extends Component {
           <div className="ScoreCard__house-mascot">{house.mascot}</div>
         </div>
         <div className="ScoreCard__actions">
-          <button
-            className="ScoreCard__button ScoreCard__button--decrement"
-            onClick={() => this.decreaseScore()}
-          />
+          {
+            (isAuthorized && !isPublicScoreBoard) ? (
+              <button
+                className="ScoreCard__button ScoreCard__button--decrement"
+                onClick={() => this.decreaseScore()}
+              />
+            ) : null
+          }
           <div className="ScoreCard__score">{house.score}</div>
-          <button
-            className="ScoreCard__button ScoreCard__button--increment"
-            onClick={() => this.increaseScore()}
-          />
+          {
+            (isAuthorized && !isPublicScoreBoard) ? (
+              <button
+                className="ScoreCard__button ScoreCard__button--increment"
+                onClick={() => this.increaseScore()}
+              />
+            ) : null
+          }
         </div>
       </div>
     );

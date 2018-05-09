@@ -227,3 +227,63 @@ export const getHouses = async (history) => {
     return authError('You are not authorized, Please signin');
   }
 };
+
+
+// Teacher Action Functions
+export const addTeacher = async (house, history) => {
+  const apiurl = `${ROOT_URL}/api/house`;
+  try {
+    const token = localStorage.getItem('token');
+    await axios.post(apiurl, house, {
+      headers: {
+        Authorization: token,
+      },
+    });
+    return {
+      type: ADDHOUSE,
+    };
+  } catch (error) {
+    history.push('/signin');
+    return authError('You are not authorized, Please signin');
+  }
+};
+
+export const deleteTeacher = async (teacherid, history) => {
+  const apiurl = `${ROOT_URL}/api/teacher/${houseid}`;
+  try {
+    const token = localStorage.getItem('token');
+    const deleteRequest = await axios.delete(apiurl, {
+      headers: {
+        Authorization: token,
+      },
+    });
+    return {
+      type: DELETETEACHER,
+      payload: deleteRequest,
+    };
+  } catch (error) {
+    history.push('/signin');
+    return authError('You are not authorized, Please signin');
+  }
+};
+
+
+export const getSignedUpTeachers = async (history) => {
+  const apiurl = `${ROOT_URL}/api/house`;
+  try {
+    const token = localStorage.getItem('token');
+    const getAllHousesRequest = await axios.get(apiurl, {
+      headers: {
+        Authorization: token,
+      },
+    });
+    return {
+      type: GETHOUSES,
+      payload: getAllHousesRequest,
+    };
+  } catch (error) {
+    history.push('/signin');
+    return authError('You are not authorized, Please signin');
+  }
+};
+

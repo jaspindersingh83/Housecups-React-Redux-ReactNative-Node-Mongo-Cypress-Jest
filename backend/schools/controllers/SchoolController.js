@@ -1,6 +1,18 @@
 const School = require('../models/SchoolModel');
 const House = require('../../houses/models/HouseModel');
 
+const addSchool = async (req, res) => {
+  const { name } = req.body;
+  try {
+    const result = await School.create({
+      name,
+    });
+    res.status(201).json(result);
+  } catch (error) {
+    res.status(500).json({ message: 'Failed to insert new School entry', error });
+  }
+};
+
 const getSchoolInfo = async (req, res) => {
   const { name } = req.params;
   try {
@@ -17,5 +29,6 @@ const getSchoolInfo = async (req, res) => {
 };
 
 module.exports = {
+  addSchool,
   getSchoolInfo,
 };

@@ -17,6 +17,7 @@ export const GETHOUSES = 'GETHOUSES';
 export const UPDATEHOUSE = 'UPDATEHOUSE';
 
 // School Actions
+export const ADDSCHOOL = 'ADDSCHOOL';
 export const GETSCHOOLINFO = 'GETSCHOOLINFO';
 
 // Score Actions
@@ -227,6 +228,24 @@ export const getHouses = async (history) => {
     return {
       type: GETHOUSES,
       payload: getAllHousesRequest,
+    };
+  } catch (error) {
+    history.push('/signin');
+    return authError('You are not authorized, Please signin');
+  }
+};
+
+export const addSchool = async (school, history) => {
+  const apiurl = `${ROOT_URL}/api/school`;
+  try {
+    const token = localStorage.getItem('token');
+    await axios.post(apiurl, school, {
+      headers: {
+        Authorization: token,
+      },
+    });
+    return {
+      type: GETSCHOOLINFO,
     };
   } catch (error) {
     history.push('/signin');

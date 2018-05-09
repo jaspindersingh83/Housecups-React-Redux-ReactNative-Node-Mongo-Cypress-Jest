@@ -4,6 +4,7 @@ import {
   GETHOUSES,
   DELETEHOUSE,
   UPDATESCORE,
+  GETSCHOOLINFO,
 } from '../actions/index';
 
 const housesReducer = (houses = [], action) => {
@@ -26,6 +27,10 @@ const housesReducer = (houses = [], action) => {
         }
         return house;
       });
+    // Get all the houses by School Name For PublicScoreBoard,
+    // action.payload.data returns a School
+    case GETSCHOOLINFO:
+      return [...action.payload.data.houses];
     default:
       return houses;
   }

@@ -16,6 +16,9 @@ export const DELETEHOUSE = 'DELETEHOUSE';
 export const GETHOUSES = 'GETHOUSES';
 export const UPDATEHOUSE = 'UPDATEHOUSE';
 
+// School Actions
+export const GETSCHOOLINFO = 'GETSCHOOLINFO';
+
 // Score Actions
 export const UPDATESCORE = 'UPDATESCORE';
 
@@ -224,6 +227,25 @@ export const getHouses = async (history) => {
     return {
       type: GETHOUSES,
       payload: getAllHousesRequest,
+    };
+  } catch (error) {
+    history.push('/signin');
+    return authError('You are not authorized, Please signin');
+  }
+};
+
+export const getSchoolInfo = async (id, history) => {
+  const apiurl = `${ROOT_URL}/api/school/${id}`;
+  try {
+    const token = localStorage.getItem('token');
+    const getSchoolInfoRequest = await axios.get(apiurl, {
+      headers: {
+        Authorization: token,
+      },
+    });
+    return {
+      type: GETSCHOOLINFO,
+      payload: getSchoolInfoRequest,
     };
   } catch (error) {
     history.push('/signin');

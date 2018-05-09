@@ -1,15 +1,16 @@
 import {
-  GETSCHOOLINFO,
+  ADDSCHOOL,
+  GETSCHOOLS,
 } from '../actions/index';
 
 const schoolsReducer = (schools = [], action) => {
   switch (action.type) {
-    case GETSCHOOLINFO:
-      return {
-        currentSchool: {
-          ...action.payload.data,
-        },
-      };
+    // When user is created send signedUpusername in props so that username field
+    // can be auto populate at first instance of signin
+    case ADDSCHOOL:
+      return [...schools, action.payload.data];
+    case GETSCHOOLS:
+      return [...action.payload.data];
     default:
       return schools;
   }

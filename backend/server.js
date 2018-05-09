@@ -30,6 +30,15 @@ const authRoutes = require('./auth/routes/routes');
 
 authRoutes(server);
 
+// Running the Pricing routes
+const pricingRoutes = require('./pricing/routes/routes');
+
+pricingRoutes(server);
+
+// Running the School routes
+const schoolRoutes = require('./schools/routes/routes');
+
+schoolRoutes(server);
 
 // Running the House routes
 const houseRoutes = require('./houses/routes/routes');

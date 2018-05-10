@@ -3,13 +3,13 @@ import { withRouter, Switch, Route } from 'react-router-dom';
 import './Dashboard.css';
 import AccountOverview from '../AccountOverview/AccountOverview';
 import Schools from '../Schools/Schools';
+import Scoreboard from '../Scoreboard/Scoreboard';
 import Settings from '../Auth/Settings';
 import Sidebar from '../Sidebar/Sidebar';
 
 class Dashboard extends Component {
 
   render() {
-    console.log(this.props.match.params);
     return (
       <div className="Dashboard">
      
@@ -17,6 +17,7 @@ class Dashboard extends Component {
           <Switch>
             <Route exact path="/dashboard" component={AccountOverview} />
             <Route exact path="/schools" component={Schools} />
+            <Route exact path="/scoreboard" component={Scoreboard} />
             <Route exact path="/settings" component={Settings} />
           </Switch>
         </Sidebar>

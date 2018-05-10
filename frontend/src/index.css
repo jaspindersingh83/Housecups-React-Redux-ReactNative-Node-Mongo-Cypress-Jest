@@ -43,7 +43,6 @@ input[type="password"] {
   outline: 0px;
   border: 0px;
   border-radius: 3px;
-  /* box-shadow: inset 0px 0px 0px 1px rgba(0, 0, 0, 0.1); */
   box-shadow: inset 0px 0px 0px 1px rgba(0, 0, 0, 0.25);
   background-color: #eee;
 }
@@ -70,10 +69,10 @@ button.btn-primary {
   opacity: 1.0;
   transition: all 0.25s ease-in-out 0s;
 }
-button:hover,
+/* button:hover, */
 button.btn:hover,
 button.btn-primary:hover,
-button:focus,
+/* button:focus, */
 button.btn:focus,
 button.btn-primary:focus {
   opacity: 0.75;

@@ -39,76 +39,81 @@ class Header extends Component {
     }
 
     return (
-      <div
-        className="Header"
-        data-protected-route={isProtectedRoute}
-        data-public-auth-route={isPublicAuthRoute}
-      >
-        <div className="wrapper">
-          <NavLink to="/">
-            <div className="Header__logo">
-              <div className="Header__logo__image">
-                <div className="img" />
-              </div>
-              <div className="Header__logo__text">
-                House Cup
-              </div>
-            </div>
-          </NavLink>
-          <nav className="Header__nav">
-            <ul>
-              {
-                (!isProtectedRoute) ? (
-                  // Main Navigation
-                  <div className="Header__nav__links">
-                    <NavLink to="/">
-                      <li data-selected={pathname === '/'}>Home</li>
-                    </NavLink>
-                    <NavLink to="/pricing">
-                      <li data-selected={pathname === '/pricing'}>Pricing</li>
-                    </NavLink>
-                  </div>
-                ) : (
-                  // Breadcrumbs for Dashboard
-                  <div className="Header__nav__links">
-                    <NavLink to="/dashboard">
-                      <li>Dashboard</li>
-                    </NavLink>
-                    {
-                      (pathname !== '/dashboard') ? (
-                        <NavLink to={pathname}>
-                          <li>{ pageName }</li>
-                        </NavLink>
-                      ) : null
-                    }
-                  </div>
-                )
-              }
-              <div className="Header__nav__buttons">
-                {
-                  (!isPublicAuthRoute && !isAuthorized) ? (
-                    <NavLink to="/signin">
-                      <button>Log In</button>
-                    </NavLink>
-                  ) : null
-                }
-                {
-                  (!isPublicAuthRoute && !isAuthorized) ? (
-                    <NavLink to="/signup">
-                      <button>Sign Up</button>
-                    </NavLink>
-                  ) : null
-                }
-                {
-                  (!isPublicAuthRoute && isAuthorized) ? (
-                    <button className="signout" onClick={this.signout}>Sign Out</button>
-                  ) : null
-                }
-              </div>
-            </ul>
-          </nav>
+      <div>
 
+        <div className="Header__dupe" />
+        <div
+          className="Header"
+          data-protected-route={isProtectedRoute}
+          data-public-auth-route={isPublicAuthRoute}
+        >
+          <div className="wrapper">
+            <NavLink to="/">
+              <div className="Header__logo">
+                <div className="Header__logo__image">
+                  <div className="img" />
+                </div>
+                <div className="Header__logo__text">
+                  House Cup
+                </div>
+              </div>
+            </NavLink>
+            <nav className="Header__nav">
+              <ul>
+                {
+                  (!isProtectedRoute) ? (
+                    // Main Navigation
+                    <div className="Header__nav__links">
+                      <NavLink to="/">
+                        <li data-selected={pathname === '/'}>Home</li>
+                      </NavLink>
+                      <NavLink to="/pricing">
+                        <li data-selected={pathname === '/pricing'}>Pricing</li>
+                      </NavLink>
+                    </div>
+                  ) : (
+                    // Breadcrumbs for Dashboard
+                    <div className="Header__nav__links">
+                      <NavLink to="/dashboard">
+                        <li>Dashboard</li>
+                      </NavLink>
+                      {
+                        (pathname !== '/dashboard') ? (
+                          <NavLink to={pathname}>
+                            <li>{ pageName }</li>
+                          </NavLink>
+                        ) : null
+                      }
+                    </div>
+                  )
+                }
+                <div className="Header__nav__buttons">
+                  {
+                    (!isPublicAuthRoute && !isAuthorized) ? (
+                      <NavLink to="/signin">
+                        <button>Log In</button>
+                      </NavLink>
+                    ) : null
+                  }
+                  {
+                    (!isPublicAuthRoute && !isAuthorized) ? (
+                      <NavLink to="/signup">
+                        <button>Sign Up</button>
+                      </NavLink>
+                    ) : null
+                  }
+                  {
+                    (!isPublicAuthRoute && isAuthorized) ? (
+                      <button className="signout" onClick={this.signout}>Sign Out</button>
+                    ) : null
+                  }
+                </div>
+              </ul>
+            </nav>
+
+          </div>
         </div>
+        
       </div>
     );
   }

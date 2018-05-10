@@ -9,7 +9,7 @@ const teachersReducer = (teachers = [], action) => {
     // When user is created send signedUpusername in props so that username field
     // can be auto populate at first instance of signin
     case ADDTEACHER:
-      return [...teachers, action.payload.data];
+      return [...teachers];
     case GETTEACHERS:
       return [...action.payload.data];
     case DELETETEACHER:

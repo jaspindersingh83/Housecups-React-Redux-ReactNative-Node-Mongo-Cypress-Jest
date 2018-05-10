@@ -7,6 +7,7 @@ export const CREATE_USER = 'CREATE_USER';
 export const CHANGESETTINGS = 'CHANGESETTINGS';
 export const FORGOTPASSWORD = 'FORGOTPASSWORD';
 export const RESETPASSWORD = 'RESETPASSWORD';
+export const TEACHERSIGNUP = 'TEACHERSIGNUP';
 export const SIGNIN = 'SIGNIN';
 export const SIGNOUT = 'SIGNOUT';
 
@@ -15,6 +16,15 @@ export const ADDHOUSE = 'ADDHOUSE';
 export const DELETEHOUSE = 'DELETEHOUSE';
 export const GETHOUSES = 'GETHOUSES';
 export const UPDATEHOUSE = 'UPDATEHOUSE';
+
+// School Actions
+export const ADDSCHOOL = 'ADDSCHOOL';
+export const GETSCHOOLS = 'GETSCHOOLS';
+
+// Teacher Actions
+export const ADDTEACHER = 'ADDTEACHER';
+export const DELETETEACHER = 'DELETETEACHER';
+export const GETTEACHERS = 'GETTEACHERS';
 
 // Api url To be changed for Production
 // const ROOT_URL = 'Insert Production URL here'
@@ -104,10 +114,26 @@ export const resetPassword = async (passwords, history) => {
         Authorization: token,
       },
     });
-    console.log('Reset Successfull');
     history.push('/signin');
     return {
       type: RESETPASSWORD,
+    };
+  } catch (error) {
+    return authError(error.response.data.message);
+  }
+};
+
+export const teacherSignup = async (passwords, history) => {
+  const token = localStorage.getItem('token');
+  try {
+    await axios.post(`${ROOT_URL}/teachersignup`, passwords, {
+      headers: {
+        Authorization: token,
+      },
+    });
+    history.push('/signin');
+    return {
+      type: TEACHERSIGNUP,
     };
   } catch (error) {
     return authError(error.response.data.message);
@@ -209,7 +235,7 @@ export const updateHouse = async (house, history) => {
   }
 };
 
-export const getHouses = async (history) => {
+export const getHousesBySchool = async (history) => {
   const apiurl = `${ROOT_URL}/api/house`;
   try {
     const token = localStorage.getItem('token');
@@ -228,28 +254,48 @@ export const getHouses = async (history) => {
   }
 };
 
-
-// Teacher Action Functions
-export const addTeacher = async (house, history) => {
-  const apiurl = `${ROOT_URL}/api/house`;
+// School Action Functions
+export const addSchool = async (school, history) => {
+  const apiurl = `${ROOT_URL}/api/schools`;
   try {
     const token = localStorage.getItem('token');
-    await axios.post(apiurl, house, {
+    const addSchoolRequest = await axios.post(apiurl, school, {
+      headers: {
+        Authorization: token,
+      },
+    });
+    localStorage.setItem('token', addSchoolRequest.data.token);
+    history.push('/schooladmin');
+    return {
+      type: ADDSCHOOL,
+      payload: addSchoolRequest,
+    };
+  } catch (error) {
+    history.push('/signin');
+    return authError('You are not authorized, Please signin as schooladmin');
+  }
+};
+
+// Teacher Action Functions
+export const addTeacher = async (teacher, history) => {
+  const apiurl = `${ROOT_URL}/api/teacher`;
+  try {
+    const token = localStorage.getItem('token');
+    await axios.post(apiurl, teacher, {
       headers: {
         Authorization: token,
       },
     });
     return {
-      type: ADDHOUSE,
+      type: ADDTEACHER,
     };
   } catch (error) {
-    history.push('/signin');
-    return authError('You are not authorized, Please signin');
+    return authError(error.response.data.message);
   }
 };
 
 export const deleteTeacher = async (teacherid, history) => {
-  const apiurl = `${ROOT_URL}/api/teacher/${houseid}`;
+  const apiurl = `${ROOT_URL}/api/teacher/${teacherid}`;
   try {
     const token = localStorage.getItem('token');
     const deleteRequest = await axios.delete(apiurl, {
@@ -262,28 +308,27 @@ export const deleteTeacher = async (teacherid, history) => {
       payload: deleteRequest,
     };
   } catch (error) {
-    history.push('/signin');
+    // history.push('/signin');
     return authError('You are not authorized, Please signin');
   }
 };
 
-
-export const getSignedUpTeachers = async (history) => {
-  const apiurl = `${ROOT_URL}/api/house`;
+export const getTeachers = async (history) => {
+  const apiurl = `${ROOT_URL}/api/teacher`;
   try {
     const token = localStorage.getItem('token');
-    const getAllHousesRequest = await axios.get(apiurl, {
+    const getTeachersRequest = await axios.get(apiurl, {
       headers: {
         Authorization: token,
       },
     });
     return {
-      type: GETHOUSES,
-      payload: getAllHousesRequest,
+      type: GETTEACHERS,
+      payload: getTeachersRequest,
     };
   } catch (error) {
-    history.push('/signin');
-    return authError('You are not authorized, Please signin');
+    // history.push('/signin');
+    // return authError('You are not authorized, Please signin');
   }
 };
 

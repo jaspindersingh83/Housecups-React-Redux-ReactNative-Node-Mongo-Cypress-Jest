@@ -2,18 +2,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Houses from '../Houses/Houses';
-import Teachers from '../Teachers/Teachers';
-import { adminAuth } from '../../actions';
+// import { getAllSchools } from '../../actions';
 
-class Schooladmin extends Component {
+class Schools extends Component {
   // async componentWillMount() {
   //   await this.props.adminAuth(this.props.history);
   // }
   render() {
     return (
       <div className="Schools">
-        <Houses />
-        <Teachers />
+        Something here
       </div>
     );
   }
@@ -23,4 +21,5 @@ const mapStateToProps = (state) => {
   return state;
 };
 
-export default connect(mapStateToProps, { adminAuth })(Schooladmin);
+// export default connect(mapStateToProps, { getAllSchools })(Schools);
+export default connect(mapStateToProps, { })(Schools);

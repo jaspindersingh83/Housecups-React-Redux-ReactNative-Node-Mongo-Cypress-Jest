@@ -2,8 +2,7 @@
 import React, { Component } from 'react';
 import Socket from 'socket.io-client';
 import { connect } from 'react-redux';
-import { getHouses } from '../../actions';
-import { updateScore } from '../../actions/index.ws';
+import { getHousesBySchool } from '../../actions';
 import './Scoreboard.css';
 import ScoreCard from './ScoreCard';
 
@@ -17,8 +16,8 @@ class Scoreboard extends Component {
     this.initializeSocket();
   }
 
-  async componentWillMount() {
-    await this.props.getHouses(this.props.history);
+  componentWillMount() {
+    this.getHouses();
   }
 
   async componentWillReceiveProps(props) {
@@ -27,12 +26,16 @@ class Scoreboard extends Component {
     });
   }
 
+  getHouses = async () => {
+    await this.props.getHousesBySchool(this.props.history);
+  }
+
   initializeSocket = () => {
     // Initialize Socket
     this.socket = Socket('http://127.0.0.1:5000');
     // Receives Response after the update
     this.socket.on('updateScoreResponse', (response) => {
-      // this.props.updateScore(response);
+      this.getHouses();
     });
     // Error Handling
     this.socket.on('error', (data) => {
@@ -58,4 +61,4 @@ const mapStateToProps = (state) => {
   return state;
 };
 
-export default connect(mapStateToProps, { getHouses, updateScore })(Scoreboard);
+export default connect(mapStateToProps, { getHousesBySchool })(Scoreboard);

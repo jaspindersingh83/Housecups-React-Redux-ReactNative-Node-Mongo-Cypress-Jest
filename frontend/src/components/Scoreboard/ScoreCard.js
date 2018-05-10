@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { updateScore } from '../../actions/index.ws';
 
 class ScoreCard extends Component {
 
@@ -112,4 +111,4 @@ const mapStateToProps = (state) => {
   return state;
 };
 
-export default withRouter(connect(mapStateToProps, { updateScore })(ScoreCard));
+export default withRouter(connect(mapStateToProps, { })(ScoreCard));

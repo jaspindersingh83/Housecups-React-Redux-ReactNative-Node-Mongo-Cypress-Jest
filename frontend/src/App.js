@@ -51,7 +51,7 @@ class App extends Component {
               <PublicAuthRoute exact path="/forgotPassword" component={Forgotpassword} />
               <PublicAuthRoute path="/reset" component={Resetpassword} />
               <Route exact path="/scoreboard/:schoolId" component={PublicScoreboard} />
-              <Route exact path="/schooladmin" component={Schooladmin} />
+              {/* <Route exact path="/schooladmin" component={Schooladmin} /> */}
               <PrivateRoute
                 exact
                 path="/(dashboard|schools|scoreboard|settings)"

@@ -16,12 +16,13 @@ export const DELETEHOUSE = 'DELETEHOUSE';
 export const GETHOUSES = 'GETHOUSES';
 export const UPDATEHOUSE = 'UPDATEHOUSE';
 
+// Teacher Actions
+export const ADDTEACHER = 'ADDTEACHER';
+export const DELETETEACHER = 'DELETETEACHER';
+
 // School Actions
 export const ADDSCHOOL = 'ADDSCHOOL';
-export const GETSCHOOLINFO = 'GETSCHOOLINFO';
-
-// Score Actions
-export const UPDATESCORE = 'UPDATESCORE';
+export const GETSCHOOLS = 'GETSCHOOLS';
 
 // Api url To be changed for Production
 // const ROOT_URL = 'Insert Production URL here'
@@ -237,17 +238,17 @@ export const getHouses = async (history) => {
 
 
 // Teacher Action Functions
-export const addTeacher = async (house, history) => {
-  const apiurl = `${ROOT_URL}/api/house`;
+export const addTeacher = async (teacher, history) => {
+  const apiurl = `${ROOT_URL}/api/teacher`;
   try {
     const token = localStorage.getItem('token');
-    await axios.post(apiurl, house, {
+    await axios.post(apiurl, teacher, {
       headers: {
         Authorization: token,
       },
     });
     return {
-      type: ADDHOUSE,
+      type: ADDTEACHER,
     };
   } catch (error) {
     history.push('/signin');
@@ -256,7 +257,7 @@ export const addTeacher = async (house, history) => {
 };
 
 export const deleteTeacher = async (teacherid, history) => {
-  const apiurl = `${ROOT_URL}/api/teacher/${houseid}`;
+  const apiurl = `${ROOT_URL}/api/teacher/${teacherid}`;
   try {
     const token = localStorage.getItem('token');
     const deleteRequest = await axios.delete(apiurl, {

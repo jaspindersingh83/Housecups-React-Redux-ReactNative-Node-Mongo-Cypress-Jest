@@ -45,10 +45,10 @@ const houseRoutes = require('./houses/routes/routes');
 
 houseRoutes(server);
 
-// Running the Score routes
-const ScoreRoutes = require('./scores/routes/routes');
+// Running the Teacher routes
+const teacherRoutes = require('./teachers/routes/routes');
 
-ScoreRoutes(server);
+teacherRoutes(server);
 
 // Connect Database
 database.connect();

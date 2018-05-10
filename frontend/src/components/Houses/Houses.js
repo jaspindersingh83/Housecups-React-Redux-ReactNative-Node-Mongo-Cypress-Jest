@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { SketchPicker } from 'react-color';
-import { getHouses, addHouse } from '../../actions';
+import { withRouter } from 'react-router-dom';
+import { getHousesBySchool, addHouse } from '../../actions';
 import House from './House';
 import './House.css';
 
@@ -17,7 +18,7 @@ class Houses extends Component {
     };
   }
   async componentWillMount() {
-    await this.props.getHouses(this.props.history);
+    await this.props.getHousesBySchool(this.props.history);
   }
 
   async componentWillReceiveProps(props) {
@@ -62,7 +63,7 @@ class Houses extends Component {
         <h4 style={{ marginBottom: '40px', marginLeft: '30px' }}>
           Add Houses
         </h4>
-        <form className="addentry" onSubmit={() => this.addHouse(this.state.id)}>
+        <form className="addentry" onSubmit={() => this.addHouse()}>
           <input
             onChange={e => this.handleInput(e, 'newHouseName')}
             style={{
@@ -102,7 +103,7 @@ class Houses extends Component {
           {this.state.houses.map((house) => {
             return (
               <House
-                key={house._id}
+                key={house}
                 id={house._id}
                 name={house.name}
                 color={house.color}
@@ -122,4 +123,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { getHouses, addHouse })(Houses);
+export default withRouter(connect(mapStateToProps, { getHousesBySchool, addHouse })(Houses));

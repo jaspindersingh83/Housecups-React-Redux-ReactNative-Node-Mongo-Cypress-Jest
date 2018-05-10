@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import { Glyphicon } from 'react-bootstrap';
 import { SketchPicker } from 'react-color';
 import { deleteHouse, updateHouse } from '../../actions';
@@ -123,5 +124,5 @@ const mapStateToProps = () => {
   };
 };
 
-export default connect(mapStateToProps, { deleteHouse, updateHouse })(House);
+export default withRouter(connect(mapStateToProps, { deleteHouse, updateHouse })(House));
 

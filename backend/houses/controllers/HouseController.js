@@ -34,12 +34,12 @@ const deleteHouse = async (req, res) => {
     res.status(500).json({ message: 'No such house in database', error });
   }
 };
-// get all Houses
+// get all Houses //use populate for having one network call.
 const getHouseBySchool = async (req, res) => {
   const { schoolID } = req.decoded;
   console.log(schoolID);
   try {
-    const school = await School.findById(schoolID);
+    const school = await School.findById(schoolID).populate('houses');
     const { houses } = school;
     res.status(200).json(houses);
   } catch (error) {
@@ -47,16 +47,20 @@ const getHouseBySchool = async (req, res) => {
   }
 };
 
-// get House by Id not needed
-// const getHouseById = async (req, res) => {
-//   const { id } = req.params;
-//   try {
-//     const house = await House.findById(id);
-//     res.status(200).json(house);
-//   } catch (error) {
-//     res.status(500).json({ message: 'No such house in database', error });
-//   }
-// };
+// Another funtion to access just the credentials of the houses of a school 
+// William -- You can use this function for displaying score, color, name, mascot  of 
+// houses of a particular school. This will come as a public/non auth user clicks on a specific school among list of schools.
+
+const publicgetHousesBySchoolId = async (req, res) => {
+  const schoolID = req.params.id;
+  try {
+    const school = await School.findById(schoolID).populate('houses');
+    const { houses } = school;
+    res.status(200).json(houses);
+  } catch (error) {
+    res.status(500).json({ message: 'No such house in database', error });
+  }
+};
 
 // update/edit house //used for changing score as well
 const updateHouse = async (req, res) => {
@@ -66,16 +70,12 @@ const updateHouse = async (req, res) => {
   houseInfo.updatedAt = moment();
   try {
     const house = await House.findByIdAndUpdate(houseID, houseInfo);
+    const school = await School.findById(schoolID).populate('houses');
+    const houses = school.houses.sort((a, b) => (b.score - a.score));
     await School.findOneAndUpdate(
       { _id: schoolID },
-      { $pull: { houses: houseID } },
+      { houses },
     );
-
-    await School.findOneAndUpdate(
-      { _id: schoolID },
-      { $push: { houses: { $each: [house], $sort: { score: 1 } } } },
-    );
-    console.log('Check 3')
     res.status(200).json({ message: 'House has been updated!', house });
   } catch (error) {
     res.status(500).json({ message: error });
@@ -87,5 +87,5 @@ module.exports = {
   deleteHouse,
   updateHouse,
   getHouseBySchool,
-  // getHouseById,
+  publicgetHousesBySchoolId,
 };

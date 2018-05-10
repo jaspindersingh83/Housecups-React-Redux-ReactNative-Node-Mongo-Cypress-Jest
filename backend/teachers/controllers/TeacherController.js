@@ -21,40 +21,32 @@ const smtpTransport = nodemailer.createTransport({
 const User = require('../../auth/models/UserModel');
 const School = require('../../schools/models/SchoolModel');
 
-const addAsNonSignedTeacher = async (req, res, next) => {
-  const { schoolID } = req.decoded;
-  const teacherInfo = req.body;
-  try {
-    await School.findOneAndUpdate(
-      { _id: schoolID },
-      { $push: { nonSignedUpTeachers: teacherInfo } },
-    );
-    next();
-  } catch (error) {
-    res.status(500).json({ message: error });
-  }
-};
 // create a Teacher in USer Model
 const createTeacher = async (req, res) => {
   const { username } = req.body;
-  const { email } = req.decoded;
+  const { email, schoolID } = req.decoded;
   const { hashedPassword } = req;
   try {
-    const result = await User.create({
+    const teacher = await User.create({
       username,
       email,
       passwordHash: hashedPassword,
       isTeacher: true,
     });
-    res.status(200).json(result);
+    await School.findOneAndUpdate(
+      { _id: schoolID },
+      { $push: { teachers: teacher } },
+    );
+    res.status(200).json(teacher);
   } catch (error) {
     res.status(422).json({ message: error });
   }
 };
 // Send a signup request to added Teachers
 const sendTeacherSignupRequest = async (req, res) => {
+  const { schoolID } = req.decoded;
   const { firstName, lastName, email } = req.body;
-  const payload = { firstName, lastName, email };
+  const payload = { firstName, lastName, email, schoolID };
   const token = await jwt.sign(payload, mysecret, { expiresIn: '48h' });
   const mailOptions = {
     to: email,
@@ -64,7 +56,7 @@ const sendTeacherSignupRequest = async (req, res) => {
       `Hi ${firstName}\n\n` +
       'You are receiving this because your school admin has added you to the list of teachers for school.\n\n' +
       'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
-      `http://localhost:3000/reset?${token}\n\n` +
+      `http://localhost:3000/teachersignup?${token}\n\n` +
       '\n\n' +
       'Thanks Team Housecups',
   };
@@ -92,34 +84,21 @@ const deleteTeacher = async (req, res) => {
     res.status(500).json({ message: 'No such teacher in database', error });
   }
 };
-// get all Houses
+// get Teachers by School.
 const getTeachersBySchool = async (req, res) => {
   const { schoolID } = req.decoded;
   try {
-    const school = await School.find(schoolID);
+    const school = await School.find(schoolID).populate('teachers');
     const { teachers } = school;
-    res.status(200).json(teachers);
+    res.status(200).json({ teachers });
   } catch (error) {
     res.status(500).json({ message: 'No teachers in database for this school', error });
   }
 };
 
-// get Teacher by Id
-const getTeacherById = async (req, res) => {
-  const { id } = req.params;
-  try {
-    const teacher = await User.findById(id);
-    res.status(200).json(teacher);
-  } catch (error) {
-    res.status(500).json({ message: 'No such teacher in database', error });
-  }
-};
-
 module.exports = {
-  addAsNonSignedTeacher,
   createTeacher,
   deleteTeacher,
   getTeachersBySchool,
-  getTeacherById,
   sendTeacherSignupRequest,
 };

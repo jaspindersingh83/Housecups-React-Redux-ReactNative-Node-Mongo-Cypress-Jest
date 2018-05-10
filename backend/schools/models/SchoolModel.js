@@ -15,13 +15,6 @@ const SchoolSchema = Schema({
     type: Schema.Types.ObjectId,
     ref: 'Plan',
   },
-  nonSignedUpTeachers: [
-    {
-      firstName: String,
-      lastName: String,
-      email: String,
-    },
-  ],
   teachers: [{
     type: Schema.Types.ObjectId,
     ref: 'User',

@@ -15,18 +15,11 @@ const HouseSchema = new Schema({
     type: String,
     required: true,
   },
-<<<<<<< HEAD
   schoolID: {
     type: Schema.Types.ObjectId,
     required: true,
     ref: 'School',
   }, // schoolId: foreign key from the schools table
-=======
-  school: {
-    type: Schema.Types.ObjectId,
-    ref: 'School',
-  },
->>>>>>> master
   score: {
     type: Number,
     default: 0,

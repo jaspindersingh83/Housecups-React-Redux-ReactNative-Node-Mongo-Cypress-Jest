@@ -2,13 +2,12 @@
 import React, { Component } from 'react';
 import Socket from 'socket.io-client';
 import { connect } from 'react-redux';
-import { getHouses } from '../../actions';
+import { getHousesBySchool } from '../../actions';
 import { updateScore } from '../../actions/index.ws';
 import './Scoreboard.css';
 import ScoreCard from './ScoreCard';
 
 class Scoreboard extends Component {
-
   constructor(props) {
     super(props);
     this.state = {
@@ -18,7 +17,7 @@ class Scoreboard extends Component {
   }
 
   async componentWillMount() {
-    await this.props.getHouses(this.props.history);
+    await this.props.getHousesBySchool(this.props.history);
   }
 
   async componentWillReceiveProps(props) {
@@ -58,4 +57,4 @@ const mapStateToProps = (state) => {
   return state;
 };
 
-export default connect(mapStateToProps, { getHouses, updateScore })(Scoreboard);
+export default connect(mapStateToProps, { getHousesBySchool, updateScore })(Scoreboard);

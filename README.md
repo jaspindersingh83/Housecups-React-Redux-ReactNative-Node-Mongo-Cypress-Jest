@@ -106,3 +106,82 @@ Success
 * The JWT in localstorage is deleted. 
 * The user is redirected to signin page.
 
+
+# Admin Routes
+
+GET`\superadmin`
+
+* Can be shown when clicked on `SuperAdmin Dashboard` in Headerbar/Schoolbar (if user has school admin rights. Will be represented by `isSuperAdmin: true` in auth state)
+This can be default page where a superadmin lands after signin.
+Pending- Creating isSuperAdmin action in auth and corresponding reducer.
+
+Success
+A route which gives admin dashboard for company/housecups admin. Has following Features
+1. List of current plans, maxAllowedTeachers/school ,maxAllowedHouses/school number of schools for each plan.
+2. Ability to delte and update each plan.
+3. Ability to add new pricing plans.
+4. List of schools that are due payment and their current plan.
+
+Errors:
+1. Authentication error. `You are not authorized as superadmin. Please login as superadmin`.
+
+GET`\schooladmin`
+* Can be shown when clicked on `Admin Dashboard` in Headerbar (if user has school admin rights. Will be represented by `isAdmin: true` in auth state). 
+This can be default page where a schooladmin lands after signin.
+
+Success
+A route which gives admin dashboard for company/housecups admin. Following Features
+1. List of current added Teachers, their emailid and whether teacher has completed signup process or not.
+2. Ability to delte and update teachers.
+3. Ability to add teachers and handle their sigup process by sending temporary JWT (similar to `reset`) to their emailid. 
+3. List of current added houses, house colors, house mascots.
+4. Ability to add teachers.
+5. Ability to delete/update teachers.
+
+Errors:
+1. Authentication error. `You are not authorized as schooladmin. Please login as schooladmin`.
+
+# School Routes
+
+GET`\api\schools` Type: `public`
+Rendered when user/non-user/teachers/schooladmin/superadmin clicks on `schools` in side bar
+
+Success
+1. List of all the schools which can be clicked to see house scorecard of each school.
+
+POST `\api\schools` Type: `Protected`
+Rendered when `signed up user` clicks on `Add School` in side bar.
+
+This can be default page when a signed up user lands after signin.
+
+Success
+1. Ability to add a school. Refere to schools model to see the details needed for adding a school.
+
+Erros
+1. If user is not signed up `You are not signedup. Please Signup`. and redirect to signup page.
+
+GET`\api\schools\:id` Type: `public`
+Rendered when user/non-user/teachers/schooladmin/superadmin clicks on a particular school in list of schools.
+
+Success
+1. List of school houses color and their corresponding scores (in sorted manner).
+
+# Teachers/ House Routes
+These are simple CRUD routes. If there are any points of cofusion please refer to 
+corresponding teachers/houses folder on backend.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

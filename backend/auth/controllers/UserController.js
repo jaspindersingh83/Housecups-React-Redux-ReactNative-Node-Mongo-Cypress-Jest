@@ -22,7 +22,6 @@ const smtpTransport = nodemailer.createTransport({
 
 const createUser = async (req, res) => {
   const { username } = req.body;
-  if (!username) return res.status(422).json({ err: 'Username and email required' });
   const { email } = req.body;
   const { hashedPassword } = req;
   try {
@@ -36,7 +35,7 @@ const createUser = async (req, res) => {
     res.status(422).json({ message: error });
   }
 };
-
+// This one is used for Settings and Reset password all in one.
 const updateUserPassword = async (req, res, next) => {
   let { email } = req.body;
   const { hashedPassword } = req;
@@ -77,8 +76,8 @@ const sendResetPasswordEmail = async (req, res) => {
 
 // signin
 const signin = async (req, res) => {
-  const { username, isAdmin, isTeacher } = req;
-  const payload = { username, isAdmin, isTeacher };
+  const { username, isAdmin, isTeacher, isSuperAdmin, schoolID } = req;
+  const payload = { username, isAdmin, isTeacher, isSuperAdmin, schoolID };
   const token = await jwt.sign(payload, mysecret);
   res.status(200).json({ token });
 };

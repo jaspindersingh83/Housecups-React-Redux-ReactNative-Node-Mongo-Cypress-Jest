@@ -30,12 +30,26 @@ const authRoutes = require('./auth/routes/routes');
 
 authRoutes(server);
 
+// Running the Pricing routes
+const pricingRoutes = require('./pricing/routes/routes');
+
+pricingRoutes(server);
+
+// Running the School routes
+const schoolRoutes = require('./schools/routes/routes');
+
+schoolRoutes(server);
 
 // Running the House routes
 const houseRoutes = require('./houses/routes/routes');
 
 houseRoutes(server);
 
+
+// Running the Teacher routes
+const teacherRoutes = require('./teachers/routes/routes');
+
+teacherRoutes(server);
 // Running the Score routes
 const ScoreRoutes = require('./scores/routes/routes');
 
@@ -59,7 +73,6 @@ webSocketEvents.scores = require('./scores/routes/ScoreRoutes.ws');
 
 io.on('connection', (socket) => {
   console.log('Websocket is connected');
-
   /* Routes */
   webSocketEvents.scores(io, socket);
 

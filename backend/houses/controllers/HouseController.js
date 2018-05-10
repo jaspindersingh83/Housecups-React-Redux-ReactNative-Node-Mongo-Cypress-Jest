@@ -46,20 +46,20 @@ const getHouseBySchool = async (req, res) => {
   }
 };
 
-// get House by Id
-const getHouseById = async (req, res) => {
-  const { id } = req.params;
-  try {
-    const house = await House.findById(id);
-    res.status(200).json(house);
-  } catch (error) {
-    res.status(500).json({ message: 'No such house in database', error });
-  }
-};
+// get House by Id not needed
+// const getHouseById = async (req, res) => {
+//   const { id } = req.params;
+//   try {
+//     const house = await House.findById(id);
+//     res.status(200).json(house);
+//   } catch (error) {
+//     res.status(500).json({ message: 'No such house in database', error });
+//   }
+// };
 
 // update/edit house //used for changing score as well
 const updateHouse = async (req, res) => {
-  const { schoolID } = req;
+  const { schoolID } = req.decoded;
   const houseID = req.params.id;
   const houseInfo = req.body;
   houseInfo.updatedAt = moment();
@@ -67,12 +67,14 @@ const updateHouse = async (req, res) => {
     const house = await House.findByIdAndUpdate(houseID, houseInfo);
     await School.findOneAndUpdate(
       { _id: schoolID },
-      { $pull: { houses: { _id: houseID } } },
+      { $pull: { houses: houseID } },
     );
+
     await School.findOneAndUpdate(
       { _id: schoolID },
       { $push: { houses: { $each: [house], $sort: { score: 1 } } } },
     );
+    console.log('Check 3')
     res.status(200).json({ message: 'House has been updated!', house });
   } catch (error) {
     res.status(500).json({ message: error });

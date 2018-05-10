@@ -45,11 +45,6 @@ const houseRoutes = require('./houses/routes/routes');
 
 houseRoutes(server);
 
-// Running the House routes
-const schoolRoutes = require('./schools/routes/routes');
-
-schoolRoutes(server);
-
 // Running the Score routes
 const ScoreRoutes = require('./scores/routes/routes');
 

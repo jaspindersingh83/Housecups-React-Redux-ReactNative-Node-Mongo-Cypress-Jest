@@ -231,6 +231,7 @@ export const getHouses = async (history) => {
       payload: getAllHousesRequest,
     };
   } catch (error) {
+    console.log(error);
     history.push('/signin');
     return authError('You are not authorized, Please signin');
   }

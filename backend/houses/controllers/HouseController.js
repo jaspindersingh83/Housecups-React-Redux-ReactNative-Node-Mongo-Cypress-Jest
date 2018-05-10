@@ -37,6 +37,7 @@ const deleteHouse = async (req, res) => {
 // get all Houses
 const getHouseBySchool = async (req, res) => {
   const { schoolID } = req.decoded;
+  console.log(schoolID);
   try {
     const school = await School.findById(schoolID);
     const { houses } = school;
@@ -86,5 +87,5 @@ module.exports = {
   deleteHouse,
   updateHouse,
   getHouseBySchool,
-  getHouseById,
+  // getHouseById,
 };

@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import Socket from 'socket.io-client';
 import { connect } from 'react-redux';
-import { getSchoolInfo } from '../../actions';
+import { getHouses } from '../../actions';
 import { updateScore } from '../../actions/index.ws';
 import './Scoreboard.css';
 import ScoreCard from './ScoreCard';
@@ -19,10 +19,11 @@ class PublicScoreboard extends Component {
   }
 
   async componentWillMount() {
-    await this.props.getSchoolInfo(this.state.schoolId, this.props.history);
+    await this.props.getHouses(this.props.history);
   }
 
   async componentWillReceiveProps(props) {
+    await console.log(this.props)
     await this.setState({
       houses: [...props.houses],
     });
@@ -60,4 +61,4 @@ const mapStateToProps = (state) => {
   return state;
 };
 
-export default connect(mapStateToProps, { getSchoolInfo, updateScore })(PublicScoreboard);
+export default connect(mapStateToProps, { getHouses, updateScore })(PublicScoreboard);

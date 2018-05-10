@@ -20,6 +20,7 @@ import Signup from './components/Auth/Signup';
 // General View Pages
 import Landing from './components/Landing/Landing';
 import Pricing from './components/Pricing/Pricing';
+import SchoolAdmin from './components/SchoolAdmin/SchoolAdmin';
 import Dashboard from './components/Dashboard/Dashboard';
 import PublicScoreboard from './components/Scoreboard/PublicScoreboard';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
@@ -51,7 +52,7 @@ class App extends Component {
               <PublicAuthRoute exact path="/forgotPassword" component={Forgotpassword} />
               <PublicAuthRoute path="/reset" component={Resetpassword} />
               <Route exact path="/scoreboard/:schoolId" component={PublicScoreboard} />
-              {/* <Route exact path="/schooladmin" component={Schooladmin} /> */}
+              <Route exact path="/schooladmin" component={SchoolAdmin} />
               <PrivateRoute
                 exact
                 path="/(dashboard|schools|scoreboard|settings)"

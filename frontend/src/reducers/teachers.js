@@ -1,6 +1,6 @@
 import {
   ADDTEACHER,
-  GETTEACHERS,
+  // GETTEACHERS,
   DELETETEACHER,
 } from '../actions/index';
 
@@ -10,8 +10,8 @@ const teachersReducer = (teachers = [], action) => {
     // can be auto populate at first instance of signin
     case ADDTEACHER:
       return [...teachers, action.payload.data];
-    case GETTEACHERS:
-      return [...action.payload.data];
+    // case GETTEACHERS:
+    //   return [...action.payload.data];
     case DELETETEACHER:
       return teachers.filter(teacher => teacher._id !== action.payload.data.teacher._id);
     default:

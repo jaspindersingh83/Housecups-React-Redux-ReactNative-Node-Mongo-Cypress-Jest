@@ -32,7 +32,7 @@ class Scoreboard extends Component {
     this.socket = Socket('http://127.0.0.1:5000');
     // Receives Response after the update
     this.socket.on('updateScoreResponse', (response) => {
-      this.props.updateScore(response);
+      // this.props.updateScore(response);
     });
     // Error Handling
     this.socket.on('error', (data) => {

@@ -4,6 +4,7 @@ import { NavLink, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { signout } from '../../actions';
 import './Header.css';
+import DashboardTitle from '../DashboardTitle/DashboardTitle';
 
 class Header extends Component {
 
@@ -22,8 +23,17 @@ class Header extends Component {
       '/dashboard',
       '/schools',
       '/houses',
+      '/teachers',
       '/scoreboard',
       '/settings',
+    ];
+    const protectedRoutesTitle = [
+      '',
+      'Create Schools',
+      'Manage Houses',
+      'Manage Teachers',
+      'Current Scores',
+      'Settings',
     ];
 
     const { pathname } = this.props.history.location;
@@ -32,11 +42,6 @@ class Header extends Component {
     const isAuthorized = !!token;
     const isProtectedRoute = protectedRoutes.includes(pathname);
     const isPublicAuthRoute = publicAuthRoute.includes(pathname);
-
-    let pageName = pathname.split('/').reverse()[0];
-    if (pageName.length > 0) {
-      pageName = pageName[0].toUpperCase() + pageName.substring(1);
-    }
 
     return (
       <div>
@@ -72,6 +77,9 @@ class Header extends Component {
                         <NavLink to="/pricing">
                           <li data-selected={pathname === '/pricing'}>Pricing</li>
                         </NavLink>
+                        <NavLink to="/search-schools">
+                          <li data-selected={pathname === '/search-schools'}>School Search</li>
+                        </NavLink>
                       </div>
                       <div className="Header__nav__links">
                         {
@@ -84,19 +92,7 @@ class Header extends Component {
                       </div>
                     </div>
                   ) : (
-                    // Breadcrumbs for Dashboard
-                    <div className="Header__nav__links">
-                      <NavLink to="/dashboard">
-                        <li>Dashboard</li>
-                      </NavLink>
-                      {
-                        (pathname !== '/dashboard') ? (
-                          <NavLink to={pathname}>
-                            <li>{ pageName }</li>
-                          </NavLink>
-                        ) : null
-                      }
-                    </div>
+                    <DashboardTitle title={ protectedRoutesTitle[protectedRoutes.indexOf(pathname)] } />
                   )
                 }
                 <div className="Header__nav__buttons">

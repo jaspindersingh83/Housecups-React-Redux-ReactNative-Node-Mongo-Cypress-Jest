@@ -20,6 +20,7 @@ export const UPDATEHOUSE = 'UPDATEHOUSE';
 // School Actions
 export const ADDSCHOOL = 'ADDSCHOOL';
 export const GETSCHOOLS = 'GETSCHOOLS';
+export const SEARCHSCHOOLS = 'SEARCHSCHOOLS';
 
 // Teacher Actions
 export const ADDTEACHER = 'ADDTEACHER';
@@ -266,7 +267,7 @@ export const addSchool = async (school, history) => {
       },
     });
     localStorage.setItem('token', addSchoolRequest.data.token);
-    history.push('/schooladmin');
+    history.push('/houses');
     return {
       type: ADDSCHOOL,
       payload: addSchoolRequest,
@@ -274,6 +275,21 @@ export const addSchool = async (school, history) => {
   } catch (error) {
     history.push('/signin');
     return authError('You are not authorized, Please signin as schooladmin');
+  }
+};
+
+export const searchSchools = async (query, history) => {
+  const apiurl = `${ROOT_URL}/api/schools/search`;
+  try {
+    const searchSchoolsRequest = await axios.get(apiurl, {
+      params: query,
+    });
+    return {
+      type: SEARCHSCHOOLS,
+      payload: searchSchoolsRequest,
+    };
+  } catch (error) {
+    console.error('Error on searchSchools()', error);
   }
 };
 

@@ -6,7 +6,7 @@ class ScoreCard extends Component {
 
   componentDidMount() {
     // Initialize
-    this.changeScore(0);
+    // this.changeScore(0);
   }
 
   increaseScore = () => {

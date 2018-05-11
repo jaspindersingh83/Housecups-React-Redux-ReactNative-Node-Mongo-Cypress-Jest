@@ -46,11 +46,16 @@ class Scoreboard extends Component {
   render() {
     return (
       <div className="Scoreboard">
-        {
-          this.state.houses.map((house, index) => {
-            return <ScoreCard key={house._id} house={house} socket={this.socket} />;
-          })
-        }
+        <div className="Scoreboard__heading">
+          <div className="Scoreboard__title">Current Score</div>
+        </div>
+        <div className="Scoreboard__cards">
+          {
+            this.state.houses.map((house, index) => {
+              return <ScoreCard key={house._id} house={house} socket={this.socket} />;
+            })
+          }
+        </div>
       </div>
     );
   }

@@ -48,11 +48,17 @@ class PublicScoreboard extends Component {
     console.log(this.state.schoolId);
     return (
       <div className="Scoreboard">
-        {
-          this.state.houses.map((house, index) => {
-            return <ScoreCard key={house._id} house={house} socket={this.socket} public={true} />;
-          })
-        }
+        <div className="Scoreboard__heading">
+          <div className="Scoreboard__title">Current Score</div>
+          <div className="Scoreboard__subtitle">Lambda School (Online)</div>
+        </div>
+        <div className="Scoreboard__cards">
+          {
+            this.state.houses.map((house, index) => {
+              return <ScoreCard key={house._id} house={house} socket={this.socket} public={true} />;
+            })
+          }
+        </div>
       </div>
     );
   }

@@ -351,7 +351,3 @@ export const getTeachers = async (history) => {
     // return authError('You are not authorized, Please signin');
   }
 };
-<<<<<<< HEAD
-=======
-
->>>>>>> 6bd5d8245ba81e2f4fe840f0db1a2dbb049b5699

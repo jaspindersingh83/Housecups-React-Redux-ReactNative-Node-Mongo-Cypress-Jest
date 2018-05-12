@@ -65,8 +65,4 @@ const mapStateToProps = (state) => {
   return state;
 };
 
-<<<<<<< HEAD
 export default connect(mapStateToProps, { getHousesBySchool })(Scoreboard);
-=======
-export default connect(mapStateToProps, { getHousesBySchool, updateScore })(Scoreboard);
->>>>>>> 6bd5d8245ba81e2f4fe840f0db1a2dbb049b5699

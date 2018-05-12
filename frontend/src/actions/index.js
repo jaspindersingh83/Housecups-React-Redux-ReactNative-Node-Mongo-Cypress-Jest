@@ -7,7 +7,7 @@ export const CREATE_USER = 'CREATE_USER';
 export const CHANGESETTINGS = 'CHANGESETTINGS';
 export const FORGOTPASSWORD = 'FORGOTPASSWORD';
 export const RESETPASSWORD = 'RESETPASSWORD';
-export const TEACHERSIGNUP = 'TEACHERSIGNUP';
+export const CREATE_TEACHER = 'CREATE_TEACHER';
 export const SIGNIN = 'SIGNIN';
 export const SIGNOUT = 'SIGNOUT';
 
@@ -123,7 +123,7 @@ export const resetPassword = async (passwords, history) => {
   }
 };
 
-export const teacherSignup = async (passwords, history) => {
+export const createTeacher = async (passwords, history) => {
   const token = localStorage.getItem('token');
   try {
     await axios.post(`${ROOT_URL}/teachersignup`, passwords, {
@@ -133,7 +133,7 @@ export const teacherSignup = async (passwords, history) => {
     });
     history.push('/signin');
     return {
-      type: TEACHERSIGNUP,
+      type: CREATE_TEACHER,
     };
   } catch (error) {
     return authError(error.response.data.message);
@@ -327,8 +327,8 @@ export const getTeachers = async (history) => {
       payload: getTeachersRequest,
     };
   } catch (error) {
-    // history.push('/signin');
-    // return authError('You are not authorized, Please signin');
+    history.push('/signin');
+    return authError('You are not authorized, Please signin');
   }
 };
 

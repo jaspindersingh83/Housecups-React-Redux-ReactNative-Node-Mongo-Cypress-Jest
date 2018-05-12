@@ -12,11 +12,12 @@ class Teachers extends Component {
       newTeacherFirstName: '',
       newTeacherLastName: '',
       newTeacherEmail: '',
+      teacherAdded: false,
     };
   }
-  // async componentWillMount() {
-  //   await this.props.getTeachers(this.props.history);
-  // }
+  async componentWillMount() {
+    await this.props.getTeachers(this.props.history);
+  }
   async componentWillReceiveProps(props) {
     await this.setState({
       teachers: props.teachers,
@@ -40,16 +41,25 @@ class Teachers extends Component {
       newTeacherFirstName: '',
       newTeacherLastName: '',
       newTeacherEmail: '',
+      teacherAdded: true,
     });
   }
+  renderTeacherAddedAlert = () => {
+    if (!this.state.teacherAdded) return null;
+    return (
+      <p style={{ color: '#337ab7' }}>Added Teacher has been sent an email to Signup, he/she will be included in list after Signup</p>
+    );
+  };
   render() {
     return (
       <div>
         <h4 style={{ marginBottom: '40px', marginLeft: '30px' }}>
           Add Teachers
         </h4>
-        <form className="addentry" onSubmit={(e) => this.addTeacher(e)}>
+        {this.renderTeacherAddedAlert()}
+        <form className="addentry" onSubmit={this.addTeacher}>
           <input
+            value={this.state.newTeacherFirstName}
             onChange={e => this.handleInput(e, 'newTeacherFirstName')}
             style={{
               fontSize: '13px',
@@ -59,6 +69,7 @@ class Teachers extends Component {
             placeholder="First Name"
           />
           <input
+            value={this.state.newTeacherLastName}
             onChange={e => this.handleInput(e, 'newTeacherLastName')}
             style={{
               fontSize: '13px',
@@ -68,6 +79,7 @@ class Teachers extends Component {
             placeholder="Last Name"
           />
           <input
+            value={this.state.newTeacherEmail}
             onChange={e => this.handleInput(e, 'newTeacherEmail')}
             style={{ fontSize: '13px', border: 'solid 1px #333' }}
             placeholder="Email"
@@ -80,17 +92,18 @@ class Teachers extends Component {
         </form>
         <div className="table">
           <h4 style={{ marginBottom: '40px' }}> Teachers </h4>
-          {/* {this.state.teachers.map((teacher) => {
+          {this.state.teachers.map((teacher) => {
             return (
               <Teacher
-                key={teacher}
+                key={teacher._id}
                 id={teacher._id}
                 firstName={teacher.firstName}
+                lastName={teacher.lastName}
                 email={teacher.email}
               />
             );
           })}
-          */}
+         
         </div>
       </div>
     );

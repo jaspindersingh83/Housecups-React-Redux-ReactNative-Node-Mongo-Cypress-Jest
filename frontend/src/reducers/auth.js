@@ -7,6 +7,7 @@ import {
   FORGOTPASSWORD,
   RESETPASSWORD,
   CHANGESETTINGS,
+  CREATE_TEACHER,
 } from '../actions/index';
 
 const authReducer = (auth = {}, action) => {
@@ -23,6 +24,8 @@ const authReducer = (auth = {}, action) => {
       return { ...auth, emailSent: true };
     case RESETPASSWORD:
       return { ...auth, resetPassword: true };
+    case CREATE_TEACHER:
+      return { ...auth, teacherSignup: true };
     case SIGNIN:
       return { ...auth };
     case SIGNOUT:

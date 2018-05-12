@@ -1,5 +1,6 @@
 /* eslint-disable */
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Houses from '../Houses/Houses';
 import { addSchool } from '../../actions';
@@ -65,4 +66,4 @@ const mapStateToProps = (state) => {
   return state;
 };
 
-export default connect(mapStateToProps, { addSchool })(Createschool);
+export default withRouter(connect(mapStateToProps, { addSchool })(Createschool));

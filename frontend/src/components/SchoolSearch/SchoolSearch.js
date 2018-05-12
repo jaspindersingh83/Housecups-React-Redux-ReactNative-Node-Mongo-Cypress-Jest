@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { searchSchools } from '../../actions';
 import './SchoolSearch.css';
 import Section from '../Section/Section';
 
@@ -8,55 +10,30 @@ class SchoolSearch extends Component {
     nameInput: '',
     locationInput: '',
     matchedSchools: [],
-    schools: [
-      {
-        name: 'Lambda School',
-        location: 'Online',
-      },
-      {
-        name: 'University of California',
-        location: 'Berkley',
-      },
-      {
-        name: 'University of Illinois',
-        location: 'Chicago',
-      },
-      {
-        name: 'University of Delaware',
-        location: 'Newark',
-      },
-      {
-        name: 'Massachusetts Institute of Technology',
-        location: 'Cambridge',
-      }
-    ],
   }
 
-  handleInput = (event) => {
+  async componentWillReceiveProps(props) {
+    await this.setState({
+      matchedSchools: [...props.schools],
+    });
+  }
+
+  handleInput = async (event) => {
     event.preventDefault();
     const { name, value } = event.target;
-    const newState = {
-      matchedSchools: this.searchSchools(
-        (name === 'name') ? value : this.state.nameInput,
-        (name === 'location') ? value : this.state.locationInput,
-      ),
-    };
+
+    const newState = {};
     newState[`${name}Input`] = value;
     this.setState(newState);
+
+    await this.props.searchSchools({
+      name: this.state.nameInput,
+      location: this.state.locationInput,
+    });
   }
 
   handleSubmit = (event) => {
     event.preventDefault();
-  }
-
-  searchSchools = (name, location) => {
-    // DELETE THIS TEST FUNCTION
-    return this.state.schools.filter(school => {
-      const matchedName = new RegExp(name, 'gi').test(school.name);
-      const matchedLocation = new RegExp(location, 'gi').test(school.location);
-      console.log('name', matchedName, 'location', matchedLocation);
-      return matchedName && matchedLocation;
-    });
   }
 
   render() {
@@ -119,4 +96,8 @@ class SchoolSearch extends Component {
 
 }
 
-export default SchoolSearch;
+const mapStateToProps = (state) => {
+  return state;
+};
+
+export default connect(mapStateToProps, { searchSchools })(SchoolSearch);

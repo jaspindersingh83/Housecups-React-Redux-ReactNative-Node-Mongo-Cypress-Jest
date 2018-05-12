@@ -12,6 +12,7 @@ class AccountOverview extends Component {
       houses: [],
       teachers: [],
     };
+    console.warn('AccountOverview ::', 'Get the User\'s name & School name and update in the render()');
   }
 
   async componentDidMount() {
@@ -30,7 +31,7 @@ class AccountOverview extends Component {
     return (
       <div className="Overview">
         <div className="User">
-          <div className="User__name">William Antony</div>
+          <div className="User__name">John Doe</div>
           <div className="User__role">Admin</div>
         </div>
         <div className="School">

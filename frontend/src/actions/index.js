@@ -267,6 +267,8 @@ export const addSchool = async (school, history) => {
       },
     });
     localStorage.setItem('token', addSchoolRequest.data.token);
+    // Redirecting to /houses after we separated houses and teachers
+    // into two different views.
     history.push('/houses');
     return {
       type: ADDSCHOOL,
@@ -278,6 +280,7 @@ export const addSchool = async (school, history) => {
   }
 };
 
+// Search Schools based on the School-name and Location
 export const searchSchools = async (query, history) => {
   const apiurl = `${ROOT_URL}/api/schools/search`;
   try {
@@ -348,3 +351,7 @@ export const getTeachers = async (history) => {
     // return authError('You are not authorized, Please signin');
   }
 };
+<<<<<<< HEAD
+=======
+
+>>>>>>> 6bd5d8245ba81e2f4fe840f0db1a2dbb049b5699

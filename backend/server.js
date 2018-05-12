@@ -10,14 +10,12 @@ const path = require('path');
 
 const server = express();
 
-
 const database = require('./database');
 
 // Global Middleware
 server.use(bodyParser.json());
 server.use(cors());
 server.use(morgan('combined'));
-
 
 // Creating Log Files
 const accessLogStream = fs.createWriteStream(
@@ -57,7 +55,6 @@ const httpListener = server.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
 
-
 // WebSocket Integration
 
 const io = require('socket.io').listen(httpListener);
@@ -68,7 +65,6 @@ webSocketEvents.scores = require('./scores/routes/ScoreRoutes.ws');
 
 io.on('connection', (socket) => {
   console.log('Websocket is connected');
-
   /* Routes */
   webSocketEvents.scores(io, socket);
 

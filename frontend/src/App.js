@@ -17,15 +17,15 @@ import Forgotpassword from './components/Auth/Forgotpassword';
 import Resetpassword from './components/Auth/Reset';
 import Signin from './components/Auth/Signin';
 import Signup from './components/Auth/Signup';
-// Views SchoolAdmin 
-import Schooladmin from './components/SchoolAdmin/SchoolAdmin';
-import Createschool from './components/SchoolAdmin/CreateSchool';
+// Views SchoolAdmin
+import SchoolAdmin from './components/SchoolAdmin/SchoolAdmin';
+import CreateSchool from './components/SchoolAdmin/CreateSchool';
 // General View Pages
 import Landing from './components/Landing/Landing';
 import Pricing from './components/Pricing/Pricing';
-import SchoolAdmin from './components/SchoolAdmin/SchoolAdmin';
 import Dashboard from './components/Dashboard/Dashboard';
 import PublicScoreboard from './components/Scoreboard/PublicScoreboard';
+import SchoolSearch from './components/SchoolSearch/SchoolSearch';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 import PublicAuthRoute from './components/PublicAuthRoute/PublicAuthRoute';
 
@@ -55,11 +55,11 @@ class App extends Component {
               <PublicAuthRoute exact path="/forgotPassword" component={Forgotpassword} />
               <PublicAuthRoute path="/reset" component={Resetpassword} />
               <Route exact path="/scoreboard/:schoolId" component={PublicScoreboard} />
-              <Route exact path="/schooladmin" component={Schooladmin} />
-              <Route path="/createschool" component={Createschool} />
+              <Route exact path="/search-schools" component={SchoolSearch} />
+              <Route exact path="/schooladmin" component={SchoolAdmin} />
               <PrivateRoute
                 exact
-                path="/(dashboard|schools|scoreboard|settings)"
+                path="/(dashboard|schools|houses|teachers|scoreboard|settings)"
                 component={Dashboard}
               />
             </Switch>

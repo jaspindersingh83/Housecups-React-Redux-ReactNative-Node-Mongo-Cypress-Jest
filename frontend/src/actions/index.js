@@ -12,6 +12,7 @@ export const SIGNIN = 'SIGNIN';
 export const SIGNOUT = 'SIGNOUT';
 export const SUPER_ADMIN_AUTHORIZED = 'SUPER_ADMIN_AUTHORIZED';
 export const TEACHER_AUTH = 'TEACHER_AUTH';
+export const GETUSERROLES = 'GETUSERROLES';
 
 // House Actions
 export const ADDHOUSE = 'ADDHOUSE';
@@ -161,11 +162,11 @@ export const signout = async (history) => {
   }
 };
 
-export const schoolAdminAuth = async (history) => {
+export const getUserRoles = async (history) => {
   try {
     const token = localStorage.getItem('token');
-    const schoolAdminRequest = await axios.get(
-      `${ROOT_URL}/schooladmin`,
+    const getRolesRequest = await axios.get(
+      `${ROOT_URL}/getuserroles`,
       {
         headers: {
           Authorization: token,
@@ -173,57 +174,14 @@ export const schoolAdminAuth = async (history) => {
       },
     );
     return {
-      type: SCHOOL_ADMIN_AUTHORIZED,
-      payload: schoolAdminRequest,
+      type: GETUSERROLES,
+      payload: getRolesRequest,
     };
   } catch (error) {
     history.push('/signin');
-    return authError('You are not authorized as school admin');
+    return authError('You are not signed, Please signin');
   }
 };
-
-export const superAdminAuth = async (history) => {
-  try {
-    const token = localStorage.getItem('token');
-    const superAdminAuthRequest = await axios.get(
-      `${ROOT_URL}/superadmin`,
-      {
-        headers: {
-          Authorization: token,
-        },
-      },
-    );
-    return {
-      type: SUPER_ADMIN_AUTHORIZED,
-      payload: superAdminAuthRequest,
-    };
-  } catch (error) {
-    history.push('/signin');
-    return authError('You are not authorized as super admin, Please sign in as super admin');
-  }
-};
-
-export const teacherAuth = async (history) => {
-  try {
-    const token = localStorage.getItem('token');
-    const teacherAuthRequest = await axios.get(
-      `${ROOT_URL}/teacherauth`,
-      {
-        headers: {
-          Authorization: token,
-        },
-      },
-    );
-    return {
-      type: TEACHER_AUTH,
-      payload: teacherAuthRequest,
-    };
-  } catch (error) {
-    history.push('/signin');
-    return authError('You are not authorized as teacher, please signin as a teacher');
-  }
-};
-
 // Houses Action Functions
 export const addHouse = async (house, history) => {
   const apiurl = `${ROOT_URL}/api/house`;
@@ -239,7 +197,7 @@ export const addHouse = async (house, history) => {
     };
   } catch (error) {
     history.push('/signin');
-    return authError('You are not authorized, Please signin');
+    return authError('You are not authorized, Please signin as schooladmin');
   }
 };
 
@@ -258,7 +216,7 @@ export const deleteHouse = async (houseid, history) => {
     };
   } catch (error) {
     history.push('/signin');
-    return authError('You are not authorized, Please signin');
+    return authError('You are not authorized, Please signin as schooladmin');
   }
 };
 
@@ -276,7 +234,7 @@ export const updateHouse = async (house, history) => {
     };
   } catch (error) {
     history.push('/signin');
-    return authError('You are not authorized, Please signin');
+    return authError('You are not authorized, Please signin as schooladmin');
   }
 };
 
@@ -295,7 +253,7 @@ export const getHousesBySchool = async (history) => {
     };
   } catch (error) {
     history.push('/signin');
-    return authError('You are not authorized, Please signin');
+    return authError('You are not authorized, Please signin as schooladmin');
   }
 };
 
@@ -353,8 +311,8 @@ export const deleteTeacher = async (teacherid, history) => {
       payload: deleteRequest,
     };
   } catch (error) {
-    // history.push('/signin');
-    return authError('You are not authorized, Please signin');
+    history.push('/signin');
+    return authError('You are not authorized, Please signin as schooladmin');
   }
 };
 
@@ -373,7 +331,7 @@ export const getTeachers = async (history) => {
     };
   } catch (error) {
     history.push('/signin');
-    return authError('You are not authorized, Please signin');
+    return authError('You are not authorized, Please signin as schooladmin');
   }
 };
 

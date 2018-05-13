@@ -4,6 +4,7 @@ import {
   CHANGESETTINGS,
   CREATE_TEACHER,
   FORGOTPASSWORD,
+  GETUSERROLES,
   RESETPASSWORD,
   SCHOOL_ADMIN_AUTHORIZED,
   SIGNIN,
@@ -26,6 +27,13 @@ const authReducer = (auth = {}, action) => {
       return { ...auth, signedUpusername: action.payload.data.username };
     case FORGOTPASSWORD:
       return { ...auth, emailSent: true };
+    case GETUSERROLES:
+      return {
+        ...auth,
+        isSchoolAdmin: action.payload.data.isAdmin,
+        isSuperAdmin: action.payload.data.isSuperAdmin,
+        isTeacher: action.payload.data.isTeacher,
+      };
     case RESETPASSWORD:
       return { ...auth, resetPassword: true };
     case SCHOOL_ADMIN_AUTHORIZED:

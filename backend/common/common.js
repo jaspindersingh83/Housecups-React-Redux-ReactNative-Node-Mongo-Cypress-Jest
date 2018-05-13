@@ -17,27 +17,12 @@ const authenticate = (req, res, next) => {
   }
 };
 
-const ifSchoolAdmin = async (req, res) => {
-  const { isAdmin } = req.decoded;
-  if (isAdmin) return res.status(200).json({ success: true });
-  return res.status(200).json({ success: false });
-};
-
-const ifSuperAdmin = async (req, res) => {
-  const { isSuperAdmin } = req.decoded;
-  if (isSuperAdmin) return res.status(200).json({ success: true });
-  return res.status(200).json({ success: false });
-};
-
-const ifTeacher = async (req, res) => {
-  const { isTeacher } = req.decoded;
-  if (isTeacher) return res.status(200).json({ success: true });
-  return res.status(200).json({ success: false });
+const getUserRoles = async (req, res) => {
+  const { isAdmin, isTeacher, isSuperAdmin } = req.decoded;
+  return res.status(200).json({ isAdmin, isTeacher, isSuperAdmin });
 };
 
 module.exports = {
   authenticate,
-  ifSchoolAdmin,
-  ifSuperAdmin,
-  ifTeacher,
+  getUserRoles,
 };

@@ -87,7 +87,6 @@ const deleteTeacher = async (req, res) => {
     const teacher = await User.findById(teacherID);
     const { schoolID } = teacher;
     const removedTeacher = await User.findByIdAndRemove(teacherID);
-    console.log(teacherID)
     const schoolDeleteRequest = await School.findOneAndUpdate(
       { _id: schoolID },
       { $pull: { teachers: teacherID } },

@@ -17,4 +17,27 @@ const authenticate = (req, res, next) => {
   }
 };
 
-module.exports = { authenticate };
+const ifSchoolAdmin = async (req, res) => {
+  const { isAdmin } = req.decoded;
+  if (isAdmin) return res.status(200).json({ success: true });
+  return res.status(200).json({ success: false });
+};
+
+const ifSuperAdmin = async (req, res) => {
+  const { isSuperAdmin } = req.decoded;
+  if (isSuperAdmin) return res.status(200).json({ success: true });
+  return res.status(200).json({ success: false });
+};
+
+const ifTeacher = async (req, res) => {
+  const { isTeacher } = req.decoded;
+  if (isTeacher) return res.status(200).json({ success: true });
+  return res.status(200).json({ success: false });
+};
+
+module.exports = {
+  authenticate,
+  ifSchoolAdmin,
+  ifSuperAdmin,
+  ifTeacher,
+};

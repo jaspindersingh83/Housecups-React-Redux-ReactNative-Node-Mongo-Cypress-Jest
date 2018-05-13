@@ -68,9 +68,7 @@ class Pricing extends Component {
               <button>Select</button>
             </div>
           </div>
-
         </div>
-
       </Section>
     );
   }

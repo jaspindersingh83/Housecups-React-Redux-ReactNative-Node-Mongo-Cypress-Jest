@@ -2,14 +2,16 @@ import axios from 'axios';
 
 // Auth Actions please maintain alphabetical order
 export const AUTHENTICATION_ERROR = 'AUTHENTICATION_ERROR';
-export const ADMIN_AUTHORIZED = 'ADMIN_AUTHORIZED';
-export const CREATE_USER = 'CREATE_USER';
 export const CHANGESETTINGS = 'CHANGESETTINGS';
+export const CREATE_USER = 'CREATE_USER';
+export const CREATE_TEACHER = 'CREATE_TEACHER';
 export const FORGOTPASSWORD = 'FORGOTPASSWORD';
 export const RESETPASSWORD = 'RESETPASSWORD';
-export const CREATE_TEACHER = 'CREATE_TEACHER';
+export const SCHOOL_ADMIN_AUTHORIZED = 'SCHOOL_ADMIN_AUTHORIZED';
 export const SIGNIN = 'SIGNIN';
 export const SIGNOUT = 'SIGNOUT';
+export const SUPER_ADMIN_AUTHORIZED = 'SUPER_ADMIN_AUTHORIZED';
+export const TEACHER_AUTH = 'TEACHER_AUTH';
 
 // House Actions
 export const ADDHOUSE = 'ADDHOUSE';
@@ -159,11 +161,11 @@ export const signout = async (history) => {
   }
 };
 
-export const adminAuth = async (history) => {
+export const schoolAdminAuth = async (history) => {
   try {
     const token = localStorage.getItem('token');
-    await axios.get(
-      `${ROOT_URL}/admin`,
+    const schoolAdminRequest = await axios.get(
+      `${ROOT_URL}/schooladmin`,
       {
         headers: {
           Authorization: token,
@@ -171,11 +173,54 @@ export const adminAuth = async (history) => {
       },
     );
     return {
-      type: ADMIN_AUTHORIZED,
+      type: SCHOOL_ADMIN_AUTHORIZED,
+      payload: schoolAdminRequest,
     };
   } catch (error) {
     history.push('/signin');
     return authError('You are not authorized as school admin');
+  }
+};
+
+export const superAdminAuth = async (history) => {
+  try {
+    const token = localStorage.getItem('token');
+    const superAdminAuthRequest = await axios.get(
+      `${ROOT_URL}/superadmin`,
+      {
+        headers: {
+          Authorization: token,
+        },
+      },
+    );
+    return {
+      type: SUPER_ADMIN_AUTHORIZED,
+      payload: superAdminAuthRequest,
+    };
+  } catch (error) {
+    history.push('/signin');
+    return authError('You are not authorized as super admin, Please sign in as super admin');
+  }
+};
+
+export const teacherAuth = async (history) => {
+  try {
+    const token = localStorage.getItem('token');
+    const teacherAuthRequest = await axios.get(
+      `${ROOT_URL}/teacherauth`,
+      {
+        headers: {
+          Authorization: token,
+        },
+      },
+    );
+    return {
+      type: TEACHER_AUTH,
+      payload: teacherAuthRequest,
+    };
+  } catch (error) {
+    history.push('/signin');
+    return authError('You are not authorized as teacher, please signin as a teacher');
   }
 };
 

@@ -12,11 +12,12 @@ const {
   sendTeacherSignupRequest,
 } = require('../controllers/TeacherController');
 
-const { authenticate } = require('../../common/common');
+const { authenticate, ifSchoolAdmin, ifTeacher } = require('../../common/common');
 
 module.exports = (server) => {
-  server.route('/api/teacher').post(authenticate, validateEmail, sendTeacherSignupRequest);
+  server.route('/teacherauth').get(authenticate, ifTeacher);
+  server.route('/api/teacher').post(authenticate, ifSchoolAdmin, validateEmail, sendTeacherSignupRequest);
   server.route('/teachersignup').post(authenticate, validateUsername, validatePasswords, hashPassword, createTeacher);
   server.route('/api/teacher').get(authenticate, getTeachersBySchool);
-  server.route('/api/teacher/:id').delete(authenticate, deleteTeacher);
+  server.route('/api/teacher/:id').delete(authenticate, ifSchoolAdmin, deleteTeacher);
 };

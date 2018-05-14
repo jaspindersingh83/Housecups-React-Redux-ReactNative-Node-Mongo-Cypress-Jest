@@ -15,6 +15,7 @@ import Header from './components/Header/Header';
 // Views for Authentication
 import Forgotpassword from './components/Auth/Forgotpassword';
 import Resetpassword from './components/Auth/Reset';
+import Teachersignup from './components/Auth/Teachersignup';
 import Signin from './components/Auth/Signin';
 import Signup from './components/Auth/Signup';
 // Views SchoolAdmin 
@@ -52,14 +53,15 @@ class App extends Component {
               <PublicAuthRoute exact path="/signup" component={Signup} />
               <PublicAuthRoute exact path="/forgotPassword" component={Forgotpassword} />
               <PublicAuthRoute path="/reset" component={Resetpassword} />
+              <Route path="/teachersignup" component={Teachersignup} />
               {/* schooladmin  */}
               <Route exact path="/schooladmin" component={Schooladmin} />
               <Route path="/createschool" component={Createschool} />
-              {/* <PrivateRoute
+              <PrivateRoute
                 exact
                 path="/(dashboard|schools|scoreboard|settings)"
                 component={Dashboard}
-              /> */}
+              />
             </Switch>
           </div>
         </Router>

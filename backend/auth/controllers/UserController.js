@@ -87,11 +87,6 @@ const signout = async (req, res) => {
   res.status(200).json({ success: true });
 };
 
-const ifAdmin = async (req, res) => {
-  const { isAdmin } = req.decoded;
-  if (isAdmin) return res.status(200).json({ success: true });
-  return res.status(422).json({ message: 'You are not authorized as admin' });
-};
 
 const forgotPassword = async (req, res, next) => {
   let { email } = req.body;
@@ -140,7 +135,6 @@ module.exports = {
   createUser,
   signin,
   signout,
-  ifAdmin,
   forgotPassword,
   sendResetEmailAndRedirect,
   updateUserPassword,

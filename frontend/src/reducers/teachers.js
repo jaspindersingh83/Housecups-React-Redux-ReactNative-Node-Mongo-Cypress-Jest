@@ -13,7 +13,7 @@ const teachersReducer = (teachers = [], action) => {
     case GETTEACHERS:
       return [...action.payload.data];
     case DELETETEACHER:
-      return teachers.filter(teacher => teacher._id !== action.payload.data.teacher._id);
+      return teachers.filter(teacher => teacher._id !== action.payload.data.removedTeacher._id);
     default:
       return teachers;
   }

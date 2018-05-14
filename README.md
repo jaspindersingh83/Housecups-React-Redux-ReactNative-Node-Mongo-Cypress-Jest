@@ -141,6 +141,17 @@ A route which gives admin dashboard for company/housecups admin. Following Featu
 Errors:
 1. Authentication error. `You are not authorized as schooladmin. Please login as schooladmin`.
 
+GET`\getuserroles`
+* This can be utilized to tailor frontend components as per user role
+
+Success
+1. Adds auth properties of `isSchoolAdmin`, `isSuperAdmin` and `isTeacher` to the store.
+2. Please make a call for each protected route like `/scorecard` and `/schooladmin` at time of mounting of the component.
+
+Errors:
+1. Authentication error. `You are not signed in. Please sign in`.
+
+
 # School Routes
 
 GET`\api\schools` Type: `public`

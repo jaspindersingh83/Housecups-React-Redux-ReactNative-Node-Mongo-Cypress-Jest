@@ -24,15 +24,27 @@ const School = require('../../schools/models/SchoolModel');
 // create a Teacher in USer Model
 const createTeacher = async (req, res) => {
   const { username } = req.body;
-  const { email, schoolID } = req.decoded;
+  const { email, lastName, firstName, schoolID } = req.decoded;
   const { hashedPassword } = req;
   try {
-    const teacher = await User.create({
-      username,
-      email,
-      passwordHash: hashedPassword,
-      isTeacher: true,
-    });
+    const adminAsteacher = await User.findOne({ email });
+    let teacher;
+    if (adminAsteacher) {
+      teacher = await User.findOneAndUpdate(
+        { email },
+        { firstName, lastName, isTeacher: true },
+      );
+    } else {
+      teacher = await User.create({
+        username,
+        email,
+        schoolID,
+        lastName,
+        firstName,
+        isTeacher: true,
+        passwordHash: hashedPassword,
+      });
+    }
     await School.findOneAndUpdate(
       { _id: schoolID },
       { $push: { teachers: teacher } },
@@ -74,11 +86,12 @@ const deleteTeacher = async (req, res) => {
   try {
     const teacher = await User.findById(teacherID);
     const { schoolID } = teacher;
-    await School.findOneAndUpdate(
-      { _id: schoolID },
-      { $pull: { teachers: { _id: teacherID } } },
-    );
     const removedTeacher = await User.findByIdAndRemove(teacherID);
+    const schoolDeleteRequest = await School.findOneAndUpdate(
+      { _id: schoolID },
+      { $pull: { teachers: teacherID } },
+    );
+    console.log(schoolDeleteRequest);
     res.status(200).json({ success: true, removedTeacher });
   } catch (error) {
     res.status(500).json({ message: 'No such teacher in database', error });
@@ -88,9 +101,11 @@ const deleteTeacher = async (req, res) => {
 const getTeachersBySchool = async (req, res) => {
   const { schoolID } = req.decoded;
   try {
-    const school = await School.find(schoolID).populate('teachers');
+    const school = await School.findById(schoolID).populate('teachers');
+    
     const { teachers } = school;
-    res.status(200).json({ teachers });
+    console.log(teachers);
+    res.status(200).json(teachers);
   } catch (error) {
     res.status(500).json({ message: 'No teachers in database for this school', error });
   }

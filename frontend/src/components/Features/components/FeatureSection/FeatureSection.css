@@ -6,7 +6,7 @@
   justify-content: center;
   align-items: center;
   max-width: 1200px;
-  height: 100vh;
+  min-height: 100vh;
   max-height: 640px;
   margin: 50px auto;
 }
@@ -31,9 +31,8 @@
   margin-bottom: 25px;
 }
 .FeatureSection__text > p {
-  font-weight: 300;
+  font-weight: 500;
   line-height: 32px;
-  text-shadow: 0px 0px 0.25px rgba(0, 0, 0, 0.75);
 }
 .FeatureSection__column__image {
   width: 100%;
@@ -50,5 +49,8 @@
   background-image: url('../../../../static/placeholder-image.png');
 }
 .FeatureSection__column__image[data-feature-name="public-scoreboard"] {
+  background-image: url('../../../../static/placeholder-image.png');
+}
+.FeatureSection__column__image[data-feature-name="cross-device"] {
   background-image: url('../../../../static/placeholder-image.png');
 }

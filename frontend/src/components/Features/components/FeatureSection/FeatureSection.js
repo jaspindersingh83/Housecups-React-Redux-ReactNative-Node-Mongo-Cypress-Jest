@@ -21,7 +21,7 @@ class FeatureSection extends Component {
               <p>{ feature.description }</p>
             </div>
           </div>
-          <div className="FeatureSection__column FeatureSection__column__image" data-feature-name={ feature.id } />
+          <div className="FeatureSection__column FeatureSection__column__image" data-feature-name={feature.id} />
         </div>
       </div>
     );

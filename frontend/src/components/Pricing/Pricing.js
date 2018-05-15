@@ -1,80 +1,62 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import './Pricing.css';
-import Section from '../Section/Section';
+import PricingPackage from './components/PricingPackage/PricingPackage';
 
 class Pricing extends Component {
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      packages: [
+        {
+          name: 'K-12',
+          amount: 29,
+          teachersAllowed: 5,
+          housesAllowed: 10,
+        },
+        {
+          name: 'College',
+          amount: 59,
+          teachersAllowed: 10,
+          housesAllowed: 20,
+        },
+        {
+          name: 'University',
+          amount: 89,
+          teachersAllowed: '10 +',
+          housesAllowed: '20 +',
+        },
+      ],
+    };
+  }
+
   render() {
+    const { packages } = this.state;
     return (
-      <Section className="Pricing">
-
-        <h1>Pricing</h1>
-        <p>Our packages are priced based on the number of <u>Teachers</u> and <u>Houses</u>.</p>
-
-        <div className="Pricing__packages">
-
-          <div className="Package">
-            <div className="Package__name">
-              Starter
-            </div>
-            <div className="Package__details">
-              <ul>
-                <li>up to 1 Teacher</li>
-                <li>up to 2 Houses</li>
-              </ul>
-            </div>
-            <div className="Package__price">
-              <div className="Package__price__amount">$ 9.99</div>
-              <div className="Package__price__term">monthly</div>
-            </div>
-            <div className="Package__button">
-              <button>Select</button>
-            </div>
+      <div className="Pricing">
+        <div className="wrapper">
+          <h2>Affordable Pricing</h2>
+          <div className="PricingPackages__listings">
+            {
+              packages.map((packageInfo, index) => {
+                return <PricingPackage key={packageInfo.name} package={packageInfo} />;
+              })
+            }
           </div>
-          <div className="Package Package--best-value">
-            <div className="Package__name">
-              Intermediate
-              <div className="Package__name__bestValue">(Best Value)</div>
-            </div>
-            <div className="Package__details">
-              <ul>
-                <li>up to 10 Teachers</li>
-                <li>up to 20 Houses</li>
-              </ul>
-            </div>
-            <div className="Package__price">
-              <div className="Package__price__amount">$ 29.99</div>
-              <div className="Package__price__term">monthly</div>
-            </div>
-            <div className="Package__button">
-              <button>Select</button>
-            </div>
-          </div>
-          <div className="Package">
-            <div className="Package__name">
-              Premium
-            </div>
-            <div className="Package__details">
-              <ul>
-                <li>more than 10 Teachers</li>
-                <li>more than 20 Houses</li>
-              </ul>
-            </div>
-            <div className="Package__price">
-              <div className="Package__price__amount">$ 49.99</div>
-              <div className="Package__price__term">monthly</div>
-            </div>
-            <div className="Package__button">
-              <button>Select</button>
-            </div>
-          </div>
-
         </div>
-
-      </Section>
+      </div>
     );
   }
 
 }
 
-export default Pricing;
+const mapStateToProps = (state) => {
+  return state;
+};
+
+const mapDispatchToProps = {
+
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Pricing);

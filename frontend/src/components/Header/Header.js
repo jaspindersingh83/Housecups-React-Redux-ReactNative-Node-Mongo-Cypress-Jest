@@ -71,14 +71,14 @@ class Header extends Component {
                     // Main Navigation
                     <div className="Header__nav__links--non-dashboard">
                       <div className="Header__nav__links">
-                        <NavLink to="/">
-                          <li data-selected={pathname === '/'}>Home</li>
+                        <NavLink to="/features">
+                          <li data-selected={pathname === '/features'}>Features</li>
                         </NavLink>
                         <NavLink to="/pricing">
                           <li data-selected={pathname === '/pricing'}>Pricing</li>
                         </NavLink>
                         <NavLink to="/search-schools">
-                          <li data-selected={pathname === '/search-schools'}>School Search</li>
+                          <li data-selected={pathname === '/search-schools'}>Schools</li>
                         </NavLink>
                       </div>
                       <div className="Header__nav__links">

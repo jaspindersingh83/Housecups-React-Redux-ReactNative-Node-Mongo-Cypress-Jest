@@ -11,31 +11,24 @@ class Teacher extends Component {
       id: props.id,
       firstName: props.firstName,
       lastName: props.lastName,
-      email: props.hasSignedUp,
+      email: props.email,
     };
   }
   deleteTeacher = async (id) => {
     await this.props.deleteTeacher(id, this.props.history);
   }
-
   render() {
     return (
       <div className="tableitem" >
         <div className="tableitem__name">
-          {this.state.firstName}
-        </div>
-        <div className="tableitem__name">
-          {this.state.lastName}
+          {this.state.firstName}  {this.state.lastName}
         </div>
         <div className="tableitem__name">
           {this.state.email}
         </div>
-        <div className="tableitem__mascot">
-          {this.state.hasSignedUp}
-        </div>
         <Glyphicon
           glyph="trash"
-          onClick={() => this.deleteHouse(this.state.id)}
+          onClick={() => this.deleteTeacher(this.state.id)}
         />
       </div>
     );

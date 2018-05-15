@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Button } from 'react-bootstrap';
-import { changeSettings } from '../../actions';
+import { createTeacher } from '../../actions';
 import backgroundimage from '../../static/trophy.png';
 
-class Settings extends Component {
+class Teachersignup extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -14,6 +14,10 @@ class Settings extends Component {
       error: undefined,
       teacherSignUpsuccess  : false,
     };
+  }
+  componentDidMount() {
+    const token = this.props.location.search.substr(1);
+    localStorage.setItem('token', token);
   }
   componentWillReceiveProps(props) {
     this.setState({
@@ -28,9 +32,9 @@ class Settings extends Component {
       [type]: e.target.value,
     });
   };
-  changeSettings = async (e) => {
+  createTeacher = async (e) => {
     e.preventDefault();
-    await this.props.changeSettings(this.state, this.props.history);
+    await this.props.createTeacher(this.state, this.props.history);
     this.setState({
       email: '',
       password: '',
@@ -43,14 +47,6 @@ class Settings extends Component {
     if (!this.state.error) return null;
     return <p style={{ color: '#337ab7' }}>{this.state.error}</p>;
   }
-  renderteacherSignupSuccess() {
-    if (!this.state.settingsChanged) return null;
-    return (
-      <p style={{ color: '#337ab7' }}>
-        Settings have been changed successfully.
-      </p>
-    );
-  }
   render() {
     return (
       <div>
@@ -58,11 +54,10 @@ class Settings extends Component {
           <div className="Auth__Body__Imageholder" />
           <div className="Auth__Body__Container" style={{ marginTop: '80px' }}>
             {this.renderAlert()}
-            {this.renderSettingsChangeSuccess()}
-            <form onSubmit={this.changeSettings}>
-              <label>Email</label>
+            <form onSubmit={this.createTeacher}>
+              <label>Username</label>
               <input
-                onChange={e => this.handleInput(e, 'email')}
+                onChange={e => this.handleInput(e, 'username')}
                 value={this.state.email}
                 type="text"
               />
@@ -103,4 +98,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { changeSettings })(Settings);
+export default connect(mapStateToProps, { createTeacher })(Teachersignup);

@@ -103,7 +103,7 @@ class Houses extends Component {
           {this.state.houses.map((house) => {
             return (
               <House
-                key={house}
+                key={house._id}
                 id={house._id}
                 name={house.name}
                 color={house.color}

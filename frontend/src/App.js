@@ -16,10 +16,9 @@ import Footer from './components/Footer/Footer';
 // Views for Authentication
 import Forgotpassword from './components/Auth/Forgotpassword';
 import Resetpassword from './components/Auth/Reset';
+import Teachersignup from './components/Auth/Teachersignup';
 import Signin from './components/Auth/Signin';
 import Signup from './components/Auth/Signup';
-// Views SchoolAdmin
-import SchoolAdmin from './components/SchoolAdmin/SchoolAdmin';
 // General View Pages
 import Landing from './components/Landing/Landing';
 import Pricing from './components/Pricing/Pricing';
@@ -58,7 +57,7 @@ class App extends Component {
               <PublicAuthRoute path="/reset" component={Resetpassword} />
               <Route exact path="/scoreboard/:schoolId" component={PublicScoreboard} />
               <Route exact path="/search-schools" component={SchoolSearch} />
-              <Route exact path="/schooladmin" component={SchoolAdmin} />
+              <Route path="/teachersignup" component={Teachersignup} />
               <PrivateRoute
                 exact
                 path="/(dashboard|schools|houses|teachers|scoreboard|settings)"

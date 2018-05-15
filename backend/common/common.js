@@ -17,4 +17,12 @@ const authenticate = (req, res, next) => {
   }
 };
 
-module.exports = { authenticate };
+const getUserRoles = async (req, res) => {
+  const { isAdmin, isTeacher, isSuperAdmin } = req.decoded;
+  return res.status(200).json({ isAdmin, isTeacher, isSuperAdmin });
+};
+
+module.exports = {
+  authenticate,
+  getUserRoles,
+};

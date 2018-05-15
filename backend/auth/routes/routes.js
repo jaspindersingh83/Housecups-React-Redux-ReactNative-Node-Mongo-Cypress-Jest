@@ -5,13 +5,11 @@ const {
   validatePasswords,
   validateUsername,
 } = require('../middleware/middleware');
-const { authenticate } = require('../../common/common');
+const { authenticate, getUserRoles } = require('../../common/common');
 
 const {
   createUser,
-  getUsers,
   signin,
-  ifAdmin,
   signout,
   forgotPassword,
   sendResetEmailAndRedirect,
@@ -52,5 +50,11 @@ module.exports = (server) => {
       hashPassword,
       updateUserPassword,
       sendResetPasswordEmail,
+    );
+  server
+    .route('/getuserroles')
+    .get(
+      authenticate,
+      getUserRoles,
     );
 };

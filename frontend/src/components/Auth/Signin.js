@@ -69,6 +69,14 @@ class Signin extends Component {
       </p>
     );
   };
+  renderteacherSignupSuccess() {
+    if (!this.props.teacherSignup) return null;
+    return (
+      <p style={{ color: '#337ab7' }}>
+        You have been signed up as a Teacher, Please Sign in
+      </p>
+    );
+  }
 
   render() {
     return (
@@ -80,6 +88,7 @@ class Signin extends Component {
             {this.renderAlert()}
             {this.renderSignupSuccess()}
             {this.renderResetPasswordSuccess()}
+            {this.renderteacherSignupSuccess()}
             <form onSubmit={this.signin}>
               <label>Username or Email</label>
               <input
@@ -131,6 +140,7 @@ const mapStateToProps = (state) => {
     error: state.auth.error,
     signedUpusername: state.auth.signedUpusername,
     resetPassword: state.auth.resetPassword,
+    teacherSignup: state.auth.teacherSignup,
   };
 };
 

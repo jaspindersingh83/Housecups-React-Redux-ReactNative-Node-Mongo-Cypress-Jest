@@ -188,13 +188,14 @@ export const addHouse = async (house, history) => {
   const apiurl = `${ROOT_URL}/api/house`;
   try {
     const token = localStorage.getItem('token');
-    await axios.post(apiurl, house, {
+    const addHouseRequest = await axios.post(apiurl, house, {
       headers: {
         Authorization: token,
       },
     });
     return {
       type: ADDHOUSE,
+      payload: addHouseRequest,
     };
   } catch (error) {
     history.push('/signin');

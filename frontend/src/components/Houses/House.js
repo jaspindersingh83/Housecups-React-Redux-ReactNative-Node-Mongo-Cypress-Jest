@@ -46,7 +46,8 @@ class House extends Component {
   deleteHouse = async (id) => {
     await this.props.deleteHouse(id, this.props.history);
   }
-  updateHouse = async () => {
+  updateHouse = async (e) => {
+    e.preventDefault();
     await this.props.updateHouse(this.state, this.props.history);
   }
   render() {
@@ -60,7 +61,7 @@ class House extends Component {
     return (
       <div>
         {updating ? (
-          <form className="tableitem" onSubmit={() => this.updateHouse(this.state.id)}>
+          <form className="tableitem" onSubmit={(e) => this.updateHouse(e)}>
             <input
               style={{ width: '40%', fontSize: '14px', height: '60%', marginRight: '20px' }}
               onChange={e => this.handleInput(e, 'name')}

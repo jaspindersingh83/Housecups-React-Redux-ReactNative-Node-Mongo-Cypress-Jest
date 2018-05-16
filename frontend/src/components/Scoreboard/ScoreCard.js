@@ -1,12 +1,25 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { getUserRoles } from '../../actions';
 
 class ScoreCard extends Component {
 
-  componentDidMount() {
-    // Initialize
-    // this.changeScore(0);
+  constructor(props) {
+    super(props);
+    this.state = {
+      auth: {},
+    };
+  }
+
+  async componentWillMount() {
+    await this.props.getUserRoles(this.props.history);
+  }
+
+  async componentWillReceiveProps(props) {
+    await this.setState({
+      auth: {...props.auth},
+    });
   }
 
   increaseScore = () => {
@@ -62,10 +75,6 @@ class ScoreCard extends Component {
   }
 
   render() {
-    const token = localStorage.getItem('token');
-    const isAuthorized = !!token;
-    const isPublicScoreBoard = this.props.public;
-
     const { house } = this.props;
     const fontStyleGenerated = this.getFontColor(house.color);
     const styles = {
@@ -84,7 +93,7 @@ class ScoreCard extends Component {
         </div>
         <div className="ScoreCard__actions">
           {
-            (isAuthorized && !isPublicScoreBoard) ? (
+            (this.props.auth.isTeacher) ? (
               <button
                 className="ScoreCard__button ScoreCard__button--decrement"
                 onClick={() => this.decreaseScore()}
@@ -93,7 +102,7 @@ class ScoreCard extends Component {
           }
           <div className="ScoreCard__score">{house.score}</div>
           {
-            (isAuthorized && !isPublicScoreBoard) ? (
+            (this.props.auth.isTeacher) ? (
               <button
                 className="ScoreCard__button ScoreCard__button--increment"
                 onClick={() => this.increaseScore()}
@@ -111,4 +120,4 @@ const mapStateToProps = (state) => {
   return state;
 };
 
-export default withRouter(connect(mapStateToProps, { })(ScoreCard));
+export default withRouter(connect(mapStateToProps, { getUserRoles })(ScoreCard));

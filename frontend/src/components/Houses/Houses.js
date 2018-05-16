@@ -23,7 +23,7 @@ class Houses extends Component {
 
   async componentWillReceiveProps(props) {
     await this.setState({
-      houses: props.houses,
+      houses: [...props.houses],
     });
   }
   handleInput = async (e, type) => {
@@ -43,7 +43,8 @@ class Houses extends Component {
   handleChange = async (color) => {
     await this.setState({ color: color.hex });
   };
-  addHouse = async () => {
+  addHouse = async (e) => {
+    e.preventDefault();
     const house = {
       name: this.state.newHouseName,
       color: this.state.color,
@@ -63,7 +64,7 @@ class Houses extends Component {
         <h4 style={{ marginBottom: '40px', marginLeft: '30px' }}>
           Add Houses
         </h4>
-        <form className="addentry" onSubmit={() => this.addHouse()}>
+        <form className="addentry" onSubmit={(e) => this.addHouse(e)}>
           <input
             onChange={e => this.handleInput(e, 'newHouseName')}
             style={{

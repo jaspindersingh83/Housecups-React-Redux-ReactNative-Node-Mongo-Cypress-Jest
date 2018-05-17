@@ -23,7 +23,9 @@ class Header extends Component {
       '/dashboard',
       '/schools',
       '/houses',
+      '/houses/create',
       '/teachers',
+      '/teachers/create',
       '/scoreboard',
       '/settings',
     ];
@@ -31,6 +33,8 @@ class Header extends Component {
       '',
       'Create Schools',
       'Manage Houses',
+      'Manage Houses',
+      'Manage Teachers',
       'Manage Teachers',
       'Current Scores',
       'Settings',

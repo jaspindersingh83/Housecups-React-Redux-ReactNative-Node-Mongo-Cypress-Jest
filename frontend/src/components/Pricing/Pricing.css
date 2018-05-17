@@ -2,8 +2,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
-  max-height: 640px;
+  height: 100vh;
+  min-height: 640px;
+  max-height: 800px;
 }
 .Pricing > .wrapper {
   flex-basis: 100%;

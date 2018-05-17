@@ -93,3 +93,56 @@ button.btn-primary:focus {
   background-image: none;
   background-color: blue;
 }
+
+.Table {
+  max-width: 800px;
+  margin: 0px auto;
+}
+.Table__title {
+  margin-bottom: 25px;
+}
+.Table__row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 18px;
+  font-weight: 500;
+  min-height: 50px;
+  padding: 0px 0px 0px 15px;
+}
+.Table__row:not(.Table__row--head):nth-child(odd) {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+.Table__row--head {
+  font-size: 14px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.Table__column {
+  flex-basis: calc(50% - 10px);
+}
+.Table__column--action {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-basis: 75px;
+  height: 50px;
+  cursor: pointer;
+  transition: all 0.25s ease-in-out 0s;
+}
+.Table__column--action-edit:hover {
+  color: #fff;
+  background-color: blue;
+}
+.Table__column--action-delete:hover {
+  color: #fff;
+  background-color: red;
+}
+.Table__column--action-confirm {
+  flex-basis: 140px;
+  margin-left: 10px;
+}
+.Table__column--color-swatch {
+  flex-basis: 100px;
+}

@@ -11,13 +11,23 @@ class SchoolInfoOverview extends Component {
     this.state = {
       houses: [],
       teachers: [],
+      auth: props.auth,
     };
     console.log(props);
   }
 
   async componentWillMount() {
-    await this.props.getHousesBySchool(this.props.history);
-    await this.props.getTeachers(this.props.history);
+    const { isSuperAdmin, isSchoolAdmin, isTeacher } = this.state.auth;
+    if (isSchoolAdmin === false) {
+      if (isTeacher) {
+        this.props.history.push('/scoreboard');
+      } else if (isSuperAdmin) {
+        // Implement SUPERADMIN redirection
+      }
+    } else {
+      await this.props.getHousesBySchool(this.props.history);
+      await this.props.getTeachers(this.props.history);
+    }
   }
 
   componentWillReceiveProps(props) {

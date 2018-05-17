@@ -24,23 +24,13 @@ class AccountOverview extends Component {
   }
 
   render() {
-    const { isSuperAdmin, isSchoolAdmin, isTeacher } = this.state.auth;
-    if (isSuperAdmin !== undefined) {
-      if (!isSuperAdmin && !isSchoolAdmin && !isTeacher) {
-        this.props.history.push('/schools');
-      } else if (!isSuperAdmin && !isSchoolAdmin && isTeacher) {
-        this.props.history.push('/scoreboard');
-      }
-    }
     return (
       <div className="Overview">
         <div className="User">
           <div className="User__name">John Doe</div>
           <div className="User__role">Admin</div>
         </div>
-        {
-          (this.state.auth.isSchoolAdmin) ? <SchoolInfoOverview /> : null
-        }
+        <SchoolInfoOverview auth={this.state.auth} />
       </div>
     );
   }

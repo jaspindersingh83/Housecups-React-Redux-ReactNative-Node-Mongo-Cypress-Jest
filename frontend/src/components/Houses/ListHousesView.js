@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
-import { withRouter, Link } from 'react-router-dom';
+import { withRouter, Redirect, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getHousesBySchool } from '../../actions';
 import ListHouses from './components/ListHouses/ListHouses';
 import './ListHousesView.css';
+import { stat } from 'fs';
 
 class ListHousesView extends Component {
   constructor(props) {
     super(props);
     this.state = {
       houses: [],
+      getHousesResolved: false,
     };
   }
 
@@ -20,13 +22,27 @@ class ListHousesView extends Component {
   componentWillReceiveProps(props) {
     this.setState({
       houses: [...props.houses],
+      getHousesResolved: props.houses !== undefined,
     });
   }
 
   render() {
     return (
       <div className="ListHousesView">
-        <ListHouses houses={this.state.houses} />
+        {
+          (this.state.getHousesResolved) ?
+            (
+              (this.state.houses.length > 0) ?
+                <ListHouses houses={this.state.houses} /> :
+                <Redirect to={{
+                    pathname: '/houses/create',
+                    state: {
+                      message: 'You don\'t have any houses yet, create one below.',
+                    },
+                  }} 
+                /> 
+            ): null
+        }
         <Link to="/houses/create">
           <button>Add New House</button>
         </Link>
@@ -36,9 +52,7 @@ class ListHousesView extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return {
-    houses: state.houses,
-  };
+  return state;
 };
 
 export default withRouter(connect(mapStateToProps, { getHousesBySchool })(ListHousesView));

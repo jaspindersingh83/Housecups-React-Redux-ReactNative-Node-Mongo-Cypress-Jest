@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { withRouter, Link } from 'react-router-dom';
+import { withRouter, Redirect, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getTeachers } from '../../actions';
 import ListTeachers from './components/ListTeachers/ListTeachers';
@@ -11,6 +11,7 @@ class ListTeachersView extends Component {
     super(props);
     this.state = {
       teachers: [],
+      getTeachersResolved: false,
     };
   }
 
@@ -21,13 +22,27 @@ class ListTeachersView extends Component {
   componentWillReceiveProps(props) {
     this.setState({
       teachers: [...props.teachers],
+      getTeachersResolved: props.teachers !== undefined,
     });
   }
 
   render() {
     return (
       <div className="ListTeachersView">
-        <ListTeachers teachers={this.state.teachers} />
+        {
+          (this.state.getTeachersResolved) ?
+            (
+              (this.state.teachers !== null && this.state.teachers.length > 0) ?
+              <ListTeachers teachers={this.state.teachers} /> :
+              <Redirect to={{
+                  pathname: '/teachers/create',
+                  state: {
+                    message: 'You haven\'t added any teachers yet, add one below.',
+                  },
+                }}
+              />
+            ) : null
+        }
         <Link to="/teachers/create">
           <button>Add New Teacher</button>
         </Link>

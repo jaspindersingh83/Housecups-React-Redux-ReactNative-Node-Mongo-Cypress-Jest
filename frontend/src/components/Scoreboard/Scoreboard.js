@@ -1,27 +1,32 @@
 /* eslint-disable */
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import Socket from 'socket.io-client';
 import { connect } from 'react-redux';
-import { getHousesBySchool } from '../../actions';
+import { getUserRoles, getHousesBySchool } from '../../actions';
 import './Scoreboard.css';
 import ScoreCard from './ScoreCard';
+import DashboardNotification from '../DashboardNotification/DashboardNotification';
 
 class Scoreboard extends Component {
   constructor(props) {
     super(props);
     this.state = {
       houses: [],
+      auth: {},
     };
     this.initializeSocket();
   }
 
-  componentWillMount() {
-    this.getHouses();
+  async componentWillMount() {
+    await this.props.getUserRoles(this.props.history);
+    await this.getHouses();
   }
 
   async componentWillReceiveProps(props) {
     await this.setState({
       houses: [...props.houses],
+      auth: {...props.auth},
     });
   }
 
@@ -42,9 +47,30 @@ class Scoreboard extends Component {
     });
   }
 
+  renderNoHouseNotification = () => {
+    const { isSuperAdmin, isSchoolAdmin, isTeacher } = this.state.auth;
+    let notification = null;
+    if (isTeacher === true) {
+      notification = (
+        <DashboardNotification type="info">
+          Scores are not available at the moment.<br />
+          Please contact your school admin.
+        </DashboardNotification>
+      );
+    } else if (isSchoolAdmin === true) {
+      notification = (
+        <DashboardNotification type="info">
+          Please create houses first, before accessing scoreboard.
+        </DashboardNotification>
+      );
+    }
+    return notification;
+  }
+
   render() {
     return (
       <div className="Scoreboard">
+        {this.renderNoHouseNotification()}
         <div className="Scoreboard__cards">
           {
             this.state.houses.map((house, index) => {
@@ -62,4 +88,4 @@ const mapStateToProps = (state) => {
   return state;
 };
 
-export default connect(mapStateToProps, { getHousesBySchool })(Scoreboard);
+export default withRouter(connect(mapStateToProps, { getUserRoles, getHousesBySchool })(Scoreboard));

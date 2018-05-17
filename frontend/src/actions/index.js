@@ -226,7 +226,9 @@ export const updateHouse = async (house, history) => {
   const apiurl = `${ROOT_URL}/api/house/${house.id}`;
   try {
     const token = localStorage.getItem('token');
+
     const updateHouseRequest = await axios.put(apiurl, house, {
+    // await axios.put(apiurl, house, {
       headers: {
         Authorization: token,
       },

@@ -1,37 +1,36 @@
 import React, { Component } from 'react';
+import { withRouter, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { getUserRoles, getTeachers } from '../../actions';
-import CreateTeacher from './components/CreateTeacher/CreateTeacher';
-import Teacher from './components/Teacher/Teacher';
+import { getTeachers } from '../../actions';
 import ListTeachers from './components/ListTeachers/ListTeachers';
+import './ListTeachersView.css';
 
-class Teachers extends Component {
+class ListTeachersView extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      auth: {},
-      teachers: []
+      teachers: [],
     };
   }
 
   async componentWillMount() {
-    await this.props.getUserRoles(this.props.history);
     await this.props.getTeachers(this.props.history);
   }
 
   componentWillReceiveProps(props) {
     this.setState({
-      auth: { ...props.auth },
       teachers: [...props.teachers],
     });
   }
 
   render() {
     return (
-      <div className="Teachers">
-        <CreateTeacher />
+      <div className="ListTeachersView">
         <ListTeachers teachers={this.state.teachers} />
+        <Link to="/teachers/create">
+          <button>Add New Teacher</button>
+        </Link>
       </div>
     );
   }
@@ -42,4 +41,4 @@ const mapStateToProps = (state) => {
   return state;
 };
 
-export default connect(mapStateToProps, { getUserRoles, getTeachers })(Teachers);
+export default withRouter(connect(mapStateToProps, { getTeachers })(ListTeachersView));

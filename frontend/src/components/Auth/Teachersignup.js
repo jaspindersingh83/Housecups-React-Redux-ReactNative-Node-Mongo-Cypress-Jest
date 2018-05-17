@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Button } from 'react-bootstrap';
 import { createTeacher } from '../../actions';
 import backgroundimage from '../../static/trophy.png';
 
@@ -55,31 +54,35 @@ class Teachersignup extends Component {
           <div className="Auth__Body__Container" style={{ marginTop: '80px' }}>
             {this.renderAlert()}
             <form onSubmit={this.createTeacher}>
-              <label>Username</label>
+              <label htmlFor="TeacherSignUpForm__Email">Username</label>
               <input
+                id="TeacherSignUpForm__Email"
                 onChange={e => this.handleInput(e, 'username')}
                 value={this.state.email}
                 type="text"
               />
-              <label>New Password</label>
+              <label htmlFor="TeacherSignUpForm__Password">New Password</label>
               <input
+                id="TeacherSignUpForm__Password"
                 onChange={e => this.handleInput(e, 'password')}
                 value={this.state.password}
                 type="password"
               />
-              <label>Confirm New Password</label>
+              <label htmlFor="TeacherSignUpForm__ConfirmPassword">Confirm New Password</label>
               <input
+                id="TeacherSignUpForm__ConfirmPassword"
                 onChange={e => this.handleInput(e, 'confirmPassword')}
                 value={this.state.confirmPassword}
                 type="password"
               />
-              <Button
-                style={{ width: '100%', margin: '20px 0px' }}
-                bsStyle="primary"
+              <button
+                style={{
+                  marginTop: 20,
+                }}
                 type="submit"
               >
                 Submit
-              </Button>
+              </button>
             </form>
           </div>
           <div className="Auth__Body__Imageholder">

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Button } from 'react-bootstrap';
 import './Auth.css';
 import { changeSettings } from '../../actions';
 import backgroundimage from '../../static/trophy.png';
@@ -61,31 +60,35 @@ class Settings extends Component {
             {this.renderAlert()}
             {this.renderSettingsChangeSuccess()}
             <form onSubmit={this.changeSettings}>
-              <label>Email</label>
+              <label htmlFor="SettingsForm__Email">Email</label>
               <input
+                id="SettingsForm__Email"
                 onChange={e => this.handleInput(e, 'email')}
                 value={this.state.email}
                 type="text"
               />
-              <label>New Password</label>
+              <label htmlFor="SettingsForm__Password">New Password</label>
               <input
+                id="SettingsForm__Password"
                 onChange={e => this.handleInput(e, 'password')}
                 value={this.state.password}
                 type="password"
               />
-              <label>Confirm New Password</label>
+              <label htmlFor="SettingsForm__ConfirmPassword">Confirm New Password</label>
               <input
+                id="SettingsForm__ConfirmPassword"
                 onChange={e => this.handleInput(e, 'confirmPassword')}
                 value={this.state.confirmPassword}
                 type="password"
               />
-              <Button
-                style={{ width: '100%', margin: '20px 0px' }}
-                bsStyle="primary"
+              <button 
                 type="submit"
+                style={{
+                  marginTop: 20,
+                }}
               >
-                Submit
-              </Button>
+              Submit
+              </button>
             </form>
           </div>
           <div className="Auth__Body__Imageholder">

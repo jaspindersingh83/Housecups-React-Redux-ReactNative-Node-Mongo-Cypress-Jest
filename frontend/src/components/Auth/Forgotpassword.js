@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import './Auth.css';
 import { forgotPassword } from '../../actions';
@@ -61,19 +60,14 @@ class Fogotpassword extends Component {
             {this.renderAlert()}
             {this.renderEmailSuccess()}
             <form onSubmit={this.forgotPassword}>
-              <label>Email</label>
+              <label htmlFor="ForgotPassword__Email">Email</label>
               <input
+                id="ForgotPassword__Email"
                 onChange={this.handleInput}
                 value={this.state.email}
                 type="text"
               />
-              <Button
-                style={{ width: '100%', margin: '20px 0px' }}
-                bsStyle="primary"
-                type="submit"
-              >
-                Submit
-              </Button>
+              <button type="submit">Submit</button>
             </form>
             <p>
               New to Housecups?

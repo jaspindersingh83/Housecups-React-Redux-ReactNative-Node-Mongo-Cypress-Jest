@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import './Auth.css';
 import { signin } from '../../actions';
@@ -90,14 +89,16 @@ class Signin extends Component {
             {this.renderResetPasswordSuccess()}
             {this.renderteacherSignupSuccess()}
             <form onSubmit={this.signin}>
-              <label>Username or Email</label>
+              <label htmlFor="SignInForm__Username">Username or Email</label>
               <input
+                id="SignInForm__Username"
                 onChange={this.handleUsernameInput}
                 value={this.state.username}
                 type="text"
               />
-              <label>Password</label>
+              <label htmlFor="SignInForm__Password">Password</label>
               <input
+                id="SignInForm__Password"
                 onChange={this.handlePasswordInput}
                 value={this.state.password}
                 type="password"
@@ -107,13 +108,14 @@ class Signin extends Component {
                   Forgot username or password?
                 </Link>
               </p>
-              <Button
-                style={{ width: '100%', margin: '20px 0px' }}
-                bsStyle="primary"
+              <button
+                style={{
+                  marginTop: 20,
+                }}
                 type="submit"
               >
                 Sign In
-              </Button>
+              </button>
             </form>
             <p>
               New to Housecups?

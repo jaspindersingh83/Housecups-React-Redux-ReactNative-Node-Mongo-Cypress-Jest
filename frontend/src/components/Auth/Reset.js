@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import backgroundimage from '../../static/trophy.png';
 import { resetPassword } from '../../actions';
@@ -54,25 +53,21 @@ class Resetpassword extends Component {
             <h1 style={{ marginBottom: '20px' }}>Reset Password</h1>
             {this.renderAlert()}
             <form onSubmit={this.resetPassword}>
-              <label>New Password</label>
+              <label htmlFor="ResetForm__Password">New Password</label>
               <input
+                id="ResetForm__Password"
                 onChange={e => this.handleInput(e, 'password')}
                 value={this.state.password}
                 type="password"
               />
-              <label>Confirm Password</label>
+              <label htmlFor="ResetForm__ConfirmPassword">Confirm Password</label>
               <input
+                id="ResetForm__ConfirmPassword"
                 onChange={e => this.handleInput(e, 'confirmPassword')}
                 value={this.state.confirmPassword}
                 type="password"
               />
-              <Button
-                style={{ width: '100%', margin: '20px 0px' }}
-                bsStyle="primary"
-                type="submit"
-              >
-                Submit
-              </Button>
+              <button type="submit">Submit</button>
             </form>
             <p>
               New to Litchi?

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import './Auth.css';
 import { createUser } from '../../actions';
@@ -51,37 +50,42 @@ class Signup extends Component {
             <h1 style={{ marginBottom: '20px' }}>Sign up</h1>
             {this.renderAlert()}
             <form onSubmit={this.signup}>
-              <label>Username</label>
+              <label htmlFor="SignUpForm__Username">Username</label>
               <input
+                id="SignUpForm__Username"
                 onChange={e => this.handleInput(e, 'username')}
                 value={this.state.username}
                 type="text"
               />
-              <label>Password</label>
+              <label htmlFor="SignUpForm__Password">Password</label>
               <input
+                id="SignUpForm__Password"
                 onChange={e => this.handleInput(e, 'password')}
                 value={this.state.password}
                 type="password"
               />
-              <label>Confirm Password</label>
+              <label htmlFor="SignUpForm__ConfirmPassword">Confirm Password</label>
               <input
+                id="SignUpForm__ConfirmPassword"
                 onChange={e => this.handleInput(e, 'confirmPassword')}
                 value={this.state.confirmPassword}
                 type="password"
               />
-              <label>Email</label>
+              <label htmlFor="SignUpForm__Email">Email</label>
               <input
+                id="SignUpForm__Email"
                 onChange={e => this.handleInput(e, 'email')}
                 value={this.state.email}
                 type="text"
               />
-              <Button
-                style={{ width: '100%', margin: '20px 0px' }}
-                bsStyle="primary"
+              <button
+                style={{
+                  marginTop: 20,
+                }}
                 type="submit"
               >
                 Sign Up
-              </Button>
+              </button>
             </form>
             <p>
               Already have an account?

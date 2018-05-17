@@ -18,6 +18,7 @@
   position: relative;
   width: calc(100% - 360px);
   margin-left: 360px;
+  padding: 50px;
 }
 
 .Sidebar__navigation {

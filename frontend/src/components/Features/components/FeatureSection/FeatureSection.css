@@ -1,0 +1,57 @@
+.FeatureSection {
+
+}
+.FeatureSection > .wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 1200px;
+  height: 100vh;
+  min-height: 500px;
+  max-height: 640px;
+  margin: 50px auto;
+}
+.FeatureSection:nth-child(odd) {
+  background-color: rgb(241, 242, 245);
+}
+.FeatureSection:nth-child(odd) > .wrapper {
+  flex-direction: row-reverse;
+}
+.FeatureSection__column {
+  display: flex;
+  justify-content: flex-start;
+  flex-basis: 50%;
+}
+.FeatureSection:nth-child(odd) .FeatureSection__column {
+  justify-content: flex-end;
+}
+.FeatureSection__text {
+  max-width: 480px;
+}
+.FeatureSection__text > h3 {
+  margin-bottom: 25px;
+}
+.FeatureSection__text > p {
+  font-weight: 500;
+  line-height: 32px;
+}
+.FeatureSection__column__image {
+  width: 100%;
+  height: 100px;
+  min-height: 480px;
+  background-size: cover;
+  background-position: top left;
+  background-repeat: no-repeat;
+}
+.FeatureSection__column__image[data-feature-name="multiple-houses"] {
+  background-image: url('../../../../static/placeholder-image.png');
+}
+.FeatureSection__column__image[data-feature-name="realtime-updates"] {
+  background-image: url('../../../../static/placeholder-image.png');
+}
+.FeatureSection__column__image[data-feature-name="public-scoreboard"] {
+  background-image: url('../../../../static/placeholder-image.png');
+}
+.FeatureSection__column__image[data-feature-name="cross-device"] {
+  background-image: url('../../../../static/placeholder-image.png');
+}

@@ -37,6 +37,7 @@ const deleteHouse = async (req, res) => {
 // get all Houses //use populate for having one network call.
 const getHouseBySchool = async (req, res) => {
   const { schoolID } = req.decoded;
+  console.log(schoolID);
   try {
     const school = await School.findById(schoolID).populate('houses');
     const { houses } = school;

@@ -7,6 +7,10 @@ class Section extends Component {
     return (
       <section { ...this.props } >
         <div className="wrapper">
+          {
+            (!this.props.heading) ? null
+            : <h2>{ this.props.heading }</h2> 
+          }
           {this.props.children}
         </div>
       </section>

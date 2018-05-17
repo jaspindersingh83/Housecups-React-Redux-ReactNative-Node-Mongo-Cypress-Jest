@@ -39,7 +39,22 @@ const getAllSchools = async (req, res) => {
   }
 };
 
+// Search Schools based on name and location in a JSON query
+// Used on path /search-schools
+const searchSchools = async (req, res) => {
+  const { name, location } = req.query;
+  try {
+    const nameQuery = { name: new RegExp(name, 'gi') };
+    const locationQuery = { location: new RegExp(location, 'gi') };
+    const schools = await School.where(nameQuery).where(locationQuery);
+    res.status(200).json(schools);
+  } catch (error) {
+    res.status(500).json({ message: 'No matching Schools in db presently', error });
+  }
+};
+
 module.exports = {
   addSchool,
   getAllSchools,
+  searchSchools,
 };

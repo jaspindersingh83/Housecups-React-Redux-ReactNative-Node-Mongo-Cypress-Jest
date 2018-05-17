@@ -2,9 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { Glyphicon } from 'react-bootstrap';
-import { deleteTeacher } from '../../actions';
+import { deleteTeacher } from '../../../../actions';
+import './Teacher.css';
 
 class Teacher extends Component {
+
   constructor(props) {
     super(props);
     this.state = {
@@ -14,22 +16,26 @@ class Teacher extends Component {
       email: props.email,
     };
   }
+
   deleteTeacher = async (id) => {
     await this.props.deleteTeacher(id, this.props.history);
   }
+
   render() {
     return (
-      <div className="tableitem" >
-        <div className="tableitem__name">
-          {this.state.firstName}  {this.state.lastName}
+      <div className="Table__row Teacher" >
+        <div className="Table__column">
+          {this.state.firstName} {this.state.lastName}
         </div>
-        <div className="tableitem__name">
+        <div className="Table__column">
           {this.state.email}
         </div>
-        <Glyphicon
-          glyph="trash"
-          onClick={() => this.deleteTeacher(this.state.id)}
-        />
+        <div className="Table__column Table__column--action Table__column--action-delete">
+          <Glyphicon
+            glyph="trash"
+            onClick={() => this.deleteTeacher(this.state.id)}
+          />
+        </div>
       </div>
     );
   }

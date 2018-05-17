@@ -12,14 +12,23 @@ class Sidebar extends Component {
 
           <nav className="Sidebar__navigation">
             <ul>
+              <Link to="/dashboard">
+                <li data-selected={ new RegExp(/^\/dashboard/gi).test(pathname) }>Summary</li>
+              </Link>
               <Link to="/schools">
-                <li data-selected={ pathname === '/schools' }>Schools</li>
+                <li data-selected={ pathname === '/schools' }>Create School</li>
+              </Link>
+              <Link to="/houses">
+                <li data-selected={ new RegExp(/^\/houses/gi).test(pathname) }>Manage Houses</li>
+              </Link>
+              <Link to="/teachers">
+                <li data-selected={ new RegExp(/^\/teachers/gi).test(pathname) }>Manage Teachers</li>
               </Link>
               <Link to="/scoreboard">
                 <li data-selected={ pathname === '/scoreboard' }>Score Board</li>
               </Link>
               <Link to="/settings">
-                <li data-selected={ pathname === '/settings' }>Settings</li>
+                <li data-selected={ pathname === '/settings' }>User Settings</li>
               </Link>
             </ul>
           </nav>

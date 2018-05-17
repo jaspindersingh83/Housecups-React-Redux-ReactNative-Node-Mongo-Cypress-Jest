@@ -1,13 +1,19 @@
 import React, { Component } from 'react';
 import { withRouter, Switch, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { getUserRoles } from '../../actions';
 import './Dashboard.css';
 import AccountOverview from '../AccountOverview/AccountOverview';
-import Schools from '../Schools/Schools';
 import Scoreboard from '../Scoreboard/Scoreboard';
 import Settings from '../Auth/Settings';
 import Sidebar from '../Sidebar/Sidebar';
-import { getUserRoles } from '../../actions';
+import Houses from '../Houses/Houses';
+import Schools from '../Schools/Schools';
+import Teachers from '../Teachers/Teachers';
+import CreateTeacherView from '../Teachers/CreateTeacherView';
+import ListTeachersView from '../Teachers/ListTeachersView';
+import CreateHouseView from '../Houses/CreateHouseView';
+import ListHousesView from '../Houses/ListHousesView';
 
 class Dashboard extends Component {
 
@@ -22,6 +28,10 @@ class Dashboard extends Component {
           <Switch>
             <Route exact path="/dashboard" component={AccountOverview} />
             <Route exact path="/schools" component={Schools} />
+            <Route exact path="/houses/create" component={CreateHouseView} />
+            <Route exact path="/houses" component={ListHousesView} />
+            <Route exact path="/teachers/create" component={CreateTeacherView} />
+            <Route exact path="/teachers" component={ListTeachersView} />
             <Route exact path="/scoreboard" component={Scoreboard} />
             <Route exact path="/settings" component={Settings} />
           </Switch>

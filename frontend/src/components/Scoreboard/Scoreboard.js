@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import Socket from 'socket.io-client';
 import { connect } from 'react-redux';
 import { getHousesBySchool } from '../../actions';
-import { updateScore } from '../../actions/index.ws';
 import './Scoreboard.css';
 import ScoreCard from './ScoreCard';
 
@@ -16,8 +15,8 @@ class Scoreboard extends Component {
     this.initializeSocket();
   }
 
-  async componentWillMount() {
-    await this.props.getHousesBySchool(this.props.history);
+  componentWillMount() {
+    this.getHouses();
   }
 
   async componentWillReceiveProps(props) {
@@ -26,12 +25,16 @@ class Scoreboard extends Component {
     });
   }
 
+  getHouses = async () => {
+    await this.props.getHousesBySchool(this.props.history);
+  }
+
   initializeSocket = () => {
     // Initialize Socket
     this.socket = Socket('http://127.0.0.1:5000');
     // Receives Response after the update
     this.socket.on('updateScoreResponse', (response) => {
-      this.props.updateScore(response);
+      this.getHouses();
     });
     // Error Handling
     this.socket.on('error', (data) => {
@@ -42,11 +45,13 @@ class Scoreboard extends Component {
   render() {
     return (
       <div className="Scoreboard">
-        {
-          this.state.houses.map((house, index) => {
-            return <ScoreCard key={house._id} house={house} socket={this.socket} />;
-          })
-        }
+        <div className="Scoreboard__cards">
+          {
+            this.state.houses.map((house, index) => {
+              return <ScoreCard key={house._id} house={house} socket={this.socket} />;
+            })
+          }
+        </div>
       </div>
     );
   }
@@ -57,4 +62,4 @@ const mapStateToProps = (state) => {
   return state;
 };
 
-export default connect(mapStateToProps, { getHousesBySchool, updateScore })(Scoreboard);
+export default connect(mapStateToProps, { getHousesBySchool })(Scoreboard);

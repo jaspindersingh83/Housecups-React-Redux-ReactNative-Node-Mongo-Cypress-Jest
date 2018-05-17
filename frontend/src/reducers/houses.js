@@ -3,7 +3,6 @@ import {
   UPDATEHOUSE,
   GETHOUSES,
   DELETEHOUSE,
-  UPDATESCORE,
 } from '../actions/index';
 
 const housesReducer = (houses = [], action) => {
@@ -13,11 +12,13 @@ const housesReducer = (houses = [], action) => {
     case ADDHOUSE:
       return [...houses, action.payload.data];
     case UPDATEHOUSE:
-      return [...houses, action.payload.data];
+      return houses.map((house) => {
+        return (house._id === action.payload.data.house._id) ? action.payload.data.house : house;
+      });
     case GETHOUSES:
       return [...action.payload.data];
     case DELETEHOUSE:
-      return houses.filter(house => house !== action.payload.data.removedHouse._id);
+      return houses.filter(house => house._id !== action.payload.data.removedHouse._id);
     default:
       return houses;
   }

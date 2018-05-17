@@ -1,20 +1,28 @@
-/* Score Model not created */
 const House = require('../../houses/models/HouseModel');
+const School = require('../../schools/models/SchoolModel');
 const moment = require('moment');
 
 const updateScore = async (data, io) => {
   const { _id, scoreChange } = data;
   let response = null;
   try {
-    const house = await House.findById(_id);
-    const newUpdate = {
-      score: house.score + scoreChange,
+    const updateQuery = {
+      $inc: {
+        score: scoreChange,
+      },
       updatedAt: moment(),
     };
-    const updatedHouse = await House.findByIdAndUpdate(_id, newUpdate, { new: true });
+    const house = await House.findByIdAndUpdate(_id, updateQuery, { new: true });
+    const { schoolID } = house;
+    const school = await School.findById(schoolID).populate('houses');
+    const houses = school.houses.sort((a, b) => (b.score - a.score));
+    await School.findOneAndUpdate(
+      { _id: schoolID },
+      { houses },
+    );
     response = {
       message: 'Score has been updated!',
-      house: updatedHouse,
+      house,
     };
   } catch (error) {
     response = {

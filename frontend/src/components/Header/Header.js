@@ -22,8 +22,21 @@ class Header extends Component {
       '/dashboard',
       '/schools',
       '/houses',
+      '/houses/create',
+      '/teachers',
+      '/teachers/create',
       '/scoreboard',
       '/settings',
+    ];
+    const protectedRoutesTitle = [
+      '',
+      'Create Schools',
+      'Manage Houses',
+      'Manage Houses',
+      'Manage Teachers',
+      'Manage Teachers',
+      'Current Scores',
+      'Settings',
     ];
 
     const { pathname } = this.props.history.location;
@@ -33,11 +46,6 @@ class Header extends Component {
     const isProtectedRoute = protectedRoutes.includes(pathname);
     const isPublicAuthRoute = publicAuthRoute.includes(pathname);
 
-    let pageName = pathname.split('/').reverse()[0];
-    if (pageName.length > 0) {
-      pageName = pageName[0].toUpperCase() + pageName.substring(1);
-    }
-
     return (
       <div>
 
@@ -46,6 +54,7 @@ class Header extends Component {
           className="Header"
           data-protected-route={isProtectedRoute}
           data-public-auth-route={isPublicAuthRoute}
+          data-user-authorized={isAuthorized}
         >
           <div className="wrapper">
             <NavLink to="/">
@@ -63,28 +72,30 @@ class Header extends Component {
                 {
                   (!isProtectedRoute) ? (
                     // Main Navigation
-                    <div className="Header__nav__links">
-                      <NavLink to="/">
-                        <li data-selected={pathname === '/'}>Home</li>
-                      </NavLink>
-                      <NavLink to="/pricing">
-                        <li data-selected={pathname === '/pricing'}>Pricing</li>
-                      </NavLink>
+                    <div className="Header__nav__links--non-dashboard">
+                      <div className="Header__nav__links">
+                        <NavLink to="/features">
+                          <li data-selected={pathname === '/features'}>Features</li>
+                        </NavLink>
+                        <NavLink to="/pricing">
+                          <li data-selected={pathname === '/pricing'}>Pricing</li>
+                        </NavLink>
+                        <NavLink to="/search-schools">
+                          <li data-selected={pathname === '/search-schools'}>Schools</li>
+                        </NavLink>
+                      </div>
+                      <div className="Header__nav__links">
+                        {
+                          (isAuthorized) ? (
+                            <NavLink to="/dashboard">
+                              <li>Go to Dashboard</li>
+                            </NavLink>
+                          ) : null
+                        }
+                      </div>
                     </div>
                   ) : (
-                    // Breadcrumbs for Dashboard
-                    <div className="Header__nav__links">
-                      <NavLink to="/dashboard">
-                        <li>Dashboard</li>
-                      </NavLink>
-                      {
-                        (pathname !== '/dashboard') ? (
-                          <NavLink to={pathname}>
-                            <li>{ pageName }</li>
-                          </NavLink>
-                        ) : null
-                      }
-                    </div>
+                    <div className="Header__nav__links--non-dashboard" />
                   )
                 }
                 <div className="Header__nav__buttons">

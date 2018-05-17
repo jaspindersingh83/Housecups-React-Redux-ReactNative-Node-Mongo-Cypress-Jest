@@ -1,6 +1,7 @@
 import {
   ADDSCHOOL,
   GETSCHOOLS,
+  SEARCHSCHOOLS,
 } from '../actions/index';
 
 const schoolsReducer = (schools = [], action) => {
@@ -10,6 +11,8 @@ const schoolsReducer = (schools = [], action) => {
     case ADDSCHOOL:
       return [...schools, action.payload.data];
     case GETSCHOOLS:
+      return [...action.payload.data];
+    case SEARCHSCHOOLS:
       return [...action.payload.data];
     default:
       return schools;

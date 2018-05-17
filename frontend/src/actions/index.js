@@ -23,6 +23,7 @@ export const UPDATEHOUSE = 'UPDATEHOUSE';
 // School Actions
 export const ADDSCHOOL = 'ADDSCHOOL';
 export const GETSCHOOLS = 'GETSCHOOLS';
+export const SEARCHSCHOOLS = 'SEARCHSCHOOLS';
 
 // Teacher Actions
 export const ADDTEACHER = 'ADDTEACHER';
@@ -187,13 +188,14 @@ export const addHouse = async (house, history) => {
   const apiurl = `${ROOT_URL}/api/house`;
   try {
     const token = localStorage.getItem('token');
-    await axios.post(apiurl, house, {
+    const addHouseRequest = await axios.post(apiurl, house, {
       headers: {
         Authorization: token,
       },
     });
     return {
       type: ADDHOUSE,
+      payload: addHouseRequest,
     };
   } catch (error) {
     history.push('/signin');
@@ -224,13 +226,14 @@ export const updateHouse = async (house, history) => {
   const apiurl = `${ROOT_URL}/api/house/${house.id}`;
   try {
     const token = localStorage.getItem('token');
-    await axios.put(apiurl, house, {
+    const updateHouseRequest = await axios.put(apiurl, house, {
       headers: {
         Authorization: token,
       },
     });
     return {
       type: UPDATEHOUSE,
+      payload: updateHouseRequest,
     };
   } catch (error) {
     history.push('/signin');
@@ -252,6 +255,7 @@ export const getHousesBySchool = async (history) => {
       payload: getAllHousesRequest,
     };
   } catch (error) {
+    console.log(error);
     history.push('/signin');
     return authError('You are not authorized, Please signin as schooladmin');
   }
@@ -268,7 +272,9 @@ export const addSchool = async (school, history) => {
       },
     });
     localStorage.setItem('token', addSchoolRequest.data.token);
-    history.push('/schooladmin');
+    // Redirecting to /houses after we separated houses and teachers
+    // into two different views.
+    history.push('/houses');
     return {
       type: ADDSCHOOL,
       payload: addSchoolRequest,
@@ -276,6 +282,22 @@ export const addSchool = async (school, history) => {
   } catch (error) {
     history.push('/signin');
     return authError('You are not authorized, Please signin as schooladmin');
+  }
+};
+
+// Search Schools based on the School-name and Location
+export const searchSchools = async (query, history) => {
+  const apiurl = `${ROOT_URL}/api/schools/search`;
+  try {
+    const searchSchoolsRequest = await axios.get(apiurl, {
+      params: query,
+    });
+    return {
+      type: SEARCHSCHOOLS,
+      payload: searchSchoolsRequest,
+    };
+  } catch (error) {
+    console.error('Error on searchSchools()', error);
   }
 };
 
@@ -334,4 +356,3 @@ export const getTeachers = async (history) => {
     return authError('You are not authorized, Please signin as schooladmin');
   }
 };
-

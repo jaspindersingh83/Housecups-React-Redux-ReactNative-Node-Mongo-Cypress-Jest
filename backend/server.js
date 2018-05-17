@@ -10,14 +10,12 @@ const path = require('path');
 
 const server = express();
 
-
 const database = require('./database');
 
 // Global Middleware
 server.use(bodyParser.json());
 server.use(cors());
 server.use(morgan('combined'));
-
 
 // Creating Log Files
 const accessLogStream = fs.createWriteStream(
@@ -45,15 +43,10 @@ const houseRoutes = require('./houses/routes/routes');
 
 houseRoutes(server);
 
-
 // Running the Teacher routes
 const teacherRoutes = require('./teachers/routes/routes');
 
 teacherRoutes(server);
-// Running the Score routes
-const ScoreRoutes = require('./scores/routes/routes');
-
-ScoreRoutes(server);
 
 // Connect Database
 database.connect();
@@ -61,7 +54,6 @@ database.connect();
 const httpListener = server.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
-
 
 // WebSocket Integration
 

@@ -1,0 +1,39 @@
+.FeatureBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-basis: calc((100% / 4) - 20px);
+  min-height: 250px;
+  padding: 25px;
+  border-radius: 5px;
+  background-color: rgba(0, 0, 0, 0.075);
+}
+.FeatureBox__title {
+  color: #000;
+  font-size: 20px;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 500;
+  letter-spacing: 0.75px;
+}
+.FeatureBox__image {
+  width: 100px;
+  height: 100px;
+  background-size: contain;
+  background-position: center center;
+  background-repeat: no-repeat;
+  margin-bottom: 25px;
+  opacity: 0.5;
+}
+.FeatureBox__image[data-feature-name="multiple-houses"] {
+  background-image: url('./images/multiple-houses.png');
+}
+.FeatureBox__image[data-feature-name="realtime-updates"] {
+  background-image: url('./images/realtime-updates.png');
+}
+.FeatureBox__image[data-feature-name="public-scoreboard"] {
+  background-image: url('./images/public-scoreboard.png');
+}
+.FeatureBox__image[data-feature-name="cross-device"] {
+  background-image: url('./images/cross-device.png');
+}

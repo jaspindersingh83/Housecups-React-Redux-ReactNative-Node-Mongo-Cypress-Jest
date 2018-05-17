@@ -17,6 +17,9 @@ a:hover {
   color: #000;
 }
 
+h1, h2, h3 {
+  margin: 0px;
+}
 h1 {
   font-size: 56px;
   font-family: 'PT Serif', serif;
@@ -33,6 +36,10 @@ h3 {
   font-family: 'PT Serif', serif;
   font-weight: 700;
   letter-spacing: 0.25px;
+}
+h3.form__title,
+h3.table__title {
+  margin-bottom: 25px;
 }
 p {
   font-size: 20px;

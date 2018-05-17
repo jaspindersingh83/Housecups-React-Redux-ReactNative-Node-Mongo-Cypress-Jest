@@ -62,6 +62,7 @@ class CreateHouse extends Component {
     return (
       <div className="CreateHouse">
         <form onSubmit={this.addHouse}>
+          <h3>Add New House</h3>
           <div className="CreateHouse__row">
             <div className="CreateHouse__input">
               <label htmlFor="CreateHouse__Name">House Name</label>

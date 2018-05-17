@@ -3,7 +3,7 @@
 }
 .CreateSchool > form {
   max-width: 640px;
-  margin: 50px auto;
+  margin: 0px auto;
 }
 .CreateSchool > form > button {
   margin-top: 20px;

@@ -54,6 +54,7 @@ class CreateTeacher extends Component {
       <div className="CreateTeacher">
         {this.renderTeacherAddedAlert()}
         <form onSubmit={this.addTeacher}>
+          <h3 className="form__title">Add New Teacher</h3>
           <label htmlFor="CreateTeacher__Firstname">First Name</label>
           <input
             id="CreateTeacher__Firstname"

@@ -20,7 +20,7 @@ class ListTeachers extends Component {
   render() {
     return (
       <div className="ListTeachers Table">
-        <h3 className="Table__title">Teachers</h3>
+        <h3 className="table__title">Added Teachers</h3>
         <div className="Table__row Table__row--head" >
           <div className="Table__column">First Name</div>
           <div className="Table__column">Last Name</div>

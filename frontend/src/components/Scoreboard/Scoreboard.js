@@ -45,9 +45,6 @@ class Scoreboard extends Component {
   render() {
     return (
       <div className="Scoreboard">
-        <div className="Scoreboard__heading">
-          <div className="Scoreboard__title">Current Score</div>
-        </div>
         <div className="Scoreboard__cards">
           {
             this.state.houses.map((house, index) => {

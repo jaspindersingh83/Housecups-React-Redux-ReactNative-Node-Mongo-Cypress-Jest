@@ -20,7 +20,7 @@ class ListHouses extends Component {
   render() {
     return (
       <div className="ListHouses Table">
-        <h3 className="Table__title">Houses</h3>
+        <h3 className="table__title">Created Houses</h3>
         <div className="Table__row Table__row--head" >
           <div className="Table__column">House Name</div>
           <div className="Table__column Table__column--color-swatch">Color</div>

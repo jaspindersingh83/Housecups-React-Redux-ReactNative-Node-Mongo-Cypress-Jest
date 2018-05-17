@@ -47,6 +47,7 @@ class CreateSchool extends Component {
     return (
       <div className="CreateSchool">
         <form onSubmit={this.addSchool}>
+          <h3 className="form__title">Create School</h3>
           <label htmlFor="CreateSchool__Name">Name of the School</label>
           <input
             id="CreateSchool__Name"

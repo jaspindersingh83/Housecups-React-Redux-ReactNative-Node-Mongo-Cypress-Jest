@@ -8,8 +8,12 @@ import Scoreboard from '../Scoreboard/Scoreboard';
 import Settings from '../Auth/Settings';
 import Sidebar from '../Sidebar/Sidebar';
 import Houses from '../Houses/Houses';
-import CreateSchool from '../SchoolAdmin/CreateSchool';
+import Schools from '../Schools/Schools';
 import Teachers from '../Teachers/Teachers';
+import CreateTeacherView from '../Teachers/CreateTeacherView';
+import ListTeachersView from '../Teachers/ListTeachersView';
+import CreateHouseView from '../Houses/CreateHouseView';
+import ListHousesView from '../Houses/ListHousesView';
 
 class Dashboard extends Component {
 
@@ -23,9 +27,11 @@ class Dashboard extends Component {
         <Sidebar>
           <Switch>
             <Route exact path="/dashboard" component={AccountOverview} />
-            <Route exact path="/schools" component={CreateSchool} />
-            <Route exact path="/houses" component={Houses} />
-            <Route exact path="/teachers" component={Teachers} />
+            <Route exact path="/schools" component={Schools} />
+            <Route exact path="/houses/create" component={CreateHouseView} />
+            <Route exact path="/houses" component={ListHousesView} />
+            <Route exact path="/teachers/create" component={CreateTeacherView} />
+            <Route exact path="/teachers" component={ListTeachersView} />
             <Route exact path="/scoreboard" component={Scoreboard} />
             <Route exact path="/settings" component={Settings} />
           </Switch>

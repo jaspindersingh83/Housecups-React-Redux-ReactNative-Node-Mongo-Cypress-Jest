@@ -60,7 +60,7 @@ class App extends Component {
               <Route path="/teachersignup" component={Teachersignup} />
               <PrivateRoute
                 exact
-                path="/(dashboard|schools|houses|teachers|scoreboard|settings)"
+                path="/(dashboard|schools|houses|houses/create|teachers|teachers/create|scoreboard|settings)"
                 component={Dashboard}
               />
             </Switch>

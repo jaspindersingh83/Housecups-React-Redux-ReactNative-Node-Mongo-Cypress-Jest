@@ -4,7 +4,6 @@ import { NavLink, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { signout } from '../../actions';
 import './Header.css';
-import DashboardTitle from '../DashboardTitle/DashboardTitle';
 
 class Header extends Component {
 
@@ -96,7 +95,7 @@ class Header extends Component {
                       </div>
                     </div>
                   ) : (
-                    <DashboardTitle title={ protectedRoutesTitle[protectedRoutes.indexOf(pathname)] } />
+                    <div className="Header__nav__links--non-dashboard" />
                   )
                 }
                 <div className="Header__nav__buttons">

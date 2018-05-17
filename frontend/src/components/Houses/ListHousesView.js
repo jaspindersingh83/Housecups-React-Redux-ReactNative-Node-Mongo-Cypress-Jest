@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
+import { withRouter, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
-import { getHousesBySchool, addHouse } from '../../actions';
-import './Houses.css';
-import CreateHouse from './components/CreateHouse/CreateHouse';
+import { getHousesBySchool } from '../../actions';
 import ListHouses from './components/ListHouses/ListHouses';
+import './ListHousesView.css';
 
-class Houses extends Component {
+class ListHousesView extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -18,17 +17,19 @@ class Houses extends Component {
     await this.props.getHousesBySchool(this.props.history);
   }
 
-  async componentWillReceiveProps(props) {
-    await this.setState({
+  componentWillReceiveProps(props) {
+    this.setState({
       houses: [...props.houses],
     });
   }
 
   render() {
     return (
-      <div className="Houses">
-        <CreateHouse />
+      <div className="ListHousesView">
         <ListHouses houses={this.state.houses} />
+        <Link to="/houses/create">
+          <button>Add New House</button>
+        </Link>
       </div>
     );
   }
@@ -40,4 +41,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default withRouter(connect(mapStateToProps, { getHousesBySchool, addHouse })(Houses));
+export default withRouter(connect(mapStateToProps, { getHousesBySchool })(ListHousesView));

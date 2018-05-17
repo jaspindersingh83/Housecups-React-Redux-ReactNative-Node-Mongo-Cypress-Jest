@@ -1,0 +1,38 @@
+.Swatch {
+  position: relative;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  min-width: 75px;
+}
+.Swatch__color {
+  position: relative;
+  left: 10px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+.Swatch[data-updating="true"] {
+  height: 48px;
+}
+.Swatch[data-updating="true"] > .Swatch__color {
+  position: absolute;
+  top: 0%;
+  left: 12.5%;
+  width: 75%;
+  height: 100%;
+  border-radius: 15%;
+}
+
+.popover{
+  position: absolute;
+  z-index:2;
+}
+.cover{
+  position:fixed;
+  top:0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+}
+

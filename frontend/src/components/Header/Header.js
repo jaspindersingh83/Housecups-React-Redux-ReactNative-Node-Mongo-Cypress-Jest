@@ -114,7 +114,7 @@ class Header extends Component {
                     ) : null
                   }
                   {
-                    (!isPublicAuthRoute && isAuthorized) ? (
+                    (isProtectedRoute && isAuthorized) ? (
                       <button className="signout" onClick={this.signout}>Sign Out</button>
                     ) : null
                   }

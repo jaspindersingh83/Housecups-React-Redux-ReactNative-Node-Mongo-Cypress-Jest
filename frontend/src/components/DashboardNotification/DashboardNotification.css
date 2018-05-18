@@ -15,6 +15,10 @@
   color: #fff;
   background-color: rgba(239, 83, 80, 1.0);
 }
+.DashboardNotification[data-type="success"] {
+  color: #fff;
+  background-color: rgba(56, 142, 60, 1.0);
+}
 .DashboardNotification__title {
   font-size: 18px;
   font-family: 'Raleway', sans-serif;

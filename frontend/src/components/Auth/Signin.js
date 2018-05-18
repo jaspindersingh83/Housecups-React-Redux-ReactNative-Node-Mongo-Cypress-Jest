@@ -81,9 +81,8 @@ class Signin extends Component {
     return (
       <div>
         <div className="Auth__Body">
-          <div className="Auth__Body__Imageholder" />
-          <div className="Auth__Body__Container" style={{ marginTop: '80px' }}>
-            <h1 style={{ marginBottom: '20px' }}>Sign In</h1>
+          <div className="Auth__Body__Container">
+            <h1 className="Auth__title">Sign In</h1>
             {this.renderAlert()}
             {this.renderSignupSuccess()}
             {this.renderResetPasswordSuccess()}
@@ -123,13 +122,6 @@ class Signin extends Component {
                 {' '}Sign Up now
               </Link>
             </p>
-          </div>
-          <div className="Auth__Body__Imageholder">
-            <img
-              src={backgroundimage}
-              alt="Album"
-              style={{ opacity: 0.1 }}
-            />
           </div>
         </div>
       </div>

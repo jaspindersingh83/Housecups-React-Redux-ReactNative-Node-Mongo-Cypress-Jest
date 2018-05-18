@@ -51,12 +51,8 @@ class Fogotpassword extends Component {
     return (
       <div>
         <div className="Auth__Body">
-          <div className="Auth__Body__Imageholder" />
-          <div
-            className="Auth__Body__Container"
-            style={{ marginTop: '20px' }}
-          >
-            <h1 style={{ marginBottom: '20px' }}>Forgot Password</h1>
+          <div className="Auth__Body__Container">
+            <h1 className="Auth__title">Forgot Password</h1>
             {this.renderAlert()}
             {this.renderEmailSuccess()}
             <form onSubmit={this.forgotPassword}>
@@ -76,13 +72,6 @@ class Fogotpassword extends Component {
                 Sign Up now
               </Link>
             </p>
-          </div>
-          <div className="Auth__Body__Imageholder">
-            <img
-              src={backgroundimage}
-              alt="Album"
-              style={{ opacity: 0.1 }}
-            />
           </div>
         </div>
       </div>

@@ -45,12 +45,8 @@ class Resetpassword extends Component {
     return (
       <div>
         <div className="Auth__Body">
-          <div className="Auth__Body__Imageholder" />
-          <div
-            className="Auth__Body__Container"
-            style={{ marginTop: '40px' }}
-          >
-            <h1 style={{ marginBottom: '20px' }}>Reset Password</h1>
+          <div className="Auth__Body__Container">
+            <h1 className="Auth__title">Reset Password</h1>
             {this.renderAlert()}
             <form onSubmit={this.resetPassword}>
               <label htmlFor="ResetForm__Password">New Password</label>
@@ -70,19 +66,12 @@ class Resetpassword extends Component {
               <button type="submit">Submit</button>
             </form>
             <p>
-              New to Litchi?
+              New to Housecup?
               <Link to={"/signup"} className="Link">
                 {' '}
                 Sign Up now
               </Link>
             </p>
-          </div>
-          <div className="Auth__Body__Imageholder">
-            <img
-              src={backgroundimage}
-              alt="Album"
-              style={{ opacity: 0.1 }}
-            />
           </div>
         </div>
       </div>

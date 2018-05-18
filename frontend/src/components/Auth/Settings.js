@@ -55,8 +55,8 @@ class Settings extends Component {
     return (
       <div>
         <div className="Auth__Body">
-          <div className="Auth__Body__Imageholder" />
-          <div className="Auth__Body__Container" style={{ marginTop: '80px' }}>
+          <div className="Auth__Body__Container">
+            <h3 className="form__title">Settings</h3>
             {this.renderAlert()}
             {this.renderSettingsChangeSuccess()}
             <form onSubmit={this.changeSettings}>
@@ -90,9 +90,6 @@ class Settings extends Component {
               Submit
               </button>
             </form>
-          </div>
-          <div className="Auth__Body__Imageholder">
-            <img src={backgroundimage} alt="Album" style={{ opacity: 0.1 }} />
           </div>
         </div>
       </div>

@@ -45,9 +45,8 @@ class Signup extends Component {
     return (
       <div>
         <div className="Auth__Body">
-          <div className="Auth__Body__Imageholder" />
-          <div className="Auth__Body__Container" style={{ marginTop: '80px' }}>
-            <h1 style={{ marginBottom: '20px' }}>Sign up</h1>
+          <div className="Auth__Body__Container">
+            <h1 className="Auth__title">Sign up</h1>
             {this.renderAlert()}
             <form onSubmit={this.signup}>
               <label htmlFor="SignUpForm__Username">Username</label>
@@ -90,16 +89,9 @@ class Signup extends Component {
             <p>
               Already have an account?
               <Link to={"/signin"} className="Link">
-                {' '}SignIn now
+                {' '}Sign In now
               </Link>
             </p>
-          </div>
-          <div className="Auth__Body__Imageholder">
-            <img
-              src={backgroundimage}
-              alt="Album"
-              style={{ opacity: 0.1 }}
-            />
           </div>
         </div>
       </div>

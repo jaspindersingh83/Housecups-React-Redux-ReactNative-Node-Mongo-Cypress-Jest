@@ -20,7 +20,7 @@ class ListHousesView extends Component {
     await this.props.getHousesBySchool(this.props.history);
   }
 
-  componentWillReceiveProps(props) {
+  async componentWillReceiveProps(props) {
     const { isSuperAdmin, isSchoolAdmin, isTeacher } = props.auth;
     if (isSchoolAdmin === false) {
       if (isTeacher) {
@@ -29,11 +29,12 @@ class ListHousesView extends Component {
         // Implement SUPERADMIN redirection
       }
     }
-    this.setState({
+    await this.setState({
       auth: { ...props.auth },
       houses: [...props.houses],
       getHousesResolved: props.houses !== undefined,
     });
+    console.log(this.state);
   }
 
   render() {

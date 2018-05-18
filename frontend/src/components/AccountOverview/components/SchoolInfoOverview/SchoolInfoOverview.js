@@ -13,7 +13,6 @@ class SchoolInfoOverview extends Component {
       teachers: [],
       auth: props.auth,
     };
-    console.log(props);
   }
 
   async componentWillMount() {

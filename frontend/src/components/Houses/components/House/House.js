@@ -22,13 +22,8 @@ class House extends Component {
   async componentWillReceiveProps(props) {
     const {
       id, name, mascot, color,
-<<<<<<< HEAD
     } = props;
     await this.setState({
-=======
-    } = this.state;
-    this.setState({
->>>>>>> 8f9cc169abd73f69fef4a855cf5c3013db48990b
       id,
       name,
       color,

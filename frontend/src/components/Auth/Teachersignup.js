@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { createTeacher } from '../../actions';
 import backgroundimage from '../../static/trophy.png';
+import DashboardNotification from '../DashboardNotification/DashboardNotification';
 
 class Teachersignup extends Component {
   constructor(props) {
@@ -44,7 +45,11 @@ class Teachersignup extends Component {
   };
   renderAlert() {
     if (!this.state.error) return null;
-    return <p style={{ color: '#337ab7' }}>{this.state.error}</p>;
+    return (
+      <DashboardNotification type="warn">
+        {this.state.error}
+      </DashboardNotification>
+    );
   }
   render() {
     return (

@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import './Auth.css';
 import { signin } from '../../actions';
 import backgroundimage from '../../static/trophy.png';
+import DashboardNotification from '../DashboardNotification/DashboardNotification';
 
 class Signin extends Component {
   constructor(props) {
@@ -52,28 +53,34 @@ class Signin extends Component {
   };
   renderAlert = () => {
     if (!this.state.error) return null;
-    return <p style={{ color: '#337ab7' }}>{this.state.error}</p>;
+    return (
+      <DashboardNotification type="warn">
+        {this.state.error}
+      </DashboardNotification>
+    );
   };
   renderSignupSuccess = () => {
     if (!this.props.signedUpusername) return null;
     return (
-      <p style={{ color: '#337ab7' }}>Sign Up successfull, Please sign in</p>
+      <DashboardNotification type="success">
+        Sign Up successfull, Please sign in
+      </DashboardNotification>
     );
   };
   renderResetPasswordSuccess = () => {
     if (!this.props.resetPassword) return null;
     return (
-      <p style={{ color: '#337ab7' }}>
+      <DashboardNotification type="success">
         Password has been reset, Please sign in with new password
-      </p>
+      </DashboardNotification>
     );
   };
   renderteacherSignupSuccess() {
     if (!this.props.teacherSignup) return null;
     return (
-      <p style={{ color: '#337ab7' }}>
+      <DashboardNotification type="success">
         You have been signed up as a Teacher, Please Sign in
-      </p>
+      </DashboardNotification>
     );
   }
 

@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import './Auth.css';
 import { forgotPassword } from '../../actions';
 import backgroundimage from '../../static/trophy.png';
+import DashboardNotification from '../DashboardNotification/DashboardNotification';
 
 class Fogotpassword extends Component {
   constructor(props) {
@@ -36,14 +37,18 @@ class Fogotpassword extends Component {
   };
   renderAlert() {
     if (!this.state.error) return null;
-    return <p style={{ color: '#337ab7' }}>{this.state.error}</p>;
+    return (
+      <DashboardNotification type="warn">
+        {this.state.error}
+      </DashboardNotification>
+    );
   }
   renderEmailSuccess() {
     if (!this.state.emailSent) return null;
     return (
-      <p style={{ color: '#337ab7' }}>
+      <DashboardNotification type="success">
         Reset Password link has been sent to email associated with this account
-      </p>
+      </DashboardNotification>
     );
   }
 

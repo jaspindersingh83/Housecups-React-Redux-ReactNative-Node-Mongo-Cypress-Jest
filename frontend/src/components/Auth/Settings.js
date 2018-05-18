@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import './Auth.css';
 import { changeSettings } from '../../actions';
 import backgroundimage from '../../static/trophy.png';
+import DashboardNotification from '../DashboardNotification/DashboardNotification';
 
 class Settings extends Component {
   constructor(props) {
@@ -41,14 +42,18 @@ class Settings extends Component {
   };
   renderAlert() {
     if (!this.state.error) return null;
-    return <p style={{ color: '#337ab7' }}>{this.state.error}</p>;
+    return (
+      <DashboardNotification type="warn">
+        {this.state.error}
+      </DashboardNotification>
+    );
   }
   renderSettingsChangeSuccess() {
     if (!this.state.settingsChanged) return null;
     return (
-      <p style={{ color: '#337ab7' }}>
+      <DashboardNotification type="success">
         Settings have been changed successfully.
-      </p>
+      </DashboardNotification>
     );
   }
   render() {

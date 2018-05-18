@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import './Auth.css';
 import { createUser } from '../../actions';
 import backgroundimage from '../../static/trophy.png';
+import DashboardNotification from '../DashboardNotification/DashboardNotification';
 
 class Signup extends Component {
   constructor(props) {
@@ -39,7 +40,11 @@ class Signup extends Component {
   };
   renderAlert() {
     if (!this.state.error) return null;
-    return <p style={{ color: '#337ab7' }}>{this.state.error}</p>;
+    return (
+      <DashboardNotification type="warn">
+        {this.state.error}
+      </DashboardNotification>
+    );
   }
   render() {
     return (

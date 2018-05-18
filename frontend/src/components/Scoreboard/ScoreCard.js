@@ -93,7 +93,7 @@ class ScoreCard extends Component {
         </div>
         <div className="ScoreCard__actions">
           {
-            (this.props.auth.isTeacher) ? (
+            (this.props.auth.isTeacher && !this.props.public) ? (
               <button
                 className="ScoreCard__button ScoreCard__button--decrement"
                 onClick={() => this.decreaseScore()}
@@ -102,7 +102,7 @@ class ScoreCard extends Component {
           }
           <div className="ScoreCard__score">{house.score}</div>
           {
-            (this.props.auth.isTeacher) ? (
+            (this.props.auth.isTeacher && !this.props.public) ? (
               <button
                 className="ScoreCard__button ScoreCard__button--increment"
                 onClick={() => this.increaseScore()}

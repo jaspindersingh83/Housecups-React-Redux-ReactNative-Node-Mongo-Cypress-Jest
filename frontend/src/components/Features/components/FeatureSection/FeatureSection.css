@@ -55,10 +55,12 @@
   background-image: url('./images/multiple-teachers-screenshot.png');
 }
 .FeatureSection__column__image[data-feature-name="realtime-updates"] {
-  background-image: url('../../../../static/placeholder-image.png');
+  background-image: url('./images/realtime-updates.png');
+  background-color: #ededed;
 }
 .FeatureSection__column__image[data-feature-name="public-scoreboard"] {
-  background-image: url('../../../../static/placeholder-image.png');
+  background-image: url('./images/public-scoreboard.png');
+  background-color: #fff;
 }
 .FeatureSection__column__image[data-feature-name="cross-device"] {
   background-image: url('../../../../static/placeholder-image.png');

@@ -32,11 +32,11 @@ class Features extends Component {
           description: 'House scores can be made available to the public via a web address. ' +
             'You can choose to enable or disable the public visibility of your scoreboard.',
         },
-        {
-          id: 'cross-device',
-          title: 'Cross Device',
-          description: 'House Cup can be accessed from multiple device platforms. It will work seemlessly on all popular OS and browsers.',
-        },
+        // {
+        //   id: 'cross-device',
+        //   title: 'Cross Device',
+        //   description: 'House Cup can be accessed from multiple device platforms. It will work seemlessly on all popular OS and browsers.',
+        // },
       ],
     };
   }

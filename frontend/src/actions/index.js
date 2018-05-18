@@ -30,6 +30,9 @@ export const ADDTEACHER = 'ADDTEACHER';
 export const DELETETEACHER = 'DELETETEACHER';
 export const GETTEACHERS = 'GETTEACHERS';
 
+// Pricing Plans
+export const GETPLANS = 'GETPLANS';
+
 // Api url To be changed for Production
 // const ROOT_URL = 'Insert Production URL here'
 
@@ -179,7 +182,7 @@ export const getUserRoles = async (history) => {
       payload: getRolesRequest,
     };
   } catch (error) {
-    history.push('/signin');
+    // history.push('/signin');
     return authError('You are not signed, Please signin');
   }
 };
@@ -354,5 +357,18 @@ export const getTeachers = async (history) => {
   } catch (error) {
     history.push('/signin');
     return authError('You are not authorized, Please signin as schooladmin');
+  }
+};
+
+export const getPlans = async () => {
+  const apiurl = `${ROOT_URL}/api/plan`;
+  try {
+    const getAllPlansRequest = await axios.get(apiurl);
+    return {
+      type: GETPLANS,
+      payload: getAllPlansRequest,
+    };
+  } catch (error) {
+    console.error(error);
   }
 };

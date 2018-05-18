@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './Auth.css';
 import { changeSettings } from '../../actions';
-import backgroundimage from '../../static/trophy.png';
 import DashboardNotification from '../DashboardNotification/DashboardNotification';
 
 class Settings extends Component {

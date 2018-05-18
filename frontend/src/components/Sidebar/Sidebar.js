@@ -25,7 +25,7 @@ class Sidebar extends Component {
 
   render() {
     const { pathname } = this.props.history.location;
-    const { isSuperAdmin, isSchoolAdmin, isTeacher } = this.state.auth;
+    const { isSchoolAdmin, isTeacher } = this.state.auth;
     return (
       <div className="Sidebar">
         <div className="Sidebar__sidebar">

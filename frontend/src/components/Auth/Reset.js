@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import backgroundimage from '../../static/trophy.png';
 import { resetPassword } from '../../actions';
 import DashboardNotification from '../DashboardNotification/DashboardNotification';
 

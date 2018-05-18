@@ -13,7 +13,7 @@ class CreateTeacherView extends Component {
     const locationState = this.props.history.location.state;
     const message = (locationState) ? locationState.message : null;
     this.state = {
-      message: null,
+      message,
     };
   }
 

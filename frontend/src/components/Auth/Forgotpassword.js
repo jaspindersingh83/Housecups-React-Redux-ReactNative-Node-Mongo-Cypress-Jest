@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import './Auth.css';
 import { forgotPassword } from '../../actions';
-import backgroundimage from '../../static/trophy.png';
 import DashboardNotification from '../DashboardNotification/DashboardNotification';
 
 class Fogotpassword extends Component {

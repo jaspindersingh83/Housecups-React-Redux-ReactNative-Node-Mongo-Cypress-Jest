@@ -138,6 +138,7 @@ nav.Header__nav > ul {
 .Header__nav__buttons > a:not(:last-child) {
   margin-right: 10px;
 }
+.Header__nav__links > a > .Header__nav__links-dashboard,
 .Header__nav__buttons button {
   color: #000;
   border-radius: 3px;
@@ -147,6 +148,7 @@ nav.Header__nav > ul {
   opacity: 1.0;
   transition: all 0.25s linear 0s;
 }
+.Header__nav__links > a:hover > .Header__nav__links-dashboard,
 .Header__nav__buttons button:hover {
   opacity: 0.8;
 }

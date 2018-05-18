@@ -88,7 +88,7 @@ class Header extends Component {
                         {
                           (isAuthorized) ? (
                             <NavLink to="/dashboard">
-                              <li>Go to Dashboard</li>
+                              <li className="Header__nav__links-dashboard">Go to Dashboard</li>
                             </NavLink>
                           ) : null
                         }

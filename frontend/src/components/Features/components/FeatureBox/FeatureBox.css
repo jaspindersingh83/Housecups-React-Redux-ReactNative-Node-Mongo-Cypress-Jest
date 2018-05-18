@@ -30,7 +30,6 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4735c1', end
   background-position: center center;
   background-repeat: no-repeat;
   margin-bottom: 25px;
-  opacity: 0.65;
   filter: invert(1);
 }
 .FeatureBox__image[data-feature-name="multiple-houses"] {

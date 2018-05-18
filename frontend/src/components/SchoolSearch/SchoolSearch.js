@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { searchSchools } from '../../actions';
 import './SchoolSearch.css';
@@ -10,6 +11,13 @@ class SchoolSearch extends Component {
     nameInput: '',
     locationInput: '',
     matchedSchools: [],
+  }
+
+  async componentWillMount() {
+    await this.props.searchSchools({
+      name: '',
+      location: '',
+    });
   }
 
   async componentWillReceiveProps(props) {
@@ -39,7 +47,7 @@ class SchoolSearch extends Component {
   render() {
     return (
       <Section className="SchoolSearch">
-        <h1>Search Schools</h1>
+        <h2>Schools</h2>
         <form onSubmit={this.handleSubmit} className="SchoolSearch__form">
           <input
             type="text"
@@ -60,7 +68,7 @@ class SchoolSearch extends Component {
         <div className="SchoolSearch__results">
           <div className="SchoolSearch__results__message">
             {
-              ((this.state.nameInput === '' && this.state.locationInput === '') || this.state.matchedSchools.length === 0)
+              (this.state.matchedSchools.length === 0)
                 ? (
                   <div className="text">No school matched.</div>
                 )
@@ -74,16 +82,16 @@ class SchoolSearch extends Component {
           </div>
           <ul className="SearchResults">
             {
-              ((this.state.nameInput !== '' || this.state.locationInput !== '') && this.state.matchedSchools.length > 0)
+              (this.state.matchedSchools.length > 0)
                 ? this.state.matchedSchools.map((school, index) => {
                   return (
-                    <a href={`/scoreboard/${school.name}`} key={index}>
+                    <Link to={`/scoreboard/${school._id}`} key={index}>
                       <li className="SearchResults__item">
                         <div className="SearchResults__item__name">
                           {school.name}
                         </div>
                       </li>
-                    </a>
+                    </Link>
                   );
                 })
                 : null

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { addTeacher, deleteTeacher, getTeachers } from '../../../../actions';
 import './CreateTeacher.css';
+import DashboardNotification from '../../../DashboardNotification/DashboardNotification';
 
 class CreateTeacher extends Component {
 
@@ -43,9 +44,9 @@ class CreateTeacher extends Component {
   renderTeacherAddedAlert = () => {
     if (!this.state.teacherAdded) return null;
     return (
-      <p style={{ color: '#337ab7' }}>
+      <DashboardNotification type="info">
         Added Teacher has been sent an email to Signup, he/she will be included in list after Signup
-      </p>
+      </DashboardNotification>
     );
   };
 

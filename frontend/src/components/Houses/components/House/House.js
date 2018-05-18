@@ -9,20 +9,20 @@ class House extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      id: props.id,
-      name: props.name,
-      color: props.color,
-      mascot: props.mascot,
+      id: props.house._id,
+      name: props.house.name,
+      color: props.house.color,
+      mascot: props.house.mascot,
       isUpdating: false,
       displayColorPicker: false,
     };
     console.warn('css selector :nth-child() is not working on .Table__row :: because of an extra <div />');
   }
 
-  async componentWillReceiveProps(props) {
+  async componentWillMount(props) {
     const {
       id, name, mascot, color,
-    } = props;
+    } = this.state;
     await this.setState({
       id,
       name,
@@ -154,9 +154,8 @@ class House extends Component {
   }
 }
 
-const mapStateToProps = () => {
-  return {
-  };
+const mapStateToProps = (state) => {
+  return state;
 };
 
 export default withRouter(connect(mapStateToProps, { deleteHouse, updateHouse })(House));

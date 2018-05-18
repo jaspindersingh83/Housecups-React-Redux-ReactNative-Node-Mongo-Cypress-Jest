@@ -22,6 +22,7 @@ class SchoolInfoOverview extends Component {
         this.props.history.push('/scoreboard');
       } else if (isSuperAdmin) {
         // Implement SUPERADMIN redirection
+        this.props.history.push('/schools/list');
       }
     } else {
       await this.props.getHousesBySchool(this.props.history);
@@ -29,8 +30,8 @@ class SchoolInfoOverview extends Component {
     }
   }
 
-  componentWillReceiveProps(props) {
-    this.setState({
+  async componentWillReceiveProps(props) {
+    await this.setState({
       houses: [...props.houses],
       teachers: [...props.teachers],
     });
@@ -39,14 +40,17 @@ class SchoolInfoOverview extends Component {
   render() {
     return (
       <div className="SchoolInfoOverview">
-        <div className="School__name">Lambda School</div>
+        {/* <div className="School__name">Lambda School</div> */}
+        <h3 className="form__title">Welcome</h3>
         <div className="School__info">
           <div className="School__info__text">
             Total number of Houses:
             <span className="number">{ this.state.houses.length }</span>
           </div>
           <div className="School__info__action">
-            <Link to="/houses">See all Houses</Link>
+            <Link to="/houses">
+              <button>See all Houses</button>
+            </Link>
           </div>
         </div>
         <div className="School__info">
@@ -55,7 +59,9 @@ class SchoolInfoOverview extends Component {
             <span className="number">{ this.state.teachers.length }</span>
           </div>
           <div className="School__info__action">
-            <Link to="/teachers">See all Teachers</Link>
+            <Link to="/teachers">
+              <button>See all Teachers</button>
+            </Link>
           </div>
         </div>
       </div>

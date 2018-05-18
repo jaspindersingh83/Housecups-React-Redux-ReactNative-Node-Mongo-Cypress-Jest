@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Button } from 'react-bootstrap';
 import './Auth.css';
 import { changeSettings } from '../../actions';
-import backgroundimage from '../../static/trophy.png';
+import DashboardNotification from '../DashboardNotification/DashboardNotification';
 
 class Settings extends Component {
   constructor(props) {
@@ -42,54 +41,59 @@ class Settings extends Component {
   };
   renderAlert() {
     if (!this.state.error) return null;
-    return <p style={{ color: '#337ab7' }}>{this.state.error}</p>;
+    return (
+      <DashboardNotification type="warn">
+        {this.state.error}
+      </DashboardNotification>
+    );
   }
   renderSettingsChangeSuccess() {
     if (!this.state.settingsChanged) return null;
     return (
-      <p style={{ color: '#337ab7' }}>
+      <DashboardNotification type="success">
         Settings have been changed successfully.
-      </p>
+      </DashboardNotification>
     );
   }
   render() {
     return (
       <div>
         <div className="Auth__Body">
-          <div className="Auth__Body__Imageholder" />
-          <div className="Auth__Body__Container" style={{ marginTop: '80px' }}>
+          <div className="Auth__Body__Container">
+            <h3 className="form__title">Settings</h3>
             {this.renderAlert()}
             {this.renderSettingsChangeSuccess()}
             <form onSubmit={this.changeSettings}>
-              <label>Email</label>
+              <label htmlFor="SettingsForm__Email">Email</label>
               <input
+                id="SettingsForm__Email"
                 onChange={e => this.handleInput(e, 'email')}
                 value={this.state.email}
                 type="text"
               />
-              <label>New Password</label>
+              <label htmlFor="SettingsForm__Password">New Password</label>
               <input
+                id="SettingsForm__Password"
                 onChange={e => this.handleInput(e, 'password')}
                 value={this.state.password}
                 type="password"
               />
-              <label>Confirm New Password</label>
+              <label htmlFor="SettingsForm__ConfirmPassword">Confirm New Password</label>
               <input
+                id="SettingsForm__ConfirmPassword"
                 onChange={e => this.handleInput(e, 'confirmPassword')}
                 value={this.state.confirmPassword}
                 type="password"
               />
-              <Button
-                style={{ width: '100%', margin: '20px 0px' }}
-                bsStyle="primary"
+              <button 
                 type="submit"
+                style={{
+                  marginTop: 20,
+                }}
               >
-                Submit
-              </Button>
+              Submit
+              </button>
             </form>
-          </div>
-          <div className="Auth__Body__Imageholder">
-            <img src={backgroundimage} alt="Album" style={{ opacity: 0.1 }} />
           </div>
         </div>
       </div>

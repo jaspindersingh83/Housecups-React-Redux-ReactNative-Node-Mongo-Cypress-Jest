@@ -1,8 +1,13 @@
 .Scoreboard {
-  
+
 }
 .Scoreboard__heading {
-  margin-bottom: 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+  background-color: #eee;
 }
 .Scoreboard__title {
   font-size: 36px;
@@ -20,6 +25,7 @@
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
+  padding: 50px;
 }
 .ScoreCard {
   display: flex;

@@ -3,6 +3,7 @@ import {
   UPDATEHOUSE,
   GETHOUSES,
   DELETEHOUSE,
+  SIGNOUT,
 } from '../actions/index';
 
 const housesReducer = (houses = [], action) => {
@@ -15,6 +16,8 @@ const housesReducer = (houses = [], action) => {
       return houses.map((house) => {
         return (house._id === action.payload.data.house._id) ? action.payload.data.house : house;
       });
+    case SIGNOUT:
+      return [];
     case GETHOUSES:
       return [...action.payload.data];
     case DELETEHOUSE:

@@ -11,8 +11,8 @@ class ListTeachers extends Component {
     };
   }
 
-  componentWillReceiveProps(props) {
-    this.setState({
+  async componentWillReceiveProps(props) {
+    await this.setState({
       teachers: [...props.teachers],
     });
   }
@@ -23,7 +23,7 @@ class ListTeachers extends Component {
         <h3 className="table__title">Added Teachers</h3>
         <div className="Table__row Table__row--head" >
           <div className="Table__column">Name</div>
-          <div className="Table__column">Email</div>
+          <div className="Table__column">Email Address</div>
           <div className="Table__column Table__column--action" />
         </div>
         {
@@ -42,7 +42,6 @@ class ListTeachers extends Component {
       </div>
     )
   }
-
 }
 
 export default ListTeachers;

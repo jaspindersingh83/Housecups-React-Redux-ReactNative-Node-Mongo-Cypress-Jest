@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import './Auth.css';
 import { createUser } from '../../actions';
-import backgroundimage from '../../static/trophy.png';
+import DashboardNotification from '../DashboardNotification/DashboardNotification';
 
 class Signup extends Component {
   constructor(props) {
@@ -40,62 +39,63 @@ class Signup extends Component {
   };
   renderAlert() {
     if (!this.state.error) return null;
-    return <p style={{ color: '#337ab7' }}>{this.state.error}</p>;
+    return (
+      <DashboardNotification type="warn">
+        {this.state.error}
+      </DashboardNotification>
+    );
   }
   render() {
     return (
       <div>
         <div className="Auth__Body">
-          <div className="Auth__Body__Imageholder" />
-          <div className="Auth__Body__Container" style={{ marginTop: '80px' }}>
-            <h1 style={{ marginBottom: '20px' }}>Sign up</h1>
+          <div className="Auth__Body__Container">
+            <h1 className="Auth__title">Sign up</h1>
             {this.renderAlert()}
             <form onSubmit={this.signup}>
-              <label>Username</label>
+              <label htmlFor="SignUpForm__Username">Username</label>
               <input
+                id="SignUpForm__Username"
                 onChange={e => this.handleInput(e, 'username')}
                 value={this.state.username}
                 type="text"
               />
-              <label>Password</label>
+              <label htmlFor="SignUpForm__Password">Password</label>
               <input
+                id="SignUpForm__Password"
                 onChange={e => this.handleInput(e, 'password')}
                 value={this.state.password}
                 type="password"
               />
-              <label>Confirm Password</label>
+              <label htmlFor="SignUpForm__ConfirmPassword">Confirm Password</label>
               <input
+                id="SignUpForm__ConfirmPassword"
                 onChange={e => this.handleInput(e, 'confirmPassword')}
                 value={this.state.confirmPassword}
                 type="password"
               />
-              <label>Email</label>
+              <label htmlFor="SignUpForm__Email">Email</label>
               <input
+                id="SignUpForm__Email"
                 onChange={e => this.handleInput(e, 'email')}
                 value={this.state.email}
                 type="text"
               />
-              <Button
-                style={{ width: '100%', margin: '20px 0px' }}
-                bsStyle="primary"
+              <button
+                style={{
+                  marginTop: 20,
+                }}
                 type="submit"
               >
                 Sign Up
-              </Button>
+              </button>
             </form>
             <p>
               Already have an account?
               <Link to={"/signin"} className="Link">
-                {' '}SignIn now
+                {' '}Sign In now
               </Link>
             </p>
-          </div>
-          <div className="Auth__Body__Imageholder">
-            <img
-              src={backgroundimage}
-              alt="Album"
-              style={{ opacity: 0.1 }}
-            />
           </div>
         </div>
       </div>

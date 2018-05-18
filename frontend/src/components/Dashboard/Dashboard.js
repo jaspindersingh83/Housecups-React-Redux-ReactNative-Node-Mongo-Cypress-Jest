@@ -7,9 +7,7 @@ import AccountOverview from '../AccountOverview/AccountOverview';
 import Scoreboard from '../Scoreboard/Scoreboard';
 import Settings from '../Auth/Settings';
 import Sidebar from '../Sidebar/Sidebar';
-import Houses from '../Houses/Houses';
 import Schools from '../Schools/Schools';
-import Teachers from '../Teachers/Teachers';
 import CreateTeacherView from '../Teachers/CreateTeacherView';
 import ListTeachersView from '../Teachers/ListTeachersView';
 import CreateHouseView from '../Houses/CreateHouseView';
@@ -21,7 +19,6 @@ class Dashboard extends Component {
   async componentWillMount() {
     await this.props.getUserRoles(this.props.history);
   }
-
   render() {
     return (
       <div className="Dashboard">

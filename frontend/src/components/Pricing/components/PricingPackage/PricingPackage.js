@@ -7,7 +7,10 @@ class PricingPackage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      ...props.package,
+      name: props.name,
+      amount: props.amount,
+      housesAllowed: props.housesAllowed,
+      teachersAllowed: props.teachersAllowed,
     };
   }
 

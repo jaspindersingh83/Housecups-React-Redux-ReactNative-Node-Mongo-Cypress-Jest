@@ -6,7 +6,6 @@ import { deleteTeacher } from '../../../../actions';
 import './Teacher.css';
 
 class Teacher extends Component {
-
   constructor(props) {
     super(props);
     this.state = {

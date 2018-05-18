@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import backgroundimage from '../../static/trophy.png';
 import { resetPassword } from '../../actions';
+import DashboardNotification from '../DashboardNotification/DashboardNotification';
+
 
 class Resetpassword extends Component {
   constructor(props) {
@@ -40,54 +40,39 @@ class Resetpassword extends Component {
   };
   renderAlert() {
     if (!this.state.error) return null;
-    return <p style={{ color: '#337ab7' }}>{this.state.error}</p>;
+    return <DashboardNotification type="warn">{this.state.error}</DashboardNotification>;
   }
   render() {
     return (
       <div>
         <div className="Auth__Body">
-          <div className="Auth__Body__Imageholder" />
-          <div
-            className="Auth__Body__Container"
-            style={{ marginTop: '40px' }}
-          >
-            <h1 style={{ marginBottom: '20px' }}>Reset Password</h1>
+          <div className="Auth__Body__Container">
+            <h1 className="Auth__title">Reset Password</h1>
             {this.renderAlert()}
             <form onSubmit={this.resetPassword}>
-              <label>New Password</label>
+              <label htmlFor="ResetForm__Password">New Password</label>
               <input
+                id="ResetForm__Password"
                 onChange={e => this.handleInput(e, 'password')}
                 value={this.state.password}
                 type="password"
               />
-              <label>Confirm Password</label>
+              <label htmlFor="ResetForm__ConfirmPassword">Confirm Password</label>
               <input
+                id="ResetForm__ConfirmPassword"
                 onChange={e => this.handleInput(e, 'confirmPassword')}
                 value={this.state.confirmPassword}
                 type="password"
               />
-              <Button
-                style={{ width: '100%', margin: '20px 0px' }}
-                bsStyle="primary"
-                type="submit"
-              >
-                Submit
-              </Button>
+              <button type="submit">Submit</button>
             </form>
             <p>
-              New to Litchi?
+              New to Housecup?
               <Link to={"/signup"} className="Link">
                 {' '}
                 Sign Up now
               </Link>
             </p>
-          </div>
-          <div className="Auth__Body__Imageholder">
-            <img
-              src={backgroundimage}
-              alt="Album"
-              style={{ opacity: 0.1 }}
-            />
           </div>
         </div>
       </div>

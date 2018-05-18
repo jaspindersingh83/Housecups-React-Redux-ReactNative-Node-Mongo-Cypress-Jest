@@ -196,6 +196,7 @@ export const addHouse = async (house, history) => {
         Authorization: token,
       },
     });
+    history.push('/houses');
     return {
       type: ADDHOUSE,
       payload: addHouseRequest,

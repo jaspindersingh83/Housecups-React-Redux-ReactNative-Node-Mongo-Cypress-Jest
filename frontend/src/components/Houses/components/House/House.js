@@ -19,11 +19,11 @@ class House extends Component {
     console.warn('css selector :nth-child() is not working on .Table__row :: because of an extra <div />');
   }
 
-  componentWillReceiveProps(props) {
+  async componentWillReceiveProps(props) {
     const {
       id, name, mascot, color,
     } = props;
-    this.setState({
+    await this.setState({
       id,
       name,
       color,

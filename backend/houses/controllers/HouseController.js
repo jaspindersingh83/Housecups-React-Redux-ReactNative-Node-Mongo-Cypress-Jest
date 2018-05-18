@@ -20,7 +20,11 @@ const addHouse = async (req, res) => {
 };
 // delete houses
 const deleteHouse = async (req, res) => {
+  const {isAdmin } = req.decoded;
   const houseID = req.params.id;
+  if (!isAdmin) {
+    res.status(500).json({ message: 'error' });
+  }
   try {
     const house = await House.findById(houseID);
     const { schoolID } = house;
@@ -37,7 +41,6 @@ const deleteHouse = async (req, res) => {
 // get all Houses //use populate for having one network call.
 const getHouseBySchool = async (req, res) => {
   const { schoolID } = req.decoded;
-  console.log(schoolID);
   try {
     const school = await School.findById(schoolID).populate('houses');
     const { houses } = school;
@@ -64,7 +67,10 @@ const publicgetHousesBySchoolId = async (req, res) => {
 
 // update/edit house //used for changing score as well
 const updateHouse = async (req, res) => {
-  const { schoolID } = req.decoded;
+  const { schoolID, isAdmin } = req.decoded;
+  if (!isAdmin) {
+    res.status(500).json({ message: 'error' });
+  }
   const houseID = req.params.id;
   const houseInfo = req.body;
   houseInfo.updatedAt = moment();

@@ -1,4 +1,8 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { getHousesBySchool } from '../../../../actions';
+
 import House from '../House/House';
 import './ListHouses.css';
 
@@ -9,6 +13,10 @@ class ListHouses extends Component {
     this.state = {
       houses: props.houses,
     };
+  }
+
+  async componentWillMount() {
+    await this.props.getHousesBySchool(this.props.history);
   }
 
   componentWillReceiveProps(props) {
@@ -33,10 +41,7 @@ class ListHouses extends Component {
             return (
               <House
                 key={house._id}
-                id={house._id}
-                name={house.name}
-                color={house.color}
-                mascot={house.mascot}
+                house={house}
               />
             );
           })
@@ -47,4 +52,8 @@ class ListHouses extends Component {
 
 }
 
-export default ListHouses;
+const mapStateToProps = (state) => {
+  return state;
+};
+
+export default withRouter(connect(mapStateToProps, { getHousesBySchool })(ListHouses));

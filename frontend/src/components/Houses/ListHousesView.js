@@ -35,8 +35,6 @@ class ListHousesView extends Component {
       getHousesResolved: props.houses !== undefined,
     });
   }
-  async componentWillUnmount() {
-  }
   render() {
     return (
       <div className="ListHousesView">

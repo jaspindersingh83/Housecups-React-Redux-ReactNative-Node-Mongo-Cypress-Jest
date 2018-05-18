@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { getHousesBySchool, getTeachers } from '../../../../actions';
+import { getHousesBySchool, getUserRoles, getTeachers } from '../../../../actions';
 import './SchoolInfoOverview.css';
 
 class SchoolInfoOverview extends Component {
@@ -16,15 +16,9 @@ class SchoolInfoOverview extends Component {
   }
 
   async componentWillMount() {
-    const { isSuperAdmin, isSchoolAdmin, isTeacher } = this.state.auth;
-    if (isSchoolAdmin === false) {
-      if (isTeacher) {
-        this.props.history.push('/scoreboard');
-      } else if (isSuperAdmin) {
-        // Implement SUPERADMIN redirection
-        this.props.history.push('/schools/list');
-      }
-    } else {
+    await this.props.getUserRoles(this.props.history);
+    const { isSchoolAdmin } = this.props.auth;
+    if (isSchoolAdmin) {
       await this.props.getHousesBySchool(this.props.history);
       await this.props.getTeachers(this.props.history);
     }
@@ -35,12 +29,12 @@ class SchoolInfoOverview extends Component {
       houses: [...props.houses],
       teachers: [...props.teachers],
     });
+    console.log(this.state);
   }
 
   render() {
     return (
       <div className="SchoolInfoOverview">
-        {/* <div className="School__name">Lambda School</div> */}
         <h3 className="form__title">Welcome</h3>
         <div className="School__info">
           <div className="School__info__text">
@@ -77,6 +71,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = {
   getHousesBySchool,
   getTeachers,
+  getUserRoles,
 };
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SchoolInfoOverview));

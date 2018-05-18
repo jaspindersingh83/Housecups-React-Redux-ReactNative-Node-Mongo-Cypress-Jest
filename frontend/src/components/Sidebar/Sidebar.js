@@ -17,8 +17,8 @@ class Sidebar extends Component {
     await this.props.getUserRoles(this.props.history);
   }
 
-  componentWillReceiveProps(props) {
-    this.setState({
+  async componentWillReceiveProps(props) {
+    await this.setState({
       auth: { ...props.auth },
     });
   }
@@ -29,7 +29,6 @@ class Sidebar extends Component {
     return (
       <div className="Sidebar">
         <div className="Sidebar__sidebar">
-
           <nav className="Sidebar__navigation">
             <ul>
               {

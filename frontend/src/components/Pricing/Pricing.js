@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { getPlans } from '../../actions';
 import './Pricing.css';
 import PricingPackage from './components/PricingPackage/PricingPackage';
 
@@ -8,6 +9,7 @@ class Pricing extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      plans: [],
       packages: [
         {
           name: 'K-12',
@@ -31,16 +33,34 @@ class Pricing extends Component {
     };
   }
 
+  async componentWillMount() {
+    await this.props.getPlans();
+  }
+
+  componentWillReceiveProps(props) {
+    this.setState({
+      plans: [...props.plans.sort((a, b) => a.allowedHouses - b.allowedHouses)],
+    });
+  }
+
   render() {
-    const { packages } = this.state;
+    const { packages, plans } = this.state;
     return (
       <div className="Pricing">
         <div className="wrapper">
           <h2>Affordable Pricing</h2>
           <div className="PricingPackages__listings">
             {
-              packages.map((packageInfo, index) => {
-                return <PricingPackage key={packageInfo.name} package={packageInfo} />;
+              plans.map((plan, index) => {
+                return (
+                  <PricingPackage
+                    key={plan.name}
+                    name={plan.name}
+                    housesAllowed={plan.allowedHouses}
+                    teachersAllowed={plan.allowedTeachers}
+                    amount={packages[index].amount}
+                  />
+                );
               })
             }
           </div>
@@ -56,7 +76,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = {
-
+  getPlans,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Pricing);

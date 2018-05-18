@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import './Auth.css';
 import { signin } from '../../actions';
-import backgroundimage from '../../static/trophy.png';
+import DashboardNotification from '../DashboardNotification/DashboardNotification';
 
 class Signin extends Component {
   constructor(props) {
@@ -53,28 +52,34 @@ class Signin extends Component {
   };
   renderAlert = () => {
     if (!this.state.error) return null;
-    return <p style={{ color: '#337ab7' }}>{this.state.error}</p>;
+    return (
+      <DashboardNotification type="warn">
+        {this.state.error}
+      </DashboardNotification>
+    );
   };
   renderSignupSuccess = () => {
     if (!this.props.signedUpusername) return null;
     return (
-      <p style={{ color: '#337ab7' }}>Sign Up successfull, Please sign in</p>
+      <DashboardNotification type="success">
+        Sign Up successfull, Please sign in
+      </DashboardNotification>
     );
   };
   renderResetPasswordSuccess = () => {
     if (!this.props.resetPassword) return null;
     return (
-      <p style={{ color: '#337ab7' }}>
+      <DashboardNotification type="success">
         Password has been reset, Please sign in with new password
-      </p>
+      </DashboardNotification>
     );
   };
   renderteacherSignupSuccess() {
     if (!this.props.teacherSignup) return null;
     return (
-      <p style={{ color: '#337ab7' }}>
+      <DashboardNotification type="success">
         You have been signed up as a Teacher, Please Sign in
-      </p>
+      </DashboardNotification>
     );
   }
 
@@ -82,22 +87,23 @@ class Signin extends Component {
     return (
       <div>
         <div className="Auth__Body">
-          <div className="Auth__Body__Imageholder" />
-          <div className="Auth__Body__Container" style={{ marginTop: '80px' }}>
-            <h1 style={{ marginBottom: '20px' }}>Sign In</h1>
+          <div className="Auth__Body__Container">
+            <h1 className="Auth__title">Sign In</h1>
             {this.renderAlert()}
             {this.renderSignupSuccess()}
             {this.renderResetPasswordSuccess()}
             {this.renderteacherSignupSuccess()}
             <form onSubmit={this.signin}>
-              <label>Username or Email</label>
+              <label htmlFor="SignInForm__Username">Username or Email</label>
               <input
+                id="SignInForm__Username"
                 onChange={this.handleUsernameInput}
                 value={this.state.username}
                 type="text"
               />
-              <label>Password</label>
+              <label htmlFor="SignInForm__Password">Password</label>
               <input
+                id="SignInForm__Password"
                 onChange={this.handlePasswordInput}
                 value={this.state.password}
                 type="password"
@@ -107,13 +113,14 @@ class Signin extends Component {
                   Forgot username or password?
                 </Link>
               </p>
-              <Button
-                style={{ width: '100%', margin: '20px 0px' }}
-                bsStyle="primary"
+              <button
+                style={{
+                  marginTop: 20,
+                }}
                 type="submit"
               >
                 Sign In
-              </Button>
+              </button>
             </form>
             <p>
               New to Housecups?
@@ -121,13 +128,6 @@ class Signin extends Component {
                 {' '}Sign Up now
               </Link>
             </p>
-          </div>
-          <div className="Auth__Body__Imageholder">
-            <img
-              src={backgroundimage}
-              alt="Album"
-              style={{ opacity: 0.1 }}
-            />
           </div>
         </div>
       </div>

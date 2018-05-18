@@ -9,10 +9,10 @@ class House extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      id: props.id,
-      name: props.name,
-      color: props.color,
-      mascot: props.mascot,
+      id: props.house._id,
+      name: props.house.name,
+      color: props.house.color,
+      mascot: props.house.mascot,
       isUpdating: false,
       displayColorPicker: false,
     };
@@ -22,8 +22,13 @@ class House extends Component {
   async componentWillReceiveProps(props) {
     const {
       id, name, mascot, color,
+<<<<<<< HEAD
     } = props;
     await this.setState({
+=======
+    } = this.state;
+    this.setState({
+>>>>>>> 8f9cc169abd73f69fef4a855cf5c3013db48990b
       id,
       name,
       color,
@@ -154,9 +159,8 @@ class House extends Component {
   }
 }
 
-const mapStateToProps = () => {
-  return {
-  };
+const mapStateToProps = (state) => {
+  return state;
 };
 
 export default withRouter(connect(mapStateToProps, { deleteHouse, updateHouse })(House));

@@ -13,10 +13,17 @@ class Landing extends Component {
         <Section className="Intro">
           <div className="Intro__content">
             <p className="Intro__content__summary">
-              Encourage students by rewarding them for&nbsp;their&nbsp;good&nbsp;work.
+              Encourage&nbsp;students by rewarding them for their good&nbsp;work.
             </p>
           </div>
-          <div className="Intro__image" />
+          <div className="Intro__animatable">
+            <div className="Animatable">
+              <div className="Animatable__card" />
+              <div className="Animatable__card" />
+              <div className="Animatable__card" />
+              <div className="Animatable__card" />
+            </div>
+          </div>
         </Section>
 
         <Features />

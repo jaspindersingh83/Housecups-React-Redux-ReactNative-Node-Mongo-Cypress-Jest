@@ -26,10 +26,6 @@ class AccountOverview extends Component {
   render() {
     return (
       <div className="Overview">
-        <div className="User">
-          <div className="User__name">John Doe</div>
-          <div className="User__role">Admin</div>
-        </div>
         <SchoolInfoOverview auth={this.state.auth} />
       </div>
     );

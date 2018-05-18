@@ -8,20 +8,23 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  max-width: 1500px;
   height: calc(100vh - 100px);
   min-height: 500px;
   max-height: 800px;
+  padding: 0px 50px;
 }
 
 .Intro__content {
-  flex-basis: 50%;
+  flex-basis: 60%;
   color: #000000;
   padding: 0px 50px;
 }
 .Intro__content__summary {
-  font-size: 30px;
-  font-family: 'Raleway', sans-serif;
-  font-weight: 500;
+  color: #444;
+  font-size: 48px;
+  font-family: 'PT Serif', sans-serif;
+  font-weight: 700;
 }
 .Intro__content__buttons {
   margin-top: 35px;
@@ -35,13 +38,11 @@
   padding: 10px 35px;
 }
 
-.Intro__image {
-  flex-basis: 50%;
+.Intro__animatable {
+  display: flex;
+  justify-content: center;
+  flex-basis: 40%;
   min-width: 360px;
   height: 360px;
   background-color: #eee;
-  background-image: url('../../static/placeholder-image.png');
-  background-position: center center;
-  background-size: cover;
-  background-repeat: no-repeat;
 }

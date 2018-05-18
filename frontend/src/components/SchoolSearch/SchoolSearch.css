@@ -1,13 +1,21 @@
 .SchoolSearch {
-  margin-bottom: 500px;
+  padding: 50px 0px;
 }
 
-.SchoolSearch > .wrapper > h1 {
+.SchoolSearch > .wrapper > h2 {
+  text-align: left;
   margin-bottom: 25px;
 }
 .SchoolSearch__form {
   display: flex;
   justify-content: center;
+  max-width: 800px;
+}
+.SchoolSearch__form > input[name="name"] {
+  flex-basis: 60%;
+}
+.SchoolSearch__form > input[name="location"] {
+  flex-basis: 40%;
 }
 .SchoolSearch__form > button {
   flex-basis: 25%;

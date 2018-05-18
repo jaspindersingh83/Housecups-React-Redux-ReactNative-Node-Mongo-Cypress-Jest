@@ -64,7 +64,7 @@ class Scoreboard extends Component {
         </DashboardNotification>
       );
     }
-    return notification;
+    return (this.state.houses.length === 0) ? notification : <h3 className="dashboard__title" style={{textAlign: 'center'}}>Current Scores</h3>;
   }
 
   render() {

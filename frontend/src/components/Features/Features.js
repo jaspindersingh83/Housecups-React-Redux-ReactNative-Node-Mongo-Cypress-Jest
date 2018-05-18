@@ -16,6 +16,12 @@ class Features extends Component {
             'A mascot and a color can be assigned to a house.',
         },
         {
+          id: 'multiple-teachers',
+          title: 'Multiple Teachers',
+          description: 'A school can have multiple houses, which can be created by the admin of the school. ' +
+            'A mascot and a color can be assigned to a house.',
+        },
+        {
           id: 'realtime-updates',
           title: 'Realtime Updates',
           description: 'When a teacher updates the score, students and parents can monitor their progress on the scoreboard in realtime.',

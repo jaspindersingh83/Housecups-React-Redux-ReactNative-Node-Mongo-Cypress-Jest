@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter, Redirect, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { getTeachers } from '../../actions';
+import { getUserRoles, getTeachers } from '../../actions';
 import ListTeachers from './components/ListTeachers/ListTeachers';
 import './ListTeachersView.css';
 
@@ -16,10 +16,19 @@ class ListTeachersView extends Component {
   }
 
   async componentWillMount() {
+    await this.props.getUserRoles(this.props.history);
     await this.props.getTeachers(this.props.history);
   }
 
   componentWillReceiveProps(props) {
+    const { isSuperAdmin, isSchoolAdmin, isTeacher } = props.auth;
+    if (isSchoolAdmin === false) {
+      if (isTeacher) {
+        this.props.history.push('/scoreboard');
+      } else if (isSuperAdmin) {
+        // Implement SUPERADMIN redirection
+      }
+    }
     this.setState({
       teachers: [...props.teachers],
       getTeachersResolved: props.teachers !== undefined,
@@ -56,4 +65,4 @@ const mapStateToProps = (state) => {
   return state;
 };
 
-export default withRouter(connect(mapStateToProps, { getTeachers })(ListTeachersView));
+export default withRouter(connect(mapStateToProps, { getUserRoles, getTeachers })(ListTeachersView));

@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { getUserRoles } from '../../actions';
 import CreateHouse from './components/CreateHouse/CreateHouse';
 import DashboardNotification from '../DashboardNotification/DashboardNotification';
 import './CreateHouseView.css';
@@ -13,6 +15,21 @@ class CreateHouseView extends Component {
     this.state = {
       message,
     };
+  }
+
+  async componentWillMount() {
+    await this.props.getUserRoles(this.props.history);
+  }
+
+  componentWillReceiveProps(props) {
+    const { isSuperAdmin, isSchoolAdmin, isTeacher } = props.auth;
+    if (isSchoolAdmin === false) {
+      if (isTeacher) {
+        this.props.history.push('/scoreboard');
+      } else if (isSuperAdmin) {
+        // Implement SUPERADMIN redirection
+      }
+    }
   }
 
   render() {
@@ -29,4 +46,8 @@ class CreateHouseView extends Component {
   }
 }
 
-export default withRouter(CreateHouseView);
+const mapStateToProps = (state) => {
+  return state;
+};
+
+export default withRouter(connect(mapStateToProps, { getUserRoles })(CreateHouseView));

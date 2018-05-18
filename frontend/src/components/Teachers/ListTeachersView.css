@@ -3,8 +3,5 @@
   margin: 0px auto;
 }
 .ListTeachersView > a > button {
-  display: block;
-  width: auto;
-  min-width: 150px;
-  margin: 20px 0px 0px auto;
+  margin-top: 20px;
 }

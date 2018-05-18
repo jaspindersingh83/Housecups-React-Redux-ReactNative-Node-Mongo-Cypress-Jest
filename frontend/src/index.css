@@ -50,7 +50,7 @@ p {
 
 label {
   font-size: 18px;
-  font-family: 'PT Sans', sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-weight: 400;
 }
 input[type="text"],
@@ -58,14 +58,14 @@ input[type="email"],
 input[type="tel"],
 input[type="password"] {
   font-size: 20px;
-  font-family: 'PT Sans', sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-weight: 400;
   padding: 10px 15px;
   outline: 0px;
   border: 0px;
   border-radius: 3px;
-  box-shadow: inset 0px 0px 0px 1px rgba(0, 0, 0, 0.25);
-  background-color: #eee;
+  box-shadow: inset 0px 1px 5px -1px rgba(0, 0, 0, 0.15);
+  background-color: #e5e5e5;
 }
 input[type="text"]:focus,
 input[type="email"]:focus,
@@ -78,14 +78,15 @@ button,
 button.btn,
 button.btn-primary {
   position: relative;
-  width: 100%;
+  width: auto;
   color: #fff;
-  font-family: 'PT Sans', sans-serif;
+  font-size: 18px;
+  font-family: 'Roboto', sans-serif;
   font-weight: 500;
   border-radius: 3px;
-  padding: 7px 25px;
+  padding: 10px 25px;
   border: 0px;
-  background-color: blue;
+  background-color: #009688;
   background-image: none;
   opacity: 1.0;
   transition: all 0.25s ease-in-out 0s;
@@ -144,7 +145,7 @@ button.btn-primary:focus {
 }
 .Table__column--action-delete:hover {
   color: #fff;
-  background-color: red;
+  background-color: #e05353;
 }
 .Table__column--action-confirm {
   flex-basis: 140px;

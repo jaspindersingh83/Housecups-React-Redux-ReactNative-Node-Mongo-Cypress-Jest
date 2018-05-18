@@ -53,7 +53,7 @@ const searchSchools = async (req, res) => {
     if (req.query.location && req.query.location !== '') {
       query.location = new RegExp(req.query.location, 'gi');
     }
-    const schools = await School.find(query).populate('houses');
+    const schools = await School.find(query).populate('houses').populate('plan');
     res.status(200).json(schools);
   } catch (error) {
     res.status(500).json({ message: 'No matching Schools in db presently', error });

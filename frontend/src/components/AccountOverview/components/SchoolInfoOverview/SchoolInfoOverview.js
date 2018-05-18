@@ -40,7 +40,7 @@ class SchoolInfoOverview extends Component {
   render() {
     return (
       <div className="SchoolInfoOverview">
-        <div className="School__name">Lambda School</div>
+        {/* <div className="School__name">Lambda School</div> */}
         <div className="School__info">
           <div className="School__info__text">
             Total number of Houses:

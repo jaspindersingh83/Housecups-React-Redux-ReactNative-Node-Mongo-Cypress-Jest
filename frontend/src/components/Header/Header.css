@@ -151,6 +151,8 @@ nav.Header__nav > ul {
 .Header__nav__links > a:hover > .Header__nav__links-dashboard,
 .Header__nav__buttons button:hover {
   opacity: 0.8;
+  border-right: 0px solid transparent;
+  background-color: #fff;
 }
 .Header__nav__buttons button.signout {
   width: 135px;

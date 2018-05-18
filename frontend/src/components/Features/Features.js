@@ -18,8 +18,8 @@ class Features extends Component {
         {
           id: 'multiple-teachers',
           title: 'Multiple Teachers',
-          description: 'A school can have multiple houses, which can be created by the admin of the school. ' +
-            'A mascot and a color can be assigned to a house.',
+          description: 'A school can also have multiple teachers, which can be created by the admin of the school. ' +
+            'A teacher can access scoreboard for each houses in the school.',
         },
         {
           id: 'realtime-updates',

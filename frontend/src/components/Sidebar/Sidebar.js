@@ -1,32 +1,68 @@
 import React, { Component } from 'react';
 import { withRouter, Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { getUserRoles } from '../../actions';
 import './Sidebar.css';
 
 class Sidebar extends Component {
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      auth: {},
+    };
+  }
+
+  async componentWillMount() {
+    await this.props.getUserRoles(this.props.history);
+  }
+
+  componentWillReceiveProps(props) {
+    this.setState({
+      auth: { ...props.auth },
+    });
+  }
+
   render() {
     const { pathname } = this.props.history.location;
+    const { isSchoolAdmin, isTeacher } = this.state.auth;
     return (
       <div className="Sidebar">
         <div className="Sidebar__sidebar">
 
           <nav className="Sidebar__navigation">
             <ul>
-              <Link to="/dashboard">
-                <li data-selected={ new RegExp(/^\/dashboard/gi).test(pathname) }>Summary</li>
-              </Link>
-              <Link to="/schools">
-                <li data-selected={ pathname === '/schools' }>Create School</li>
-              </Link>
-              <Link to="/houses">
-                <li data-selected={ new RegExp(/^\/houses/gi).test(pathname) }>Manage Houses</li>
-              </Link>
-              <Link to="/teachers">
-                <li data-selected={ new RegExp(/^\/teachers/gi).test(pathname) }>Manage Teachers</li>
-              </Link>
-              <Link to="/scoreboard">
-                <li data-selected={ pathname === '/scoreboard' }>Score Board</li>
-              </Link>
+              {
+                (isSchoolAdmin) ? (
+                  <Link to="/dashboard">
+                    <li data-selected={ new RegExp(/^\/dashboard/gi).test(pathname) }>Summary</li>
+                  </Link>
+                ) : null
+              }{
+                (isSchoolAdmin) ? (
+                  <Link to="/schools">
+                    <li data-selected={ pathname === '/schools' }>Create School</li>
+                  </Link>
+                ) : null
+              }{
+                (isSchoolAdmin) ? (
+                  <Link to="/houses">
+                    <li data-selected={ new RegExp(/^\/houses/gi).test(pathname) }>Manage Houses</li>
+                  </Link>
+                ) : null
+              }{
+                (isSchoolAdmin) ? (
+                  <Link to="/teachers">
+                    <li data-selected={ new RegExp(/^\/teachers/gi).test(pathname) }>Manage Teachers</li>
+                  </Link>
+                ) : null
+              }{
+                (isTeacher) ? (
+                  <Link to="/scoreboard">
+                    <li data-selected={ pathname === '/scoreboard' }>Score Board</li>
+                  </Link>
+                ) : null
+              }
               <Link to="/settings">
                 <li data-selected={ pathname === '/settings' }>User Settings</li>
               </Link>
@@ -42,4 +78,8 @@ class Sidebar extends Component {
 
 }
 
-export default withRouter(Sidebar);
+const mapStateToProp = (state) => {
+  return state;
+};
+
+export default withRouter(connect(mapStateToProp, { getUserRoles })(Sidebar));

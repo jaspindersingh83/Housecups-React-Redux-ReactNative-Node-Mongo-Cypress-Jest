@@ -28,7 +28,12 @@
 
 .Package__header {
   color: #fff;
-  background-color: blue;
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#4735c1+0,332c6b+100 */
+  background: rgb(71,53,193); /* Old browsers */
+  background: -moz-linear-gradient(left, rgba(71,53,193,1) 0%, rgba(51,44,107,1) 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(left, rgba(71,53,193,1) 0%,rgba(51,44,107,1) 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to right, rgba(71,53,193,1) 0%,rgba(51,44,107,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4735c1', endColorstr='#332c6b',GradientType=1 ); /* IE6-9 */
 }
 .Package__header > h4 {
   font-size: 20px;

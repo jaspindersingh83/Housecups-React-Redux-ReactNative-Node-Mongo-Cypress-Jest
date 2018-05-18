@@ -40,14 +40,17 @@ class SchoolInfoOverview extends Component {
   render() {
     return (
       <div className="SchoolInfoOverview">
-        <div className="School__name">Lambda School</div>
+        {/* <div className="School__name">Lambda School</div> */}
+        <h3 className="form__title">Welcome</h3>
         <div className="School__info">
           <div className="School__info__text">
             Total number of Houses:
             <span className="number">{ this.state.houses.length }</span>
           </div>
           <div className="School__info__action">
-            <Link to="/houses">See all Houses</Link>
+            <Link to="/houses">
+              <button>See all Houses</button>
+            </Link>
           </div>
         </div>
         <div className="School__info">
@@ -56,7 +59,9 @@ class SchoolInfoOverview extends Component {
             <span className="number">{ this.state.teachers.length }</span>
           </div>
           <div className="School__info__action">
-            <Link to="/teachers">See all Teachers</Link>
+            <Link to="/teachers">
+              <button>See all Teachers</button>
+            </Link>
           </div>
         </div>
       </div>

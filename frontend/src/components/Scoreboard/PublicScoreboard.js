@@ -2,9 +2,10 @@
 import React, { Component } from 'react';
 import Socket from 'socket.io-client';
 import { connect } from 'react-redux';
-import { getHousesBySchool } from '../../actions';
+import { searchSchools } from '../../actions';
 import './Scoreboard.css';
 import ScoreCard from './ScoreCard';
+import DashboardNotification from '../DashboardNotification/DashboardNotification';
 
 class PublicScoreboard extends Component {
 
@@ -12,6 +13,8 @@ class PublicScoreboard extends Component {
     super(props);
     this.state = {
       schoolId: props.match.params.schoolId,
+      schoolName: '',
+      schoolLocation: '',
       houses: [],
     };
     this.initializeSocket();
@@ -22,13 +25,16 @@ class PublicScoreboard extends Component {
   }
 
   async componentWillReceiveProps(props) {
+    const school = props.schools[0];
     await this.setState({
-      houses: [...props.houses],
+      schoolName: school.name,
+      schoolLocation: school.location,
+      houses: [...school.houses],
     });
   }
 
   getHouses = async () => {
-    await this.props.getHousesBySchool(this.props.history);
+    await this.props.searchSchools({ _id: this.state.schoolId }, this.props.history);
   }
 
   initializeSocket = () => {
@@ -45,18 +51,19 @@ class PublicScoreboard extends Component {
   }
 
   render() {
-    console.log(this.state.schoolId);
     return (
       <div className="Scoreboard">
         <div className="Scoreboard__heading">
-          <div className="Scoreboard__title">Current Score</div>
-          <div className="Scoreboard__subtitle">Lambda School (Online)</div>
+          <h2>Current Score</h2>
+          <div className="Scoreboard__subtitle">{this.state.schoolName} ({this.state.schoolLocation})</div>
         </div>
         <div className="Scoreboard__cards">
           {
-            this.state.houses.map((house, index) => {
-              return <ScoreCard key={house._id} house={house} socket={this.socket} public={true} />;
-            })
+            (this.state.houses.length > 0) ?
+              this.state.houses.map((house, index) => {
+                return <ScoreCard key={house._id} house={house} socket={this.socket} public={true} />;
+              })
+            : <DashboardNotification type="warn">Scores are not available at the moment</DashboardNotification>
           }
         </div>
       </div>
@@ -69,4 +76,4 @@ const mapStateToProps = (state) => {
   return state;
 };
 
-export default connect(mapStateToProps, { getHousesBySchool })(PublicScoreboard);
+export default connect(mapStateToProps, { searchSchools })(PublicScoreboard);

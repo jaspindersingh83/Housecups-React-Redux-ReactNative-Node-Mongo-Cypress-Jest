@@ -9,10 +9,10 @@ class House extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      id: props.id,
-      name: props.name,
-      color: props.color,
-      mascot: props.mascot,
+      id: props.house._id,
+      name: props.house.name,
+      color: props.house.color,
+      mascot: props.house.mascot,
       isUpdating: false,
       displayColorPicker: false,
     };
@@ -22,7 +22,7 @@ class House extends Component {
   componentWillReceiveProps(props) {
     const {
       id, name, mascot, color,
-    } = props;
+    } = this.state;
     this.setState({
       id,
       name,
@@ -154,9 +154,8 @@ class House extends Component {
   }
 }
 
-const mapStateToProps = () => {
-  return {
-  };
+const mapStateToProps = (state) => {
+  return state;
 };
 
 export default withRouter(connect(mapStateToProps, { deleteHouse, updateHouse })(House));

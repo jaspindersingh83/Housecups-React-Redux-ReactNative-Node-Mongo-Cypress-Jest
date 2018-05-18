@@ -22,8 +22,8 @@ class ListTeachers extends Component {
       <div className="ListTeachers Table">
         <h3 className="table__title">Added Teachers</h3>
         <div className="Table__row Table__row--head" >
-          <div className="Table__column">First Name</div>
-          <div className="Table__column">Last Name</div>
+          <div className="Table__column">Name</div>
+          <div className="Table__column">Email Address</div>
           <div className="Table__column Table__column--action" />
         </div>
         {

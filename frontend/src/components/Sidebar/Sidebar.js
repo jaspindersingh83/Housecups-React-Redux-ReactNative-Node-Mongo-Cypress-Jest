@@ -18,6 +18,9 @@ class Sidebar extends Component {
               <Link to="/schools">
                 <li data-selected={ pathname === '/schools' }>Create School</li>
               </Link>
+              <Link to="/schools/list">
+              <li data-selected={ new RegExp(/^\/schools/gi).test(pathname) }>Manage Schools</li>
+              </Link>
               <Link to="/houses">
                 <li data-selected={ new RegExp(/^\/houses/gi).test(pathname) }>Manage Houses</li>
               </Link>

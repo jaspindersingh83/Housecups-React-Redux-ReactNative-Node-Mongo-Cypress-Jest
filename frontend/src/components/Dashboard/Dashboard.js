@@ -14,6 +14,7 @@ import CreateTeacherView from '../Teachers/CreateTeacherView';
 import ListTeachersView from '../Teachers/ListTeachersView';
 import CreateHouseView from '../Houses/CreateHouseView';
 import ListHousesView from '../Houses/ListHousesView';
+import ListSchoolsView from '../Schools/ListSchoolsView';
 
 class Dashboard extends Component {
 
@@ -28,6 +29,7 @@ class Dashboard extends Component {
           <Switch>
             <Route exact path="/dashboard" component={AccountOverview} />
             <Route exact path="/schools" component={Schools} />
+            <Route exact path="/schools/list" component={ListSchoolsView} />
             <Route exact path="/houses/create" component={CreateHouseView} />
             <Route exact path="/houses" component={ListHousesView} />
             <Route exact path="/teachers/create" component={CreateTeacherView} />

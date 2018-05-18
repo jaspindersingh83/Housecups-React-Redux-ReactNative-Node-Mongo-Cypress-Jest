@@ -3,6 +3,7 @@ import './Landing.css';
 import Section from '../Section/Section';
 import Features from '../Features/Features';
 import Pricing from '../Pricing/Pricing';
+import IntroScoreCard from './components/IntroScoreCard/IntroScoreCard';
 
 class Landing extends Component {
   state = {}
@@ -17,12 +18,7 @@ class Landing extends Component {
             </p>
           </div>
           <div className="Intro__animatable">
-            <div className="Animatable">
-              <div className="Animatable__card" />
-              <div className="Animatable__card" />
-              <div className="Animatable__card" />
-              <div className="Animatable__card" />
-            </div>
+            <IntroScoreCard />
           </div>
         </Section>
 

@@ -75,8 +75,7 @@ const styles = StyleSheet.create({
   signupsuccess:{
       fontSize:18,
       color:'#e50914',
-  },   
-  
+  },  
 });
 
 export const {button, buttonText, h1, h2, hyperlink, hyperlinkText, body, formwrapper, buttonswrapper, signinButton, signupsuccess} = styles

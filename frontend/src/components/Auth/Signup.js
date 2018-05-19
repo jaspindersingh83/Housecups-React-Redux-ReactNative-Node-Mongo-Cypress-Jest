@@ -28,10 +28,10 @@ class Signup extends Component {
       [type]: e.target.value,
     });
   };
-  signup = (e) => {
+  signup = async (e) => {
     e.preventDefault();
-    this.props.createUser(this.state, this.props.history);
-    this.setState({
+    await this.props.createUser(this.state, this.props.history);
+    await this.setState({
       password: '',
       confirmPassword: '',
       error: this.props.error,

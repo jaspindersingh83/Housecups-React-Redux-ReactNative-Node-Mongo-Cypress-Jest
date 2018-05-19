@@ -31,7 +31,7 @@ class Settings extends Component {
   changeSettings = async (e) => {
     e.preventDefault();
     await this.props.changeSettings(this.state, this.props.history);
-    this.setState({
+    await this.setState({
       email: '',
       password: '',
       confirmPassword: '',

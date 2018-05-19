@@ -1,71 +1,83 @@
 import React, { Component } from "react";
 import { connect } from 'react-redux';
+import { changeSettings } from '../../actions';
 import {
   View,
   StyleSheet,
   Text,
-  TouchableOpacity
+  TouchableOpacity,
+  Linking
 } from "react-native";
 import {
   FormLabel,
   FormInput,
   FormValidationMessage
 } from "react-native-elements";
+
 import {
   signinButton,
   buttonText,
   body,
-  buttonswrapper,
   formwrapper,
   h1,
+  hyperlinkText,
+  hyperlink,
+  signupsuccess,
 } from "./Authstyles";
-import { createUser } from '../../actions';
 
-
-class SignUp extends Component {
-  static navigationOptions = {
-    header: null
-  };
+class Settings extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: "",
-      password: "",
-      confirmPassword: "",
-      email: "",
-      error: null
+      email: '',
+      password: '',
+      confirmPassword: '',
+      error: undefined,
+      settingsChanged: false,
     };
   }
-  componentWillReceiveProps(props) {
-    this.setState({
+  async componentWillReceiveProps(props) {
+    await this.setState({
       error: props.error,
+      settingsChanged: props.settingsChanged,
     });
   }
-  handleInput = (text, type) => {
-    this.setState({
-      [type]: text
+
+  handleInput = async (text, type) => {
+    await this.setState({
+      [type]: text,
     });
   };
-  signup = async () => {
-    await this.props.createUser(this.state, this.props.navigation);
+  changeSettings = async () => {
+    await this.props.changeSettings(this.state, this.props.navigation);
     await this.setState({
+      email: '',
       password: '',
       confirmPassword: '',
       error: this.props.error,
+      settingsChanged: this.props.changedSettings,
     });
   };
   render() {
     return (
       <View style={body}>
-        <Text style={h1}>Sign Up</Text>
+        <Text style={h1}>Change Settings</Text>
         <View style={formwrapper}>
+          {this.state.settingsChanged ? (
+            <View>
+              <Text style={signupsuccess}>
+                {" "}
+                Settings have been changed successfully.
+              </Text>
+            </View>
+          ) : null}
           <FormLabel labelStyle={{ color: "white", fontSize: 18 }}>
-            Username
+            Email
           </FormLabel>
           <FormInput
-            value={this.state.username}
+            value={this.state.email}
             inputStyle={{ color: "white", fontSize: 18 }}
-            onChangeText={text => this.handleInput(text, "username")}
+            onChangeText={text => this.handleInput(text, "email")}
           />
           <FormLabel labelStyle={{ color: "white", fontSize: 18 }}>
             Password
@@ -77,8 +89,8 @@ class SignUp extends Component {
             inputStyle={{ color: "white", fontSize: 18 }}
             onChangeText={text => this.handleInput(text, "password")}
           />
-          <FormLabel labelStyle={{ color: "white", fontSize: 18 }}>
-            Confirm Password
+           <FormLabel labelStyle={{ color: "white", fontSize: 18 }}>
+           Confirm Password
           </FormLabel>
           <FormInput
             value={this.state.confirmPassword}
@@ -87,17 +99,9 @@ class SignUp extends Component {
             inputStyle={{ color: "white", fontSize: 18 }}
             onChangeText={text => this.handleInput(text, "confirmPassword")}
           />
-          <FormLabel labelStyle={{ color: "white", fontSize: 18 }}>
-            Email
-          </FormLabel>
-          <FormInput
-            value={this.state.email}
-            inputStyle={{ color: "white", fontSize: 18 }}
-            onChangeText={text => this.handleInput(text, "email")}
-          />
           <FormValidationMessage>{this.state.error}</FormValidationMessage>
-          <TouchableOpacity style={signinButton} onPress={() => this.signup()}>
-            <Text style={buttonText}>Sign Up</Text>
+          <TouchableOpacity style={signinButton} onPress={() => this.changeSettings()}>
+            <Text style={buttonText}>Change Settings</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -107,8 +111,7 @@ class SignUp extends Component {
 const mapStateToProps = (state) => {
   return {
     error: state.auth.error,
+    changedSettings: state.auth.changedSettings,
   };
 };
-
-export default connect(mapStateToProps, { createUser })(SignUp);
-
+export default connect(mapStateToProps, { changeSettings })(Settings);

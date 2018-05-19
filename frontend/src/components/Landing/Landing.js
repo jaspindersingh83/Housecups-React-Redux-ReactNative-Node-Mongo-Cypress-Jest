@@ -10,7 +10,6 @@ class Landing extends Component {
   render() {
     return (
       <div className="Landing">
-
         <Section className="Intro">
           <div className="Intro__content">
             <p className="Intro__content__summary">

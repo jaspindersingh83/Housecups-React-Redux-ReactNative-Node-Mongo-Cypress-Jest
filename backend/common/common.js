@@ -18,8 +18,18 @@ const authenticate = (req, res, next) => {
 };
 
 const getUserRoles = async (req, res) => {
-  const { isAdmin, isTeacher, isSuperAdmin } = req.decoded;
-  return res.status(200).json({ isAdmin, isTeacher, isSuperAdmin });
+  const {
+    isAdmin,
+    isTeacher,
+    isSuperAdmin,
+    schoolID,
+  } = req.decoded;
+  return res.status(200).json({
+    isAdmin,
+    isTeacher,
+    isSuperAdmin,
+    schoolID,
+  });
 };
 
 module.exports = {

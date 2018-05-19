@@ -11,6 +11,7 @@ import {
   SIGNOUT,
   SUPER_ADMIN_AUTHORIZED,
   TEACHER_AUTH,
+  GETSESSIONINFO,
 } from '../actions/index';
 
 const authReducer = (auth = {}, action) => {
@@ -33,6 +34,7 @@ const authReducer = (auth = {}, action) => {
         isSchoolAdmin: action.payload.data.isAdmin,
         isSuperAdmin: action.payload.data.isSuperAdmin,
         isTeacher: action.payload.data.isTeacher,
+        schoolID: action.payload.data.schoolID,
       };
     case RESETPASSWORD:
       return { ...auth, resetPassword: true };

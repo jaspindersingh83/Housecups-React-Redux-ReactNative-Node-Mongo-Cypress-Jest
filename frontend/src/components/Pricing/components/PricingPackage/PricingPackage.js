@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import './PricingPackage.css';
 
@@ -40,7 +41,9 @@ class PricingPackage extends Component {
           </ol>
         </div>
         <div className="Package__actions">
-          <button>Choose This Plan</button>
+          <Link to="/signup">
+            <button>Choose This Plan</button>
+          </Link>
         </div>
       </div>
     );

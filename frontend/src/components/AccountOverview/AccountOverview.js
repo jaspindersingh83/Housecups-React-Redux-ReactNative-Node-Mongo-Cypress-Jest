@@ -1,44 +1,36 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { getUserRoles } from '../../actions';
 import './AccountOverview.css';
 import SchoolInfoOverview from './components/SchoolInfoOverview/SchoolInfoOverview';
+import Gateway from '../Gateway/Gateway';
 
 class AccountOverview extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      auth: {},
+      
     };
   }
 
-  async componentWillMount() {
-    await this.props.getUserRoles(this.props.history);
-  }
-
-  componentWillReceiveProps(props) {
-    this.setState({
-      auth: { ...props.auth },
-    });
-  }
-
   render() {
+    const gatewayProps = {
+      allow: [
+        'schoolAdmin',
+      ],
+      redirect: {
+        teacher: '/scoreboard',
+      },
+    };
+
     return (
-      <div className="Overview">
-        <SchoolInfoOverview auth={this.state.auth} />
-      </div>
+      <Gateway {...gatewayProps}>
+        <div className="Overview">
+          <SchoolInfoOverview />
+        </div>
+      </Gateway>
     );
   }
 
 }
 
-const mapStateToProps = (state) => {
-  return state;
-};
-
-const mapDispatchToProps = {
-  getUserRoles,
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(AccountOverview);
+export default AccountOverview;

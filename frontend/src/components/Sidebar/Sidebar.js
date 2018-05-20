@@ -8,24 +8,24 @@ class Sidebar extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      auth: {},
-    };
+    this.state = {};
   }
 
-  async componentWillMount() {
-    await this.props.getUserRoles(this.props.history);
-  }
-
-  componentWillReceiveProps(props) {
-    this.setState({
-      auth: { ...props.auth },
-    });
+  componentWillMount() {
+    const sessionToken = sessionStorage.getItem('token');
+    if (sessionToken) {
+      this.setState({
+        isSuperAdmin: (sessionToken[0] === '1'),
+        isSchoolAdmin: (sessionToken[1] === '1'),
+        isTeacher: (sessionToken[2] === '1'),
+        schoolID: sessionToken.slice(3),
+      });
+    }
   }
 
   render() {
     const { pathname } = this.props.history.location;
-    const { isSchoolAdmin, isTeacher } = this.state.auth;
+    const { isSchoolAdmin, isTeacher, schoolID } = this.state;
     return (
       <div className="Sidebar">
         <div className="Sidebar__sidebar">
@@ -39,7 +39,7 @@ class Sidebar extends Component {
                   </Link>
                 ) : null
               }{
-                (isSchoolAdmin) ? (
+                (isSchoolAdmin && !schoolID) ? (
                   <Link to="/schools">
                     <li data-selected={ pathname === '/schools' }>Create School</li>
                   </Link>

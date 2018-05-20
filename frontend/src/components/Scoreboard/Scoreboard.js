@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import Socket from 'socket.io-client';
 import { connect } from 'react-redux';
-import { getUserRoles, getHousesBySchool } from '../../actions';
+import { getHousesBySchool } from '../../actions';
 import './Scoreboard.css';
 import ScoreCard from './ScoreCard';
 import DashboardNotification from '../DashboardNotification/DashboardNotification';
@@ -13,20 +13,32 @@ class Scoreboard extends Component {
     super(props);
     this.state = {
       houses: [],
-      auth: {},
+      auth: {
+        isSuperAdmin: false,
+        isSchoolAdmin: false,
+        isTeacher: false,
+      },
     };
     this.initializeSocket();
   }
 
   async componentWillMount() {
-    await this.props.getUserRoles(this.props.history);
     await this.getHouses();
+
+    const sessionToken = sessionStorage.getItem('token');
+
+    if (sessionToken) {
+      this.setState({
+        isSuperAdmin: (sessionToken[0] === '1'),
+        isSchoolAdmin: (sessionToken[1] === '1'),
+        isTeacher: (sessionToken[2] === '1'),
+      });
+    }
   }
 
   async componentWillReceiveProps(props) {
     await this.setState({
       houses: [...props.houses],
-      auth: {...props.auth},
     });
   }
 
@@ -88,4 +100,4 @@ const mapStateToProps = (state) => {
   return state;
 };
 
-export default withRouter(connect(mapStateToProps, { getUserRoles, getHousesBySchool })(Scoreboard));
+export default withRouter(connect(mapStateToProps, { getHousesBySchool })(Scoreboard));

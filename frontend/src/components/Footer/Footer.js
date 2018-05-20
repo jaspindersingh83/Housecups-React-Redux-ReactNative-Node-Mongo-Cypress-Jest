@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
-import { NavLink } from 'react-router-dom';
+import { withRouter, NavLink } from 'react-router-dom';
 import './Footer.css';
 
 class Footer extends Component {
@@ -9,7 +8,7 @@ class Footer extends Component {
     const { pathname } = this.props.history.location;
     const protectedRoutes = [
       '/dashboard',
-      '/schools',
+      '/school/create',
       '/houses',
       '/houses/create',
       '/teachers',

@@ -20,23 +20,13 @@ class Header extends Component {
     ];
     const protectedRoutes = [
       '/dashboard',
-      '/schools',
+      '/school/create',
       '/houses',
       '/houses/create',
       '/teachers',
       '/teachers/create',
       '/scoreboard',
       '/settings',
-    ];
-    const protectedRoutesTitle = [
-      '',
-      'Create Schools',
-      'Manage Houses',
-      'Manage Houses',
-      'Manage Teachers',
-      'Manage Teachers',
-      'Current Scores',
-      'Settings',
     ];
 
     const { pathname } = this.props.history.location;
@@ -48,7 +38,7 @@ class Header extends Component {
 
     return (
       <div>
-
+        
         <div className="Header__dupe" />
         <div
           className="Header"
@@ -80,8 +70,8 @@ class Header extends Component {
                         <NavLink to="/pricing">
                           <li data-selected={pathname === '/pricing'}>Pricing</li>
                         </NavLink>
-                        <NavLink to="/search-schools">
-                          <li data-selected={pathname === '/search-schools'}>Schools</li>
+                        <NavLink to="/schools">
+                          <li data-selected={pathname === '/schools'}>Schools</li>
                         </NavLink>
                       </div>
                       <div className="Header__nav__links">

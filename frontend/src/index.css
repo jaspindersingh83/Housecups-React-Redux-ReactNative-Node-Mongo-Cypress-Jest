@@ -108,7 +108,7 @@ button.btn-primary:focus {
 
 .Table {
   max-width: 800px;
-  margin: 0px auto;
+  margin: 0px auto 20px auto;
 }
 .Table__title {
   margin-bottom: 25px;

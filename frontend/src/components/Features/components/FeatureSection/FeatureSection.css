@@ -65,30 +65,3 @@
 .FeatureSection__column__image[data-feature-name="cross-device"] {
   background-image: url('../../../../static/placeholder-image.png');
 }
-
-.FeatureSection__column__image {
-  box-shadow: 1px 1px 0px 0px #000000,
-  2px 1px 0px 0px #000000,
-  3px 1px 0px 0px #000000,
-  4px 1px 0px 0px #000000,
-  5px 1px 0px 0px #000000,
-  6px 1px 0px 0px #000000,
-  7px 1px 0px 0px #000000,
-  8px 1px 0px 0px #000000,
-  9px 1px 0px 0px #000000,
-  10px 1px 0px 0px #000000,
-  11px 1px 0px 0px #000000,
-  12px 1px 0px 0px #000000,
-  13px 1px 0px 0px #000000,
-  14px 1px 0px 0px #000000,
-  15px 1px 0px 0px #000000,
-  16px 1px 0px 0px #000000,
-  17px 1px 0px 0px #000000,
-  18px 1px 0px 0px #000000,
-  19px 1px 0px 0px #000000,
-  20px 1px 0px 0px #000000,
-  21px 1px 0px 0px #000000,
-  22px 1px 0px 0px #000000,
-  23px 1px 0px 0px #000000,
-  1px 1px 0px 0px #000000,;
-}

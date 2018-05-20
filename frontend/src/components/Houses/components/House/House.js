@@ -16,7 +16,6 @@ class House extends Component {
       isUpdating: false,
       displayColorPicker: false,
     };
-    console.warn('css selector :nth-child() is not working on .Table__row :: because of an extra <div />');
   }
 
   componentWillReceiveProps(props) {
@@ -81,76 +80,73 @@ class House extends Component {
         zIndex: '2',
       },
     };
-    return (
-      <div>
-        {updating ? (
-          <form
-            className="Table__row" 
-            style={{ paddingLeft: 0 }}
-            onSubmit={(e) => this.updateHouse(e)}
+    return (updating)
+      ? (
+        <form
+          className="Table__row" 
+          style={{ paddingLeft: 0 }}
+          onSubmit={(e) => this.updateHouse(e)}
+        >
+          <input
+            className="Table__column"
+            type="text"
+            name="name"
+            value={this.state.name}
+            onChange={this.handleInput}
+          />
+          <div 
+            className="Table__column Table__column--color-swatch Swatch"
+            data-updating={updating}
+            onClick={this.handleClick}
           >
-            <input
-              className="Table__column"
-              type="text"
-              name="name"
-              value={this.state.name}
-              onChange={this.handleInput}
-            />
-            <div 
-              className="Table__column Table__column--color-swatch Swatch"
-              data-updating={updating}
-              onClick={this.handleClick}
-            >
-              <div className="Swatch__color" style={{ background: this.state.color }} />
+            <div className="Swatch__color" style={{ background: this.state.color }} />
+          </div>
+          {this.state.displayColorPicker ? (
+            <div style={styles.popover}>
+              <div className="cover" onClick={this.handleClose} />
+              <SketchPicker
+                color={this.state.color}
+                onChange={this.handleChange}
+              />
             </div>
-            {this.state.displayColorPicker ? (
-              <div style={styles.popover}>
-                <div className="cover" onClick={this.handleClose} />
-                <SketchPicker
-                  color={this.state.color}
-                  onChange={this.handleChange}
-                />
-              </div>
-            ) : null}
-            <input
-              className="Table__column"
-              type="text"
-              name="mascot"
-              value={this.state.mascot}
-              onChange={this.handleInput}
-            />
-            <button className="Table__column Table__column--action Table__column--action-confirm">
-              Update
-            </button>
-          </form>
-        )
-        : (
-          <div className="Table__row" >
-            <div className="Table__column">
-              {this.state.name}
-            </div>
-            <div className="Table__column Table__column--color-swatch Swatch">
-              <div className="Swatch__color" style={{ background: this.state.color }} />
-            </div>
-            <div className="Table__column">
-              {this.state.mascot}
-            </div>
-            <div
-              className="Table__column Table__column--action Table__column--action-edit"
-              onClick={this.toggleUpdateMode}
-            >
-              <Glyphicon glyph="pencil" />
-            </div>
-            <div
-              className="Table__column Table__column--action  Table__column--action-delete"              
-              onClick={this.deleteHouse}
-            >
-              <Glyphicon glyph="trash"/>
-            </div>
-          </div>)
-        }
-      </div>
-    );
+          ) : null}
+          <input
+            className="Table__column"
+            type="text"
+            name="mascot"
+            value={this.state.mascot}
+            onChange={this.handleInput}
+          />
+          <button className="Table__column Table__column--action Table__column--action-confirm">
+            Update
+          </button>
+        </form>
+      )
+      : (
+        <div className="Table__row" >
+          <div className="Table__column">
+            {this.state.name}
+          </div>
+          <div className="Table__column Table__column--color-swatch Swatch">
+            <div className="Swatch__color" style={{ background: this.state.color }} />
+          </div>
+          <div className="Table__column">
+            {this.state.mascot}
+          </div>
+          <div
+            className="Table__column Table__column--action Table__column--action-edit"
+            onClick={this.toggleUpdateMode}
+          >
+            <Glyphicon glyph="pencil" />
+          </div>
+          <div
+            className="Table__column Table__column--action  Table__column--action-delete"
+            onClick={this.deleteHouse}
+          >
+            <Glyphicon glyph="trash" />
+          </div>
+        </div>
+      );
   }
 }
 

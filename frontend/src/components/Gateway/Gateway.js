@@ -34,13 +34,18 @@ class Gateway extends Component {
       token += (isSuperAdmin) ? '1' : '0';
       token += (isSchoolAdmin) ? '1' : '0';
       token += (isTeacher) ? '1' : '0';
-      token += schoolID;
+      token += (!schoolID) ? '' : schoolID;
 
       sessionStorage.setItem('token', token);
     }
   }
 
   validateUser = () => {
+
+    const {
+      history,
+      location,
+    } = this.props;
 
     const sessionToken = sessionStorage.getItem('token');
 
@@ -62,14 +67,22 @@ class Gateway extends Component {
       if (isTeacher) {
         roles.push('teacher');
       }
+      if (!isSuperAdmin && !isSchoolAdmin && !isTeacher) {
+        roles.push('none');
+      }
 
-      const {
-        history,
-        location,
-      } = this.props;
 
+      let userAllowed = false;
+
+      for (let i = 0; i < this.state.allow.length; i++) {
+        if (roles.includes(this.state.allow[i])) {
+          userAllowed = true;
+          break;
+        }
+      }
+
+      // Handle Function Execution (props.execute)
       if (this.state.execute) {
-
         const props = {
           // user roles
           roles,
@@ -88,17 +101,8 @@ class Gateway extends Component {
 
       } else {
 
-        let userAllowed = false;
-
-        for (let i = 0; i < this.state.allow.length; i++) {
-          if (roles.includes(this.state.allow[i])) {
-            userAllowed = true;
-            break;
-          }
-        }
-
         if (!userAllowed) {
-
+          // Handle Redirection (props.redirect)
           if (this.state.redirect) {
             if (typeof this.state.redirect === 'string') {
               history.push(this.state.redirect);
@@ -112,14 +116,16 @@ class Gateway extends Component {
             history.push('/signin');
           }
 
-        } else {
-          this.setState({
-            renderComponent: true,
-          });
         }
 
       }
-      
+
+      if (userAllowed) {
+        this.setState({
+          renderComponent: true,
+        });
+      }
+
     } else {
       setTimeout(this.validateUser, 500);
       setTimeout(() => {

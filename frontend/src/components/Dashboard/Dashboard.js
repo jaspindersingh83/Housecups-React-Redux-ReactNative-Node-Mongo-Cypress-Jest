@@ -1,23 +1,23 @@
 import React, { Component } from 'react';
 import { withRouter, Switch, Route } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { getUserRoles } from '../../actions';
 import './Dashboard.css';
-import AccountOverview from '../AccountOverview/AccountOverview';
-import Scoreboard from '../Scoreboard/Scoreboard';
-import Settings from '../Auth/Settings';
 import Sidebar from '../Sidebar/Sidebar';
-import Schools from '../Schools/Schools';
+// Dashboard - Welcome page
+import AccountOverview from '../AccountOverview/AccountOverview';
+// School
+import CreateSchoolView from '../Schools/CreateSchoolView';
+// Teacher
 import CreateTeacherView from '../Teachers/CreateTeacherView';
 import ListTeachersView from '../Teachers/ListTeachersView';
+// House
 import CreateHouseView from '../Houses/CreateHouseView';
 import ListHousesView from '../Houses/ListHousesView';
+// Scoreboard - Teacher's view
+import ScoreboardView from '../Scoreboard/ScoreboardView';
+// User Settings
+import Settings from '../Auth/Settings';
 
 class Dashboard extends Component {
-
-  async componentWillMount() {
-    await this.props.getUserRoles(this.props.history);
-  }
 
   render() {
     return (
@@ -25,12 +25,12 @@ class Dashboard extends Component {
         <Sidebar>
           <Switch>
             <Route exact path="/dashboard" component={AccountOverview} />
-            <Route exact path="/schools" component={Schools} />
+            <Route exact path="/school/create" component={CreateSchoolView} />
             <Route exact path="/houses/create" component={CreateHouseView} />
             <Route exact path="/houses" component={ListHousesView} />
             <Route exact path="/teachers/create" component={CreateTeacherView} />
             <Route exact path="/teachers" component={ListTeachersView} />
-            <Route exact path="/scoreboard" component={Scoreboard} />
+            <Route exact path="/scoreboard" component={ScoreboardView} />
             <Route exact path="/settings" component={Settings} />
           </Switch>
         </Sidebar>
@@ -40,8 +40,4 @@ class Dashboard extends Component {
 
 }
 
-const mapStateToProps = (state) => {
-  return {};
-};
-// export default withRouter(Dashboard);
-export default withRouter(connect(mapStateToProps, { getUserRoles })(Dashboard));
+export default withRouter(Dashboard);

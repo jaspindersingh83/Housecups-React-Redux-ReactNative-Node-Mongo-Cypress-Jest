@@ -18,7 +18,7 @@ class AccountOverview extends Component {
         'schoolAdmin',
       ],
       execute: (props) => {
-        if (props.roles.length === 0 && props.schoolID === '') {
+        if (props.isNone && props.schoolID === '') {
           props.history.push('/school/create');
         }
         if (props.isTeacher) {

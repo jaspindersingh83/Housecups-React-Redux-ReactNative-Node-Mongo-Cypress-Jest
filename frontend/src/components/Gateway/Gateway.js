@@ -56,6 +56,7 @@ class Gateway extends Component {
       const isSuperAdmin = (sessionToken[0] === '1');
       const isSchoolAdmin = (sessionToken[1] === '1');
       const isTeacher = (sessionToken[2] === '1');
+      const isNone = (!isSuperAdmin && !isSchoolAdmin && !isTeacher);
       const schoolID = sessionToken.slice(3);
 
       if (isSuperAdmin) {
@@ -67,7 +68,7 @@ class Gateway extends Component {
       if (isTeacher) {
         roles.push('teacher');
       }
-      if (!isSuperAdmin && !isSchoolAdmin && !isTeacher) {
+      if (isNone) {
         roles.push('none');
       }
 
@@ -90,6 +91,7 @@ class Gateway extends Component {
           isSuperAdmin,
           isSchoolAdmin,
           isTeacher,
+          isNone,
           // school id
           schoolID,
           // props

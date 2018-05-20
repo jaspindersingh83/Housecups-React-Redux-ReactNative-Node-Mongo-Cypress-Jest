@@ -17,8 +17,13 @@ class AccountOverview extends Component {
       allow: [
         'schoolAdmin',
       ],
-      redirect: {
-        teacher: '/scoreboard',
+      execute: (props) => {
+        if (props.roles.length === 0 && props.schoolID === '') {
+          props.history.push('/school/create');
+        }
+        if (props.isTeacher) {
+          props.history.push('/scoreboard');
+        }
       },
     };
 

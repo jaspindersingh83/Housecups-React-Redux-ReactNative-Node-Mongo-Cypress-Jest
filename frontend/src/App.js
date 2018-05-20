@@ -40,14 +40,14 @@ class App extends Component {
     this.state = {
       // Dashboard Routes
       privateRoutes: [
-        'dashboard',
-        'school/create',
-        'houses',
-        'houses/create',
-        'teachers',
-        'teachers/create',
-        'scoreboard',
-        'settings',
+        '/dashboard',
+        '/school/create',
+        '/houses',
+        '/houses/create',
+        '/teachers',
+        '/teachers/create',
+        '/scoreboard',
+        '/settings',
       ],
     };
   }
@@ -78,8 +78,8 @@ class App extends Component {
               <Route exact path="/schools" component={SchoolSearch} />
               <Route path="/teachersignup" component={Teachersignup} />
               {
-                this.state.privateRoutes.map((route) => {
-                  return <PrivateRoute exact path={route} component={Dashboard} />;
+                this.state.privateRoutes.map((route, index) => {
+                  return <PrivateRoute key={index} exact path={route} component={Dashboard} />;
                 })
               }
             </Switch>

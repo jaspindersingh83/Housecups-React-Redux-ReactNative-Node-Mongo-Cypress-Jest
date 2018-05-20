@@ -15,11 +15,13 @@ class CreateSchoolView extends Component {
     const gatewayProps = {
       allow: [
         'schoolAdmin',
+        'none',
       ],
       execute: (props) => {
-        if (props.schoolID) {
+        if (props.schoolID !== '') {
           props.history.push('/dashboard');
         }
+        return true;
       },
     };
 

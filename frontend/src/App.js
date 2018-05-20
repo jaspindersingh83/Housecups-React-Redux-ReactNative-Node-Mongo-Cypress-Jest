@@ -21,18 +21,37 @@ import Signin from './components/Auth/Signin';
 import Signup from './components/Auth/Signup';
 // General View Pages
 import Landing from './components/Landing/Landing';
+import Features from './components/Features/Features';
 import Pricing from './components/Pricing/Pricing';
+import SchoolSearch from './components/SchoolSearch/SchoolSearch';
 import Dashboard from './components/Dashboard/Dashboard';
 import PublicScoreboard from './components/Scoreboard/PublicScoreboard';
-import SchoolSearch from './components/SchoolSearch/SchoolSearch';
+// Routing Components
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 import PublicAuthRoute from './components/PublicAuthRoute/PublicAuthRoute';
-import Features from './components/Features/Features';
+
 
 const createStoreWithMiddleware = applyMiddleware(ReduxPromise, ReduxThunk)(createStore);
 
 class App extends Component {
-  state={}
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      // Dashboard Routes
+      privateRoutes: [
+        'dashboard',
+        'school/create',
+        'houses',
+        'houses/create',
+        'teachers',
+        'teachers/create',
+        'scoreboard',
+        'settings',
+      ],
+    };
+  }
+
   render() {
     return (
       <Provider
@@ -56,13 +75,13 @@ class App extends Component {
               <PublicAuthRoute exact path="/forgotPassword" component={Forgotpassword} />
               <PublicAuthRoute path="/reset" component={Resetpassword} />
               <Route exact path="/scoreboard/:schoolId" component={PublicScoreboard} />
-              <Route exact path="/search-schools" component={SchoolSearch} />
+              <Route exact path="/schools" component={SchoolSearch} />
               <Route path="/teachersignup" component={Teachersignup} />
-              <PrivateRoute
-                exact
-                path="/(dashboard|schools|houses|houses/create|teachers|teachers/create|scoreboard|settings)"
-                component={Dashboard}
-              />
+              {
+                this.state.privateRoutes.map((route) => {
+                  return <PrivateRoute exact path={route} component={Dashboard} />;
+                })
+              }
             </Switch>
             <Footer />
           </div>

@@ -1,26 +1,29 @@
 import React, { Component } from 'react';
 import { withRouter, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { getUserRoles } from '../../actions';
+import { getUserRoles, getSessionInfo } from '../../actions';
 import './Sidebar.css';
 
 class Sidebar extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      isSuperAdmin: null,
+      isSchoolAdmin: null,
+      isTeacher: null,
+      schoolID: '',
+    };
   }
 
-  componentWillMount() {
-    const sessionToken = sessionStorage.getItem('token');
-    if (sessionToken) {
-      this.setState({
-        isSuperAdmin: (sessionToken[0] === '1'),
-        isSchoolAdmin: (sessionToken[1] === '1'),
-        isTeacher: (sessionToken[2] === '1'),
-        schoolID: sessionToken.slice(3),
-      });
-    }
+  async componentWillMount() {
+    await this.props.getSessionInfo();
+  }
+
+  componentWillReceiveProps(props) {
+    this.setState({
+      ...props.auth,
+    });
   }
 
   render() {
@@ -39,7 +42,7 @@ class Sidebar extends Component {
                   </Link>
                 ) : null
               }{
-                (isSchoolAdmin && !schoolID) ? (
+                (isSchoolAdmin && schoolID === '') ? (
                   <Link to="/schools">
                     <li data-selected={ pathname === '/schools' }>Create School</li>
                   </Link>
@@ -82,4 +85,4 @@ const mapStateToProp = (state) => {
   return state;
 };
 
-export default withRouter(connect(mapStateToProp, { getUserRoles })(Sidebar));
+export default withRouter(connect(mapStateToProp, { getUserRoles, getSessionInfo })(Sidebar));

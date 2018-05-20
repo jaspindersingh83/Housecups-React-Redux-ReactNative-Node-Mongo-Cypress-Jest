@@ -33,6 +33,9 @@ export const GETTEACHERS = 'GETTEACHERS';
 // Pricing Plans
 export const GETPLANS = 'GETPLANS';
 
+// Session Info
+export const GETSESSIONINFO = 'GETSESSIONINFO';
+
 // Api url To be changed for Production
 // const ROOT_URL = 'Insert Production URL here'
 
@@ -372,4 +375,28 @@ export const getPlans = async () => {
   } catch (error) {
     console.error(error);
   }
+};
+
+export const getSessionInfo = () => {
+
+  const sessionToken = sessionStorage.getItem('token');
+
+  const sessionInfo = {
+    isSuperAdmin: null,
+    isSchoolAdmin: null,
+    isTeacher: null,
+    schoolID: '',
+  };
+
+  if (sessionToken !== null) {
+    sessionInfo.isSuperAdmin = (sessionToken[0] === '1');
+    sessionInfo.isSchoolAdmin = (sessionToken[1] === '1');
+    sessionInfo.isTeacher = (sessionToken[2] === '1');
+    sessionInfo.schoolID = sessionToken.slice(3);
+  }
+
+  return {
+    type: GETSESSIONINFO,
+    payload: sessionInfo,
+  };
 };

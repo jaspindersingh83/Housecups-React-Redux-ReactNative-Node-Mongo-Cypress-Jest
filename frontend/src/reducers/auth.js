@@ -48,6 +48,8 @@ const authReducer = (auth = {}, action) => {
       return { ...auth, isSuperAdmin: action.payload.data.success };
     case TEACHER_AUTH:
       return { ...auth, isTeacher: action.payload.data.success };
+    case GETSESSIONINFO:
+      return { ...action.payload };
     default:
       return auth;
   }

@@ -20,22 +20,21 @@ class ListHousesView extends Component {
     await this.props.getHousesBySchool(this.props.history);
   }
 
-  componentWillReceiveProps(props) {
+  async componentWillReceiveProps(props) {
     const { isSuperAdmin, isSchoolAdmin, isTeacher } = props.auth;
     if (isSchoolAdmin === false) {
       if (isTeacher) {
         this.props.history.push('/scoreboard');
       } else if (isSuperAdmin) {
-        // Implement SUPERADMIN redirection
+        this.props.history.push('/schools/list');
       }
     }
-    this.setState({
+    await this.setState({
       auth: { ...props.auth },
       houses: [...props.houses],
       getHousesResolved: props.houses !== undefined,
     });
   }
-
   render() {
     return (
       <div className="ListHousesView">

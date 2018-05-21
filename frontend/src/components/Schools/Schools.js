@@ -6,31 +6,17 @@ import CreateSchool from './components/CreateSchool';
 
 class Schools extends Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      auth: {},
-    };
-  }
-
   async componentWillMount() {
     await this.props.getUserRoles(this.props.history);
-  }
-
-  componentWillReceiveProps(props) {
-    this.setState({
-      auth: { ...props.auth },
-    });
   }
 
   render() {
     return (
       <div>
-        <CreateSchool auth={this.state.auth} />
+        <CreateSchool />
       </div>
     );
   }
-
 }
 
 const mapStateToProps = (state) => {

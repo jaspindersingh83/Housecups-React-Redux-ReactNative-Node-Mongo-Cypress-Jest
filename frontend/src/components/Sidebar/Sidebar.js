@@ -17,19 +17,18 @@ class Sidebar extends Component {
     await this.props.getUserRoles(this.props.history);
   }
 
-  componentWillReceiveProps(props) {
-    this.setState({
+  async componentWillReceiveProps(props) {
+    await this.setState({
       auth: { ...props.auth },
     });
   }
 
   render() {
     const { pathname } = this.props.history.location;
-    const { isSchoolAdmin, isTeacher } = this.state.auth;
+    const { isSchoolAdmin, isTeacher, isSuperAdmin } = this.state.auth;
     return (
       <div className="Sidebar">
         <div className="Sidebar__sidebar">
-
           <nav className="Sidebar__navigation">
             <ul>
               {
@@ -39,7 +38,7 @@ class Sidebar extends Component {
                   </Link>
                 ) : null
               }{
-                (isSchoolAdmin) ? (
+                (!isSchoolAdmin && !isSuperAdmin) ? (
                   <Link to="/schools">
                     <li data-selected={ pathname === '/schools' }>Create School</li>
                   </Link>
@@ -57,6 +56,12 @@ class Sidebar extends Component {
                   </Link>
                 ) : null
               }{
+                (isSuperAdmin) ? (
+                  <Link to="/schools/list">
+                    <li data-selected={ pathname === '/schools/list' }>Manage Schools</li>
+                  </Link>
+                ) : null
+              }{
                 (isTeacher) ? (
                   <Link to="/scoreboard">
                     <li data-selected={ pathname === '/scoreboard' }>Score Board</li>
@@ -66,6 +71,7 @@ class Sidebar extends Component {
               <Link to="/settings">
                 <li data-selected={ pathname === '/settings' }>User Settings</li>
               </Link>
+             
             </ul>
           </nav>
         </div>

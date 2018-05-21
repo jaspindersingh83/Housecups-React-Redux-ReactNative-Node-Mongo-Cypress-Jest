@@ -2,6 +2,7 @@ import {
   ADDTEACHER,
   GETTEACHERS,
   DELETETEACHER,
+  SIGNOUT,
 } from '../actions/index';
 
 const teachersReducer = (teachers = [], action) => {
@@ -14,6 +15,8 @@ const teachersReducer = (teachers = [], action) => {
       return [...action.payload.data];
     case DELETETEACHER:
       return teachers.filter(teacher => teacher._id !== action.payload.data.removedTeacher._id);
+    case SIGNOUT:
+      return [];
     default:
       return teachers;
   }

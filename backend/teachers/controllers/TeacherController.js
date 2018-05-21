@@ -91,7 +91,6 @@ const deleteTeacher = async (req, res) => {
       { _id: schoolID },
       { $pull: { teachers: teacherID } },
     );
-    console.log(schoolDeleteRequest);
     res.status(200).json({ success: true, removedTeacher });
   } catch (error) {
     res.status(500).json({ message: 'No such teacher in database', error });

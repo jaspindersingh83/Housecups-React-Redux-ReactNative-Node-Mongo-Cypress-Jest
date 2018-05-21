@@ -5,28 +5,10 @@ import './AccountOverview.css';
 import SchoolInfoOverview from './components/SchoolInfoOverview/SchoolInfoOverview';
 
 class AccountOverview extends Component {
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      auth: {},
-    };
-  }
-
-  async componentWillMount() {
-    await this.props.getUserRoles(this.props.history);
-  }
-
-  componentWillReceiveProps(props) {
-    this.setState({
-      auth: { ...props.auth },
-    });
-  }
-
   render() {
     return (
       <div className="Overview">
-        <SchoolInfoOverview auth={this.state.auth} />
+        <SchoolInfoOverview />
       </div>
     );
   }

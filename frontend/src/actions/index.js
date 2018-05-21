@@ -22,6 +22,7 @@ export const UPDATEHOUSE = 'UPDATEHOUSE';
 
 // School Actions
 export const ADDSCHOOL = 'ADDSCHOOL';
+export const DELETESCHOOL = 'DELETESCHOOL';
 export const GETSCHOOLS = 'GETSCHOOLS';
 export const SEARCHSCHOOLS = 'SEARCHSCHOOLS';
 
@@ -230,6 +231,7 @@ export const updateHouse = async (house, history) => {
   const apiurl = `${ROOT_URL}/api/house/${house.id}`;
   try {
     const token = localStorage.getItem('token');
+
     const updateHouseRequest = await axios.put(apiurl, house, {
       headers: {
         Authorization: token,
@@ -259,7 +261,6 @@ export const getHousesBySchool = async (history) => {
       payload: getAllHousesRequest,
     };
   } catch (error) {
-    console.log(error);
     history.push('/signin');
     return authError('You are not authorized, Please signin as schooladmin');
   }
@@ -288,7 +289,42 @@ export const addSchool = async (school, history) => {
     return authError('You are not authorized, Please signin as schooladmin');
   }
 };
-
+export const deleteSchool = async (schoolId, history) => {
+  const apiurl = `${ROOT_URL}/api/school/${schoolId}`;
+  try {
+    const token = localStorage.getItem('token');
+    const deleteRequest = await axios.delete(apiurl, {
+      headers: {
+        Authorization: token,
+      },
+    });
+    return {
+      type: DELETESCHOOL,
+      payload: deleteRequest,
+    };
+  } catch (error) {
+    history.push('/signin');
+    return authError('You are not authorized, Please signin as schooladmin');
+  }
+};
+export const getAllSchools = async (history) => {
+  const apiurl = `${ROOT_URL}/api/schools`;
+  try {
+    const token = localStorage.getItem('token');
+    const getAllSchoolsRequest = await axios.get(apiurl, {
+      headers: {
+        Authorization: token,
+      },
+    });
+    return {
+      type: GETSCHOOLS,
+      payload: getAllSchoolsRequest,
+    };
+  } catch (error) {
+    history.push('/signin');
+    return authError('You are not authorized, Please signin as schooladmin');
+  }
+};
 // Search Schools based on the School-name and Location
 export const searchSchools = async (query, history) => {
   const apiurl = `${ROOT_URL}/api/schools/search`;

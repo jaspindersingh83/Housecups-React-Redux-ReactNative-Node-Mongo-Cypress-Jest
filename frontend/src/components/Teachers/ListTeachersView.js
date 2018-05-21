@@ -20,16 +20,16 @@ class ListTeachersView extends Component {
     await this.props.getTeachers(this.props.history);
   }
 
-  componentWillReceiveProps(props) {
+  async componentWillReceiveProps(props) {
     const { isSuperAdmin, isSchoolAdmin, isTeacher } = props.auth;
     if (isSchoolAdmin === false) {
       if (isTeacher) {
         this.props.history.push('/scoreboard');
       } else if (isSuperAdmin) {
-        // Implement SUPERADMIN redirection
+        this.props.history.push('/schools/list');
       }
     }
-    this.setState({
+    await this.setState({
       teachers: [...props.teachers],
       getTeachersResolved: props.teachers !== undefined,
     });

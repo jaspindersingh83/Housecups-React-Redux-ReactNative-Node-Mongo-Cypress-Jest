@@ -11,8 +11,8 @@ class ListTeachers extends Component {
     };
   }
 
-  componentWillReceiveProps(props) {
-    this.setState({
+  async componentWillReceiveProps(props) {
+    await this.setState({
       teachers: [...props.teachers],
     });
   }
@@ -42,7 +42,6 @@ class ListTeachers extends Component {
       </div>
     )
   }
-
 }
 
 export default ListTeachers;

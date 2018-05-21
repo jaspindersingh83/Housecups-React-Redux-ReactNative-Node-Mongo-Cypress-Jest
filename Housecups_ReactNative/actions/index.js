@@ -162,7 +162,7 @@ export const getUserRoles = async history => {
   }
 };
 // Houses Action Functions
-export const addHouse = async (house, history) => {
+export const addHouse = async (house, navigation) => {
   const apiurl = `${ROOT_URL}/api/house`;
   try {
     const token =await AsyncStorage.getItem("token");
@@ -171,18 +171,18 @@ export const addHouse = async (house, history) => {
         Authorization: token
       }
     });
-    history.push("/houses");
     return {
       type: ADDHOUSE,
       payload: addHouseRequest
     };
   } catch (error) {
-    history.push("/signin");
+    navigation.navigate("signin");
     return authError("You are not authorized, Please signin as schooladmin");
   }
 };
 
-export const deleteHouse = async (houseid, history) => {
+export const deleteHouse = async (houseid, navigation) => {
+  console.log('In delete function now');
   const apiurl = `${ROOT_URL}/api/house/${houseid}`;
   try {
     const token =await AsyncStorage.getItem("token");
@@ -196,7 +196,7 @@ export const deleteHouse = async (houseid, history) => {
       payload: deleteRequest
     };
   } catch (error) {
-    history.push("/signin");
+    navigation.navigate("signin");
     return authError("You are not authorized, Please signin as schooladmin");
   }
 };
@@ -221,7 +221,7 @@ export const updateHouse = async (house, history) => {
   }
 };
 
-export const getHousesBySchool = async history => {
+export const getHousesBySchool = async(navigation) => {
   const apiurl = `${ROOT_URL}/api/house`;
   try {
     const token =await AsyncStorage.getItem("token");
@@ -235,7 +235,7 @@ export const getHousesBySchool = async history => {
       payload: getAllHousesRequest
     };
   } catch (error) {
-    history.push("/signin");
+    navigation.navigate("signin");
     return authError("You are not authorized, Please signin as schooladmin");
   }
 };

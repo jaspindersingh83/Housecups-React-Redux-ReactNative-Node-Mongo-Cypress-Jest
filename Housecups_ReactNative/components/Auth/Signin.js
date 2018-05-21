@@ -61,6 +61,7 @@ class SignIn extends Component {
   }
 
   handleInput = async (text, type) => {
+    text = text.toLowerCase()
     if (type === "username") {
       await this.setState({
         username: text,

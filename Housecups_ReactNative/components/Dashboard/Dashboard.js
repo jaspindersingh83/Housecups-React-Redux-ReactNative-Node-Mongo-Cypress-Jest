@@ -5,28 +5,18 @@ import { List, ListItem } from "react-native-elements";
 const completelist = [
   {
     name: "Create School",
-    avatar_url:
-      "https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg"
   },
   {
     name: "Manage Houses",
-    avatar_url:
-      "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg"
   },
   {
-    name: "Manage Schools",
-    avatar_url:
-      "https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg"
+    name: "Manage Schools",  
   },
   {
     name: "Manage Teachers",
-    avatar_url:
-      "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg"
   },
   {
     name: "User Settings",
-    avatar_url:
-      "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg"
   }
 ];
 
@@ -64,8 +54,6 @@ class Dashboard extends Component {
         {completelist.map((l, i) => (
           <ListItem
             onPress={() => this.handlePress(l.name)}
-            roundAvatar
-            avatar={{ uri: l.avatar_url }}
             key={i}
             title={l.name}
           />

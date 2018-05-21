@@ -7,26 +7,33 @@ import { Provider } from "react-redux";
 import { createStore, applyMiddleware } from "redux";
 import ReduxPromise from "redux-promise";
 import ReduxThunk from "redux-thunk";
+import { composeWithDevTools } from "redux-devtools-extension";
 
-import reducers from "./reducers";
+import reducer from "./reducers";
 
-// Components
+// Auth Components
 import Home from "./components/Auth/Home";
 import Dashboard from "./components/Dashboard/Dashboard";
 import Settings from "./components/Auth/Settings";
 import SignIn from "./components/Auth/Signin";
 import SignUp from "./components/Auth/Signup";
 
-import Houses from './components/Houses/Houses';
+// Houses Components
+import Houses from "./components/Houses/Houses";
+import CreateHouse from "./components/Houses/CreateHouse";
 
-const createStoreWithMiddleware = applyMiddleware(ReduxPromise, ReduxThunk)(
-  createStore
+const store = createStore(
+  reducer,
+  composeWithDevTools(applyMiddleware(ReduxPromise, ReduxThunk))
 );
 
 // Create a Navigator to be wrapped around each component
 export const Navigator = new createStackNavigator({
   Home: {
-    screen: Home
+    screen: Houses,
+  },
+  CreateHouse: {
+    screen: CreateHouse
   },
   Dashboard: {
     screen: Dashboard
@@ -42,13 +49,13 @@ export const Navigator = new createStackNavigator({
   },
   SignUp: {
     screen: SignUp
-  },
+  }
 });
 
 export default class App extends React.Component {
   render() {
     return (
-      <Provider store={createStoreWithMiddleware(reducers)}>
+      <Provider store={store}>
         <Navigator />
       </Provider>
     );

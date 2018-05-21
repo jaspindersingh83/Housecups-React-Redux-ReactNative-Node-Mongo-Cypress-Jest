@@ -13,27 +13,27 @@ import {
 import { List, ListItem } from "react-native-elements";
 import Swipeout from "react-native-swipeout";
 
-import { getHousesBySchool, deleteHouse } from "../../actions";
-import { addHouseButton, buttonText, h1 } from "./HouseStyles";
+import { getTeachers, deleteTeacher } from "../../actions";
+import { addHouseButton, buttonText, h1 } from "../../components/Houses/HouseStyles";
 
-class Houses extends Component {
+class Teachers extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      houses: []
+      teachers: []
     };
   }
   async componentWillMount() {
-    await this.props.getHousesBySchool(this.props.navigation);
+    await this.props.getTeachers(this.props.navigation);
   }
   async componentWillReceiveProps(props) {
     await this.setState({
-      houses: [...props.houses],
+      teachers: [...props.teachers],
       activeRowKey: null
     });
   }
-  addHouseNavigate = () => {
-    this.props.navigation.navigate("CreateHouse");
+  addTeacherNavigate = () => {
+    this.props.navigation.navigate("AddTeacher");
   };
   render() {
     const swipeSettings = {
@@ -43,7 +43,7 @@ class Houses extends Component {
           onPress: async () => {
             const deletingRow = this.state.activeRowKey;
             // Below for without alert Delete if using Alert
-            await this.props.deleteHouse(deletingRow)
+            await this.props.deleteTeacher(deletingRow);
             // Alert.alert(
             //   "Alert",
             //   "Are you sure you want to delete ?",
@@ -56,7 +56,7 @@ class Houses extends Component {
             //     {
             //       text: "Yes",
             //       onPress: async () => {
-            //         await this.props.deleteHouse(deletingRow)
+            //         await this.props.deleteTeacher(deletingRow)
             //       }
             //     }
             //   ],
@@ -66,27 +66,28 @@ class Houses extends Component {
           text: "Delete",
           type: "delete"
         }
-      ],
+      ]
     };
     return (
       <View>
         <Text style={h1} />
         <List containerStyle={{ marginBottom: 20 }}>
-          {this.state.houses.map(house => (
-            <Swipeout 
-              key = {house._id}
+          {this.state.teachers.map(teacher => (
+            <Swipeout
+              key={teacher._id}
               {...swipeSettings}
-              onClose = {async () => {
-                await this.setState({ activeRowKey: null })
+              onClose={async () => {
+                await this.setState({ activeRowKey: null });
               }}
-              onOpen = {async () => {
-                await this.setState({ activeRowKey: house._id });
-              }}>
+              onOpen={async () => {
+                await this.setState({ activeRowKey: teacher._id });
+                console.log(this.state.activeRowKey)
+              }}
+            >
               <ListItem
-                avatar={{}}
-                avatarOverlayContainerStyle={{ backgroundColor: house.color }}
-                title={house.name}
-                subtitle={house.mascot}
+                leftIcon={{ name: 'person' }}
+                title={teacher.firstName +" "+ teacher.lastName}
+                subtitle={teacher.email}
                 hideChevron
               />
             </Swipeout>
@@ -95,9 +96,9 @@ class Houses extends Component {
         <View style={{ alignItems: "center" }}>
           <TouchableOpacity
             style={addHouseButton}
-            onPress={() => this.addHouseNavigate()}
+            onPress={() => this.addTeacherNavigate()}
           >
-            <Text style={buttonText}>Add House</Text>
+            <Text style={buttonText}>Add Teachers</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -106,10 +107,10 @@ class Houses extends Component {
 }
 const mapStateToProps = state => {
   return {
-    houses: state.houses
+    teachers: state.teachers
   };
 };
 
-export default connect(mapStateToProps, { deleteHouse, getHousesBySchool })(
-  Houses
+export default connect(mapStateToProps, { getTeachers, deleteTeacher })(
+  Teachers
 );

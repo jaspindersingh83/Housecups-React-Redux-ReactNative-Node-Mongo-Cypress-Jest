@@ -316,10 +316,10 @@ export const searchSchools = async (query, history) => {
 };
 
 // Teacher Action Functions
-export const addTeacher = async (teacher, history) => {
+export const addTeacher = async (teacher, navigation) => {
   const apiurl = `${ROOT_URL}/api/teacher`;
   try {
-    const token =await AsyncStorage.getItem("token");
+    const token = await AsyncStorage.getItem("token");
     await axios.post(apiurl, teacher, {
       headers: {
         Authorization: token
@@ -329,14 +329,15 @@ export const addTeacher = async (teacher, history) => {
       type: ADDTEACHER
     };
   } catch (error) {
+    navigation.navigate('signin')
     return authError(error.response.data.message);
   }
 };
 
-export const deleteTeacher = async (teacherid, history) => {
+export const deleteTeacher = async (teacherid, navigation) => {
   const apiurl = `${ROOT_URL}/api/teacher/${teacherid}`;
   try {
-    const token =await AsyncStorage.getItem("token");
+    const token = await AsyncStorage.getItem("token");
     const deleteRequest = await axios.delete(apiurl, {
       headers: {
         Authorization: token
@@ -347,12 +348,12 @@ export const deleteTeacher = async (teacherid, history) => {
       payload: deleteRequest
     };
   } catch (error) {
-    history.push("/signin");
+    navigation.navigate("/signin");
     return authError("You are not authorized, Please signin as schooladmin");
   }
 };
 
-export const getTeachers = async history => {
+export const getTeachers = async (navigation) => {
   const apiurl = `${ROOT_URL}/api/teacher`;
   try {
     const token =await AsyncStorage.getItem("token");
@@ -366,7 +367,7 @@ export const getTeachers = async history => {
       payload: getTeachersRequest
     };
   } catch (error) {
-    history.push("/signin");
+    navigation.navigate("signin");
     return authError("You are not authorized, Please signin as schooladmin");
   }
 };

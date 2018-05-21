@@ -22,6 +22,10 @@ import SignUp from "./components/Auth/Signup";
 import Houses from "./components/Houses/Houses";
 import CreateHouse from "./components/Houses/CreateHouse";
 
+// Teachers Components
+import Teachers from "./components/Teachers/Teachers";
+import AddTeacher from "./components/Teachers/AddTeacher";
+
 const store = createStore(
   reducer,
   composeWithDevTools(applyMiddleware(ReduxPromise, ReduxThunk))
@@ -30,16 +34,22 @@ const store = createStore(
 // Create a Navigator to be wrapped around each component
 export const Navigator = new createStackNavigator({
   Home: {
-    screen: Houses,
+    screen: Home,
   },
   CreateHouse: {
     screen: CreateHouse
+  },
+  AddTeacher: {
+    screen: AddTeacher
   },
   Dashboard: {
     screen: Dashboard
   },
   Houses: {
     screen: Houses
+  },
+  Teachers: {
+    screen: Teachers
   },
   Settings: {
     screen: Settings

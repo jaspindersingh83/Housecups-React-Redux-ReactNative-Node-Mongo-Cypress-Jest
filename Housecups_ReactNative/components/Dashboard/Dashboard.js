@@ -42,7 +42,7 @@ class Dashboard extends Component {
       
     }
     if(type === 'Manage Teachers'){
-      
+      this.props.navigation.navigate('Teachers');
     }
     if(type === 'User Settings'){
       this.props.navigation.navigate('Settings')

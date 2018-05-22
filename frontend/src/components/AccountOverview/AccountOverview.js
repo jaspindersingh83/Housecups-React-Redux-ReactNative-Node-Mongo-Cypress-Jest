@@ -5,13 +5,6 @@ import Gateway from '../Gateway/Gateway';
 
 class AccountOverview extends Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      
-    };
-  }
-
   render() {
     const gatewayProps = {
       allow: [
@@ -23,6 +16,9 @@ class AccountOverview extends Component {
         }
         if (props.isTeacher) {
           props.history.push('/scoreboard');
+        }
+        if (props.isSuperAdmin) {
+          props.history.push('/schools/list');
         }
       },
     };

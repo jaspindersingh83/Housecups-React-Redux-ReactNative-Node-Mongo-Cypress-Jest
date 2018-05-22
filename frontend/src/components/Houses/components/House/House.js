@@ -18,11 +18,11 @@ class House extends Component {
     };
   }
 
-  componentWillReceiveProps(props) {
+  async componentWillMount(props) {
     const {
       id, name, mascot, color,
     } = this.state;
-    this.setState({
+    await this.setState({
       id,
       name,
       color,
@@ -35,7 +35,7 @@ class House extends Component {
       isUpdating: !this.state.isUpdating,
     });
   }
-  
+
   handleInput = async (e) => {
     e.preventDefault();
     const { name, value } = e.target;
@@ -61,11 +61,11 @@ class House extends Component {
       color: color.hex,
     });
   };
-  
+
   deleteHouse = async () => {
     await this.props.deleteHouse(this.state.id, this.props.history);
   }
-
+  
   updateHouse = async (e) => {
     e.preventDefault();
     await this.props.updateHouse(this.state, this.props.history);

@@ -6,13 +6,6 @@ import Gateway from '../Gateway/Gateway';
 
 class ListTeachersView extends Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      
-    };
-  }
-
   render() {
     const gatewayProps = {
       allow: [
@@ -20,6 +13,7 @@ class ListTeachersView extends Component {
       ],
       redirect: {
         teacher: '/scoreboard',
+        superAdmin: '/schools/list',
       },
     };
 

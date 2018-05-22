@@ -20,8 +20,8 @@ class ListHouses extends Component {
     await this.props.getHousesBySchool(this.props.history);
   }
 
-  componentWillReceiveProps(props) {
-    this.setState({
+  async componentWillReceiveProps(props) {
+    await this.setState({
       houses: [...props.houses],
       receivedHoused: true,
     });

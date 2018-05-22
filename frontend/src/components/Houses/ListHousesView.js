@@ -5,12 +5,6 @@ import ListHouses from './components/ListHouses/ListHouses';
 import Gateway from '../Gateway/Gateway';
 
 class ListHousesView extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      
-    };
-  }
 
   render() {
     const gatewayProps = {
@@ -19,6 +13,7 @@ class ListHousesView extends Component {
       ],
       redirect: {
         teacher: '/scoreboard',
+        superAdmin: '/schools/list',
       },
     };
 
@@ -33,6 +28,7 @@ class ListHousesView extends Component {
       </Gateway>
     );
   }
+
 }
 
 export default ListHousesView;

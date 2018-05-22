@@ -43,7 +43,7 @@ const authReducer = (auth = {}, action) => {
     case SIGNIN:
       return { ...auth };
     case SIGNOUT:
-      return { ...auth };
+      return {};
     case SUPER_ADMIN_AUTHORIZED:
       return { ...auth, isSuperAdmin: action.payload.data.success };
     case TEACHER_AUTH:

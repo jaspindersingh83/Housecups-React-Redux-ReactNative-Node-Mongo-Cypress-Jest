@@ -19,8 +19,8 @@ class SchoolInfoOverview extends Component {
     await this.props.getTeachers(this.props.history);
   }
 
-  componentWillReceiveProps(props) {
-    this.setState({
+  async componentWillReceiveProps(props) {
+    await this.setState({
       houses: [...props.houses],
       teachers: [...props.teachers],
     });
@@ -29,7 +29,6 @@ class SchoolInfoOverview extends Component {
   render() {
     return (
       <div className="SchoolInfoOverview">
-        {/* <div className="School__name">Lambda School</div> */}
         <h3 className="form__title">Welcome</h3>
         <div className="School__info">
           <div className="School__info__text">

@@ -20,8 +20,8 @@ class ListTeachers extends Component {
     await this.props.getTeachers(this.props.history);
   }
 
-  componentWillReceiveProps(props) {
-    this.setState({
+  async componentWillReceiveProps(props) {
+    await this.setState({
       teachers: [...props.teachers],
       receivedTeachers: true,
     });
@@ -69,7 +69,6 @@ class ListTeachers extends Component {
       </div>
     );
   }
-
 }
 
 const mapStateToProps = (state) => {

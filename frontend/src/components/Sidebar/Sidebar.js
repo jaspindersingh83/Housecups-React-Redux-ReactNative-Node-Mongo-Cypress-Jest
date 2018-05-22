@@ -12,7 +12,6 @@ class Sidebar extends Component {
       isSuperAdmin: null,
       isSchoolAdmin: null,
       isTeacher: null,
-      schoolID: '',
     };
   }
 
@@ -28,11 +27,10 @@ class Sidebar extends Component {
 
   render() {
     const { pathname } = this.props.history.location;
-    const { isSchoolAdmin, isTeacher, schoolID } = this.state;
+    const { isSchoolAdmin, isTeacher, isSuperAdmin } = this.state;
     return (
       <div className="Sidebar">
         <div className="Sidebar__sidebar">
-
           <nav className="Sidebar__navigation">
             <ul>
               {
@@ -42,7 +40,7 @@ class Sidebar extends Component {
                   </Link>
                 ) : null
               }{
-                (isSchoolAdmin && schoolID === '') ? (
+                (!isSchoolAdmin && !isSuperAdmin && !isTeacher) ? (
                   <Link to="/schools">
                     <li data-selected={ pathname === '/schools' }>Create School</li>
                   </Link>
@@ -60,6 +58,12 @@ class Sidebar extends Component {
                   </Link>
                 ) : null
               }{
+                (isSuperAdmin) ? (
+                  <Link to="/schools/list">
+                    <li data-selected={ pathname === '/schools/list' }>Manage Schools</li>
+                  </Link>
+                ) : null
+              }{
                 (isTeacher) ? (
                   <Link to="/scoreboard">
                     <li data-selected={ pathname === '/scoreboard' }>Score Board</li>
@@ -69,6 +73,7 @@ class Sidebar extends Component {
               <Link to="/settings">
                 <li data-selected={ pathname === '/settings' }>User Settings</li>
               </Link>
+
             </ul>
           </nav>
         </div>

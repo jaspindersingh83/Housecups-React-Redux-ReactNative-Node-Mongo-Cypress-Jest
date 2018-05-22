@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { addSchool } from '../../../actions';
+import { addSchool, getUserRoles } from '../../../actions';
 import './CreateSchool.css';
 
 class CreateSchool extends Component {
@@ -11,19 +11,10 @@ class CreateSchool extends Component {
     this.state = {
       name:'',
       location: '',
-      auth: props.auth,
     };
   }
-
-  componentWillMount() {
-    const { isSuperAdmin, isSchoolAdmin, isTeacher } = this.state.auth;
-    if (isSchoolAdmin === false) {
-      if (isTeacher) {
-        this.props.history.push('/scoreboard');
-      } else if (isSuperAdmin) {
-        // Implement SUPERADMIN redirection
-      }
-    }
+  async componentWillMount() {
+    await this.props.getUserRoles(this.props.history);
   }
 
   handleInput = async (e) => {
@@ -77,4 +68,4 @@ const mapStateToProps = (state) => {
   return state;
 };
 
-export default withRouter(connect(mapStateToProps, { addSchool })(CreateSchool));
+export default withRouter(connect(mapStateToProps, { addSchool, getUserRoles })(CreateSchool));

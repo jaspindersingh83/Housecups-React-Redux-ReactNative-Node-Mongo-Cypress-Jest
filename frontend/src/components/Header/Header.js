@@ -21,6 +21,7 @@ class Header extends Component {
     const protectedRoutes = [
       '/dashboard',
       '/school/create',
+      '/schools/list',
       '/houses',
       '/houses/create',
       '/teachers',

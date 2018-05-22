@@ -16,6 +16,7 @@ import ListHousesView from '../Houses/ListHousesView';
 import ScoreboardView from '../Scoreboard/ScoreboardView';
 // User Settings
 import Settings from '../Auth/Settings';
+import ListSchoolsView from '../Schools/ListSchoolsView';
 
 class Dashboard extends Component {
 
@@ -26,6 +27,7 @@ class Dashboard extends Component {
           <Switch>
             <Route exact path="/dashboard" component={AccountOverview} />
             <Route exact path="/school/create" component={CreateSchoolView} />
+            <Route exact path="/schools/list" component={ListSchoolsView} />
             <Route exact path="/houses/create" component={CreateHouseView} />
             <Route exact path="/houses" component={ListHousesView} />
             <Route exact path="/teachers/create" component={CreateTeacherView} />

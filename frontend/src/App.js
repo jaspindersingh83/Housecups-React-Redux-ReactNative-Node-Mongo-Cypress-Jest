@@ -42,6 +42,7 @@ class App extends Component {
       privateRoutes: [
         '/dashboard',
         '/school/create',
+        '/schools/list',
         '/houses',
         '/houses/create',
         '/teachers',

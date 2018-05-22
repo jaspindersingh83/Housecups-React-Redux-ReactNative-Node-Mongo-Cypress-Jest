@@ -50,6 +50,7 @@ class CreateHouse extends Component {
       mascot: this.state.newHouseMascot,
     };
     await this.props.addHouse(house, this.props.history);
+    this.props.history.push('/houses');
   }
 
   render() {

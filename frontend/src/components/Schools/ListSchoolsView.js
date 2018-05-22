@@ -1,25 +1,24 @@
 import React, { Component } from 'react';
-import CreateSchool from './components/CreateSchool';
+import ListSchools from './components/ListSchools/ListSchools';
 import Gateway from '../Gateway/Gateway';
 
-class CreateSchoolView extends Component {
+class ListSchoolsView extends Component {
 
   render() {
     const gatewayProps = {
       allow: [
-        'none',
+        'superAdmin',
       ],
       redirect: {
         teacher: '/scoreboard',
         schoolAdmin: '/dashboard',
-        superAdmin: '/schools/list',
       },
     };
 
     return (
       <Gateway {...gatewayProps}>
-        <div className="CreateSchoolView">
-          <CreateSchool />
+        <div className="ListTeachersView">
+          <ListSchools />
         </div>
       </Gateway>
     );
@@ -27,4 +26,4 @@ class CreateSchoolView extends Component {
 
 }
 
-export default CreateSchoolView;
+export default ListSchoolsView;

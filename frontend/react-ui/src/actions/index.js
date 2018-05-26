@@ -35,9 +35,9 @@ export const GETTEACHERS = 'GETTEACHERS';
 export const GETPLANS = 'GETPLANS';
 
 // Api url To be changed for Production
-// const ROOT_URL = 'Insert Production URL here'
+const ROOT_URL = 'https://housecups.herokuapp.com/'
 
-const ROOT_URL = 'http://127.0.0.1:5000';
+// const ROOT_URL = 'http://127.0.0.1:5000';
 
 // Auth Actions functions
 export const authError = (error) => {

@@ -35,7 +35,7 @@ export const GETTEACHERS = 'GETTEACHERS';
 export const GETPLANS = 'GETPLANS';
 
 // Api url To be changed for Production
-const ROOT_URL = 'https://housecups.herokuapp.com/'
+const ROOT_URL = 'https://arcane-forest-66025.herokuapp.com/'
 
 // const ROOT_URL = 'http://127.0.0.1:5000';
 

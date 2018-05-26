@@ -181,6 +181,17 @@ Success
 These are simple CRUD routes. If there are any points of cofusion please refer to 
 corresponding teachers/houses folder on backend.
 
+# Deploy a react app on Heroku 
+npm install -g create-react-app
+create-react-app my-app
+cd my-app
+git init
+heroku apps:create [name of App] -b https://github.com/mars/create-react-app-buildpack.git
+git add .
+git commit -m "react-create-app on Heroku"
+git push heroku master
+heroku open
+
 
 
 

@@ -29,7 +29,6 @@ class SchoolInfoOverview extends Component {
       houses: [...props.houses],
       teachers: [...props.teachers],
     });
-    console.log(this.state);
   }
 
   render() {

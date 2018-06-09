@@ -39,7 +39,7 @@ class PublicScoreboard extends Component {
 
   initializeSocket = () => {
     // Initialize Socket
-    this.socket = Socket('http://127.0.0.1:5000');
+    this.socket = Socket('https://housecups-backend.herokuapp.com');
     // Receives Response after the update
     this.socket.on('updateScoreResponse', (response) => {
       this.getHouses();

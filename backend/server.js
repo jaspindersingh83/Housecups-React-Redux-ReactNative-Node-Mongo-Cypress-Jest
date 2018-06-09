@@ -67,5 +67,6 @@ io.on('connection', (socket) => {
   console.log('Websocket is connected');
   /* Routes */
   webSocketEvents.scores(io, socket);
-
 });
+
+module.exports = server;
